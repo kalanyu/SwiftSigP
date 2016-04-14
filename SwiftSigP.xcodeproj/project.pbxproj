@@ -3,18 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 47;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0BEA07021C6AFC6100B97C6D /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608663E91C6090AA00AB8E02 /* CocoaAsyncSocket.framework */; };
-		0BEA07031C6AFC6100B97C6D /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 608663E91C6090AA00AB8E02 /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0BEA07071C6AFC6B00B97C6D /* nidaqmxbase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60E8AD581C5F121500EB2810 /* nidaqmxbase.framework */; };
 		602F13CC1BD7CCCD009A6F07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602F13CB1BD7CCCD009A6F07 /* AppDelegate.swift */; };
 		602F13CE1BD7CCCD009A6F07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602F13CD1BD7CCCD009A6F07 /* ViewController.swift */; };
 		602F13D01BD7CCCD009A6F07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 602F13CF1BD7CCCD009A6F07 /* Assets.xcassets */; };
 		602F13D31BD7CCCD009A6F07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 602F13D11BD7CCCD009A6F07 /* Main.storyboard */; };
-		608663EC1C60912B00AB8E02 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 608663E91C6090AA00AB8E02 /* CocoaAsyncSocket.framework */; };
 		60A425221BE5B9120071077A /* RoundProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A425211BE5B9120071077A /* RoundProgressView.swift */; };
 		60B5571A1BD8D5B4001EA27F /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B5570F1BD8D5B4001EA27F /* AxesDrawer.swift */; };
 		60B5571B1BD8D5B4001EA27F /* CALayer+Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557101BD8D5B4001EA27F /* CALayer+Center.swift */; };
@@ -39,30 +36,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0BEA07041C6AFC6100B97C6D /* PBXContainerItemProxy */ = {
+		C345678E1CBCC44F008A5391 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 608663E01C6090AA00AB8E02 /* CocoaAsyncSocket.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 9FC41F121B9D965000578BEB;
-			remoteInfo = "Mac CocoaAsyncSocket";
-		};
-		608663E61C6090AA00AB8E02 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 608663E01C6090AA00AB8E02 /* CocoaAsyncSocket.xcodeproj */;
+			containerPortal = C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6CD990101B77868C0011A685;
 			remoteInfo = "iOS CocoaAsyncSocket";
 		};
-		608663E81C6090AA00AB8E02 /* PBXContainerItemProxy */ = {
+		C34567901CBCC44F008A5391 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 608663E01C6090AA00AB8E02 /* CocoaAsyncSocket.xcodeproj */;
+			containerPortal = C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 9FC41F131B9D965000578BEB;
 			remoteInfo = "Mac CocoaAsyncSocket";
 		};
-		608663EA1C6090AA00AB8E02 /* PBXContainerItemProxy */ = {
+		C34567921CBCC44F008A5391 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 608663E01C6090AA00AB8E02 /* CocoaAsyncSocket.xcodeproj */;
+			containerPortal = C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 7D8B70C41BCFA15700D8E273;
 			remoteInfo = "tvOS CocoaAsyncSocket";
@@ -76,7 +66,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0BEA07031C6AFC6100B97C6D /* CocoaAsyncSocket.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,7 +80,6 @@
 		602F13D21BD7CCCD009A6F07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		602F13D41BD7CCCD009A6F07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6067E9F51BD91E7F00C76E68 /* SMKTunes-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SMKTunes-Bridging-Header.h"; sourceTree = "<group>"; };
-		608663E01C6090AA00AB8E02 /* CocoaAsyncSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaAsyncSocket.xcodeproj; path = "../../Swift Scripts/CocoaAsyncSocket/CocoaAsyncSocket.xcodeproj"; sourceTree = "<group>"; };
 		60A425211BE5B9120071077A /* RoundProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundProgressView.swift; sourceTree = "<group>"; };
 		60B5570F1BD8D5B4001EA27F /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
 		60B557101BD8D5B4001EA27F /* CALayer+Center.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Center.swift"; sourceTree = "<group>"; };
@@ -120,6 +108,7 @@
 		60FE590B1BE1D8640037E9F0 /* NSSpashBGView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSSpashBGView.swift; sourceTree = "<group>"; };
 		60FE590E1BE1D86E0037E9F0 /* CountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountView.swift; sourceTree = "<group>"; };
 		60FE59101BE1D9AB0037E9F0 /* HashDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashDrawer.swift; sourceTree = "<group>"; };
+		C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaAsyncSocket.xcodeproj; path = ../CocoaAsyncSocket/CocoaAsyncSocket.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,9 +117,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BEA07071C6AFC6B00B97C6D /* nidaqmxbase.framework in Frameworks */,
-				608663EC1C60912B00AB8E02 /* CocoaAsyncSocket.framework in Frameworks */,
 				60E8AD5B1C5F121500EB2810 /* nidaqmxbaselv.framework in Frameworks */,
-				0BEA07021C6AFC6100B97C6D /* CocoaAsyncSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +127,7 @@
 		602F13BF1BD7CCCC009A6F07 = {
 			isa = PBXGroup;
 			children = (
-				608663E01C6090AA00AB8E02 /* CocoaAsyncSocket.xcodeproj */,
+				C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */,
 				60E8AD581C5F121500EB2810 /* nidaqmxbase.framework */,
 				60E8AD591C5F121500EB2810 /* nidaqmxbaselv.framework */,
 				602F13CA1BD7CCCD009A6F07 /* SwiftSigP */,
@@ -179,16 +166,6 @@
 				60B5570E1BD8D5B4001EA27F /* PlotLib */,
 			);
 			name = "Support Files";
-			sourceTree = "<group>";
-		};
-		608663E11C6090AA00AB8E02 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				608663E71C6090AA00AB8E02 /* CocoaAsyncSocket.framework */,
-				608663E91C6090AA00AB8E02 /* CocoaAsyncSocket.framework */,
-				608663EB1C6090AA00AB8E02 /* CocoaAsyncSocket.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		60B5570E1BD8D5B4001EA27F /* PlotLib */ = {
@@ -230,6 +207,16 @@
 			name = "NIDAQ library";
 			sourceTree = "<group>";
 		};
+		C34567891CBCC44F008A5391 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C345678F1CBCC44F008A5391 /* CocoaAsyncSocket.framework */,
+				C34567911CBCC44F008A5391 /* CocoaAsyncSocket.framework */,
+				C34567931CBCC44F008A5391 /* CocoaAsyncSocket.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -245,7 +232,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0BEA07051C6AFC6100B97C6D /* PBXTargetDependency */,
 			);
 			name = SwiftSigP;
 			productName = SMKTunes;
@@ -268,7 +254,7 @@
 				};
 			};
 			buildConfigurationList = 602F13C31BD7CCCC009A6F07 /* Build configuration list for PBXProject "SwiftSigP" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -280,8 +266,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 608663E11C6090AA00AB8E02 /* Products */;
-					ProjectRef = 608663E01C6090AA00AB8E02 /* CocoaAsyncSocket.xcodeproj */;
+					ProductGroup = C34567891CBCC44F008A5391 /* Products */;
+					ProjectRef = C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -292,25 +278,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		608663E71C6090AA00AB8E02 /* CocoaAsyncSocket.framework */ = {
+		C345678F1CBCC44F008A5391 /* CocoaAsyncSocket.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CocoaAsyncSocket.framework;
-			remoteRef = 608663E61C6090AA00AB8E02 /* PBXContainerItemProxy */;
+			remoteRef = C345678E1CBCC44F008A5391 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		608663E91C6090AA00AB8E02 /* CocoaAsyncSocket.framework */ = {
+		C34567911CBCC44F008A5391 /* CocoaAsyncSocket.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CocoaAsyncSocket.framework;
-			remoteRef = 608663E81C6090AA00AB8E02 /* PBXContainerItemProxy */;
+			remoteRef = C34567901CBCC44F008A5391 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		608663EB1C6090AA00AB8E02 /* CocoaAsyncSocket.framework */ = {
+		C34567931CBCC44F008A5391 /* CocoaAsyncSocket.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CocoaAsyncSocket.framework;
-			remoteRef = 608663EA1C6090AA00AB8E02 /* PBXContainerItemProxy */;
+			remoteRef = C34567921CBCC44F008A5391 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -358,14 +344,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		0BEA07051C6AFC6100B97C6D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Mac CocoaAsyncSocket";
-			targetProxy = 0BEA07041C6AFC6100B97C6D /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		602F13D11BD7CCCD009A6F07 /* Main.storyboard */ = {

@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/kalanyuzintus-art/Dropbox/SwiftCourse/SwiftSigP/SwiftSigP.xcodeproj">
+      location = "absolute:Users/kalanyu/Documents/SwiftSigP/SwiftSigP.xcodeproj">
    </FileRef>
 </Workspace>

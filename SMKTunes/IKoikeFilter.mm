@@ -21,12 +21,12 @@
 
 @implementation IKoikeFilter
 
-- (id)initWithBufferSize:(int)bsize andNumberOfChannels:(int)noOfChannels {
+- (id)initWithSamplingRate:(int)samplingRate andNumberOfChannels:(int)noOfChannels {
     self = [super init];
     if (self) {
         _koikeFilters = static_cast<CKoikeFilter *>(::operator new(sizeof(CKoikeFilter) * noOfChannels));
         for (size_t i = 0; i < noOfChannels; i++) {
-            ::new (&_koikeFilters[i]) CKoikeFilter(bsize);
+            ::new (&_koikeFilters[i]) CKoikeFilter(samplingRate);
         }
     }
     return self;

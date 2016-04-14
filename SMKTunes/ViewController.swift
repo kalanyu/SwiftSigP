@@ -204,7 +204,7 @@ import CocoaAsyncSocket
             (sender as! RoundProgressView).loadProgressForSeconds(5)
 
         } else if(sender === filterButton) {
-            dataReader?.activateKoikefilterWithBuffersize(Int32(samplingRate));
+            dataReader?.activateKoikefilterWithSamplingRate(Int32(samplingRate));
             (sender as! RoundProgressView).loadProgressForSeconds(1)
 
         }

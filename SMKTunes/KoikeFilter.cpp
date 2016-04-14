@@ -8,8 +8,10 @@ CKoikeFilter::CKoikeFilter(int size) : bufferSize(size){
 	int i;
 	for(i=0;i<bufferSize;i++){
         coef[i] = 0;
-		t = 0.0005*i;
-		coef[i] = 100*6.44*(exp(-10.8*t) - exp(-16.52*t));
+        //time scale
+        //to one maybe to flat?
+		t = (1.0 / bufferSize)*i;
+		coef[i] = 6.44*(exp(-10.8*t) - exp(-16.52*t));
 		sum += coef[i];
         //NSLog(@"%lf %lf",coef[i], sum);
 	}
@@ -17,11 +19,7 @@ CKoikeFilter::CKoikeFilter(int size) : bufferSize(size){
 	for(i=0;i<bufferSize;i++){
 		coef[i] *= sum_inv;
 	}
-//    NSString *coefs = @"";
-//    for (int i = 0; i < bufferSize; i++) {
-//        coefs = [coefs stringByAppendingString:[NSString stringWithFormat:@"%lf,",coef[i]]];
-//    }
-    //NSLog(@"%@",coefs);
+
 	ClearBuffer();
 }
 

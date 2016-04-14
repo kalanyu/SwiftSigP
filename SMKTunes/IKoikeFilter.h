@@ -10,7 +10,7 @@
 
 @interface IKoikeFilter : NSObject
 
-- (id)initWithBufferSize: (int)bsize andNumberOfChannels: (int)noOfChannels;
+- (id)initWithSamplingRate: (int)samplingRate andNumberOfChannels: (int)noOfChannels;
 - (double)pushData:(double)data ToFilterChannel:(int)channel;
 
 @end

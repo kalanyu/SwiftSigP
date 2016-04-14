@@ -34,7 +34,6 @@
 @synthesize normalizeBuffer;
 @synthesize normalizeParameters;
 @synthesize zscoreBuffer;
-@synthesize fileHandle, fileHandle2;
 @synthesize zscoreParameters;
 @synthesize gainMultiplier;
 @synthesize rectify;
@@ -76,10 +75,10 @@ int static zscoreBufferSize;
         for (int i = 0; i < numbers; i++) {
             [self.incomingData addObject:[NSMutableArray arrayWithCapacity:1000]];
             if (numbers - i == 1) {
-                channels = [channels stringByAppendingFormat:@"Dev1/ai%d",i+1];
+                channels = [channels stringByAppendingFormat:@"Dev1/ai%d",i];
             }
             else {
-                channels = [channels stringByAppendingFormat:@"Dev1/ai%d, ",i+1];
+                channels = [channels stringByAppendingFormat:@"Dev1/ai%d, ",i];
             }
         }
 //        [channels retain];
@@ -115,7 +114,7 @@ int static zscoreBufferSize;
     //    uInt64      samplesPerChan = 1000; not neccessary because its on cont mode
     
     // Data read parameters
-    #define     bufferSize (uInt32) 4000
+    #define     bufferSize (uInt32) 6000
     float64     data[pointsToRead * noOfChannels];
     int32       pointsRead;
     float64     timeout = 5.0;
@@ -174,10 +173,10 @@ int static zscoreBufferSize;
     
     
     //prepare file write by moving the cursor to the end of file
-    self.fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:_fileName_raw];
-    [self.fileHandle seekToEndOfFile];
-    self.fileHandle2 = [NSFileHandle fileHandleForUpdatingAtPath:_fileName];
-    [self.fileHandle2 seekToEndOfFile];
+    _fileHandle = [NSFileHandle fileHandleForUpdatingAtPath:_fileName_raw];
+    [_fileHandle seekToEndOfFile];
+    _fileHandle2 = [NSFileHandle fileHandleForUpdatingAtPath:_fileName];
+    [_fileHandle2 seekToEndOfFile];
     
     [formatter setDateFormat:@"HH:mm:ss.SSS"];
     //initialize the sensor reading component and assign it to another thread
@@ -240,10 +239,6 @@ int static zscoreBufferSize;
                 
                 //raw data after base align and rectification
                 fileWrite = [fileWrite stringByAppendingFormat:@",%lf",rawData];
-
-                if (kFilterStat == KFILTER_ON) {
-                    finalData = [_koikeFilters pushData:finalData ToFilterChannel:j];
-                }
                 
                 if (normalizeStat == NORMALIZE_WORKING) {
                     [[normalizeBuffer objectAtIndex:j] addObject:[[NSNumber alloc] initWithDouble:finalData]];
@@ -286,6 +281,10 @@ int static zscoreBufferSize;
                     finalData = ((finalData - (min))/((max) - (min))) * (1-0) + 0;
                 }
                 
+                if (kFilterStat == KFILTER_ON) {
+                    finalData = [_koikeFilters pushData:finalData ToFilterChannel:j];
+                }
+                
                 fileWriteFiltered = [fileWriteFiltered stringByAppendingFormat:@",%lf",finalData];
                 
                 if (i ==  floor(sampleRate/60)) {
@@ -297,8 +296,8 @@ int static zscoreBufferSize;
 
             }
             
-            [fileHandle writeData:[[fileWrite stringByAppendingFormat:@"\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-            [fileHandle2 writeData:[[fileWriteFiltered stringByAppendingFormat:@"\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [_fileHandle writeData:[[fileWrite stringByAppendingFormat:@"\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [_fileHandle2 writeData:[[fileWriteFiltered stringByAppendingFormat:@"\n"] dataUsingEncoding:NSUTF8StringEncoding]];
 
             if (i ==  floor(sampleRate/60)) {
 //                NSLog(@"delegate: incoming data %@", incomingData);
@@ -317,8 +316,8 @@ int static zscoreBufferSize;
         }
 //        [pool drain];
     }
-    [self.fileHandle closeFile];
-    [self.fileHandle2 closeFile];
+    [_fileHandle closeFile];
+    [_fileHandle2 closeFile];
     NSLog(@"fileClosed");
     
 Error:
@@ -344,11 +343,11 @@ Error:
     }
 }
 
-- (void)activateKoikefilterWithBuffersize:(int)bsize
+- (void)activateKoikefilterWithSamplingRate:(int)samplingRate
 {
     if (kFilterStat == KFILTER_OFF) {
         //alloc a block of memory of C++ object arrays using ::operator new
-        _koikeFilters = [[IKoikeFilter alloc] initWithBufferSize:bsize andNumberOfChannels:noOfChannels];
+        _koikeFilters = [[IKoikeFilter alloc] initWithSamplingRate:samplingRate andNumberOfChannels:noOfChannels];
         kFilterStat = KFILTER_ON;
     }
     else if(kFilterStat == KFILTER_ON)

@@ -17,6 +17,8 @@
 
 @interface NIDAQreader : NSObject
 {
+    //ivar declaration no longer necessary for LLVM 4.0
+    //By default, [...] accessor methods are synthesized automatically for you by the compiler, so you don’t need to do anything other than declare the property using @property in the class interface
     NSMutableArray *incomingData;
     NSMutableArray *normalizeBuffer;
     NSMutableArray *zscoreBuffer;
@@ -30,10 +32,9 @@
     NSString *channels;
 //    CKoikeFilter *koikeFilters;
     NSFileManager *fileManager;
-    NSFileHandle *fileHandle, *fileHandle2;
-    NSString *fileName, *fileName_raw;
+//    NSFileHandle *fileHandle, *fileHandle2;
+//    NSString *fileName, *fileName_raw;
     BOOL rectify;
-    BOOL clipping;
 
 }
 @property (nonatomic, retain) id<NIDAQreaderProtocol> delegate;
@@ -54,7 +55,7 @@
 
 
 - (id)initWithNumberOfChannels:(int)numbers andSamplingRate:(int)samplingRate;
-- (void)activateKoikefilterWithBuffersize:(int)bsize;
+- (void)activateKoikefilterWithSamplingRate:(int)samplingRate;
 - (BOOL)activateNormalizationWithBufferSize:(int)bsize;
 - (BOOL)activateZscoreWithBufferSize:(int)bsize;
 - (void)startCollection;
