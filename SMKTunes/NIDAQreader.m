@@ -8,6 +8,7 @@
 
 #import "NIDAQreader.h"
 #import "IKoikeFilter.h"
+#import "LowPassFilter.h"
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
@@ -15,6 +16,8 @@
 #define DAQmxErrChk(functionCall) { if( DAQmxFailed(error=(functionCall)) ) { goto Error; } }
 #define KFILTER_OFF 1
 #define KFILTER_ON 2
+#define LPFILTER_OFF 1
+#define LPFILTER_ON 2
 #define NORMALIZE_ON 1
 #define NORMALIZE_WORKING 2
 #define NORMALIZE_OFF 0
@@ -23,9 +26,9 @@
 #define ZSCORE_OFF 0
 
 @interface  NIDAQreader()
-
+//private
 @property (nonatomic, retain) IKoikeFilter* koikeFilters;
-
+@property (nonatomic, retain) LowpassFilter* lowpassFilters;
 @end
 
 @implementation NIDAQreader
@@ -38,11 +41,14 @@
 @synthesize gainMultiplier;
 @synthesize rectify;
 
-int static kFilterStat;
-int static normalizeStat;
-int static normalizeBufferSize;
-int static zscoreStat;
-int static zscoreBufferSize;
+//status definition and corresponding parameters
+typedef enum processingStatus { deactivated, activated, processing } status;
+status static kFilterStat;
+status static lpFilterStat;
+status static normalizeStat;
+status static normalizeBufferSize;
+status static zscoreStat;
+status static zscoreBufferSize;
 
 
 - (id)init {
@@ -59,7 +65,8 @@ int static zscoreBufferSize;
         totalRead = 0;
         currentIndex = -5.0;
         rectify = YES;
-        kFilterStat = KFILTER_OFF;
+        kFilterStat = deactivated;
+        lpFilterStat = deactivated;
         _clipping = true;
     }
     return self;
@@ -88,7 +95,8 @@ int static zscoreBufferSize;
         totalRead = 0;
         currentIndex = -5.0;
         rectify = NO;
-        kFilterStat = KFILTER_OFF;
+        kFilterStat = deactivated;
+        lpFilterStat = deactivated;
         gainMultiplier = 1;
         _clipping = true;
     }
@@ -213,7 +221,7 @@ int static zscoreBufferSize;
                 
                 double emgData = data[(pointsToRead*j)+i];
                 
-                if (zscoreStat == ZSCORE_WORKING) {
+                if (zscoreStat == deactivated) {
                     [[zscoreBuffer objectAtIndex:j] addObject:[[NSNumber alloc] initWithDouble:emgData]];
                     if ([[zscoreBuffer objectAtIndex:j] count] == zscoreBufferSize)
                     {
@@ -224,12 +232,12 @@ int static zscoreBufferSize;
                         sum /= zscoreBufferSize;
                         [zscoreParameters replaceObjectAtIndex:j withObject:[[NSNumber alloc] initWithDouble:sum]];
                         if (j+1 == noOfChannels) {
-                            zscoreStat = ZSCORE_ON;
+                            zscoreStat = activated;
                         }
                     }
                 }
                 
-                if (zscoreStat == ZSCORE_ON)
+                if (zscoreStat == activated)
                 {
                     emgData = (emgData - [[zscoreParameters objectAtIndex:j] doubleValue]);
                 }
@@ -240,7 +248,7 @@ int static zscoreBufferSize;
                 //raw data after base align and rectification
                 fileWrite = [fileWrite stringByAppendingFormat:@",%lf",rawData];
                 
-                if (normalizeStat == NORMALIZE_WORKING) {
+                if (normalizeStat == processing) {
                     [[normalizeBuffer objectAtIndex:j] addObject:[[NSNumber alloc] initWithDouble:finalData]];
                     if ([[normalizeBuffer objectAtIndex:j] count] == normalizeBufferSize)
                     {
@@ -268,20 +276,20 @@ int static zscoreBufferSize;
                         [normalizeParameters replaceObjectAtIndex:j withObject:[[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:sum], @"avg",min,@"min",max,@"max", [NSNumber numberWithDouble:std], @"std", nil]];
                         NSLog(@"%@",normalizeParameters);
                         if (j+1 == noOfChannels) {
-                            normalizeStat = NORMALIZE_ON;
+                            normalizeStat = activated;
                         }
                     }
                 }
                 
                 
-                if (normalizeStat == NORMALIZE_ON) {
+                if (normalizeStat == activated) {
                     double min = [[[normalizeParameters objectAtIndex:j] valueForKey:@"min"] doubleValue];
                     double max = [[[normalizeParameters objectAtIndex:j] valueForKey:@"max"] doubleValue];
                     
                     finalData = ((finalData - (min))/((max) - (min))) * (1-0) + 0;
                 }
                 
-                if (kFilterStat == KFILTER_ON) {
+                if (kFilterStat == deactivated) {
                     finalData = [_koikeFilters pushData:finalData ToFilterChannel:j];
                 }
                 
@@ -345,21 +353,34 @@ Error:
 
 - (void)activateKoikefilterWithSamplingRate:(int)samplingRate
 {
-    if (kFilterStat == KFILTER_OFF) {
+    if (kFilterStat == deactivated) {
         //alloc a block of memory of C++ object arrays using ::operator new
         _koikeFilters = [[IKoikeFilter alloc] initWithSamplingRate:samplingRate andNumberOfChannels:noOfChannels];
-        kFilterStat = KFILTER_ON;
+        kFilterStat = activated;
     }
-    else if(kFilterStat == KFILTER_ON)
+    else if(kFilterStat == activated)
     {
-        kFilterStat = KFILTER_OFF;
+        kFilterStat = deactivated;
         _koikeFilters = nil;
+    }
+}
+
+- (void)activateLowpassFilterWithCoefficients:(double *)numerator andDenominator:(double *)denominator withOrder :(int)order {
+    if (lpFilterStat == deactivated) {
+        //alloc a block of memory of C++ object arrays using ::operator new
+        _lowpassFilters = [[LowpassFilter alloc] initWithNumeratorCoefficients:numerator andDenominatorCoefficients:denominator withOrder:order andNumberOfChannels:noOfChannels];
+        lpFilterStat = activated;
+    }
+    else if(lpFilterStat == activated)
+    {
+        lpFilterStat = deactivated;
+        _lowpassFilters = nil;
     }
 }
 
 - (BOOL)activateNormalizationWithBufferSize:(int)bsize
 {
-    if (normalizeStat == NORMALIZE_OFF) {
+    if (normalizeStat == deactivated) {
         normalizeBufferSize = bsize;
 //            NSLog(@"in");
             normalizeBuffer = [[NSMutableArray alloc] initWithCapacity:noOfChannels];
@@ -369,10 +390,10 @@ Error:
                 [normalizeBuffer addObject:[[NSMutableArray alloc] initWithCapacity:normalizeBufferSize]];
                 [normalizeParameters addObject:[[NSDictionary alloc] init]];
             }
-        normalizeStat = NORMALIZE_WORKING;
+        normalizeStat = processing;
     }
-    if (normalizeStat == NORMALIZE_ON) {
-        normalizeStat = NORMALIZE_OFF;
+    if (normalizeStat == activated) {
+        normalizeStat = deactivated;
         [normalizeBuffer removeAllObjects];
         [normalizeParameters removeAllObjects];
         normalizeBuffer = nil;
@@ -383,7 +404,7 @@ Error:
 
 - (BOOL)activateZscoreWithBufferSize:(int)bsize
 {
-    if (zscoreStat == ZSCORE_OFF) {
+    if (zscoreStat == deactivated) {
         zscoreBufferSize = bsize;
             NSLog(@"in");
             zscoreBuffer = [[NSMutableArray alloc] initWithCapacity:0];
@@ -394,11 +415,11 @@ Error:
                 [zscoreParameters addObject:[[NSNumber alloc] initWithDouble:0]];
                 [zscoreBuffer addObject:[[NSMutableArray alloc] initWithCapacity:0]];
             }
-        zscoreStat = ZSCORE_WORKING;
+        zscoreStat = processing;
     }
-    if (zscoreStat == ZSCORE_ON)
+    if (zscoreStat == activated)
     {
-        zscoreStat = ZSCORE_OFF;
+        zscoreStat = deactivated;
         [zscoreBuffer removeAllObjects];
         [zscoreParameters removeAllObjects];
         zscoreParameters = nil;

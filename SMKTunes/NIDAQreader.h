@@ -56,6 +56,7 @@
 
 - (id)initWithNumberOfChannels:(int)numbers andSamplingRate:(int)samplingRate;
 - (void)activateKoikefilterWithSamplingRate:(int)samplingRate;
+- (void)activateLowpassFilterWithCoefficients:(double *)numerator andDenominator:(double *)denominator withOrder:(int)order;
 - (BOOL)activateNormalizationWithBufferSize:(int)bsize;
 - (BOOL)activateZscoreWithBufferSize:(int)bsize;
 - (void)startCollection;

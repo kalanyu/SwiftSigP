@@ -67,6 +67,12 @@ import CocoaAsyncSocket
             normalizeButton.title = "Norm"
         }
     }
+    @IBOutlet weak var lowpassButton: RoundProgressView! {
+        didSet {
+            lowpassButton.roundDelegate = self
+            lowpassButton.title = "Lowpass"
+        }
+    }
 
     @IBOutlet weak var serverButton: NSButton! {
         didSet {
@@ -206,7 +212,11 @@ import CocoaAsyncSocket
         } else if(sender === filterButton) {
             dataReader?.activateKoikefilterWithSamplingRate(Int32(samplingRate));
             (sender as! RoundProgressView).loadProgressForSeconds(1)
-
+        } else if(sender === lowpassButton) {
+            let b = [0.0000291464944656705, 0.0000874394833970116, 0.000087439483397011, 0.0000291464944656705];
+            let a = [-2.8744, 2.7565, -0.8819];
+            dataReader?.activateLowpassFilterWithCoefficients(&b, andDenominator: &a, withOrder: 2)
+            (sender as! RoundProgressView).loadProgressForSeconds(1)
         }
     }
     
