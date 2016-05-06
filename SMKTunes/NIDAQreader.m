@@ -14,16 +14,7 @@
 #include <math.h>
 
 #define DAQmxErrChk(functionCall) { if( DAQmxFailed(error=(functionCall)) ) { goto Error; } }
-#define KFILTER_OFF 1
-#define KFILTER_ON 2
-#define LPFILTER_OFF 1
-#define LPFILTER_ON 2
-#define NORMALIZE_ON 1
-#define NORMALIZE_WORKING 2
-#define NORMALIZE_OFF 0
-#define ZSCORE_ON 1
-#define ZSCORE_WORKING 2
-#define ZSCORE_OFF 0
+
 
 @interface  NIDAQreader()
 //private
@@ -42,13 +33,14 @@
 @synthesize rectify;
 
 //status definition and corresponding parameters
-typedef enum processingStatus { deactivated, activated, processing } status;
+typedef NS_ENUM(NSInteger, status) { deactivated, activated, processing };
+
 status static kFilterStat;
 status static lpFilterStat;
 status static normalizeStat;
-status static normalizeBufferSize;
+int static normalizeBufferSize;
 status static zscoreStat;
-status static zscoreBufferSize;
+int static zscoreBufferSize;
 
 
 - (id)init {
@@ -67,6 +59,8 @@ status static zscoreBufferSize;
         rectify = YES;
         kFilterStat = deactivated;
         lpFilterStat = deactivated;
+        normalizeStat = deactivated;
+        zscoreStat = deactivated;
         _clipping = true;
     }
     return self;
@@ -97,6 +91,10 @@ status static zscoreBufferSize;
         rectify = NO;
         kFilterStat = deactivated;
         lpFilterStat = deactivated;
+        normalizeStat = deactivated;
+        zscoreStat = deactivated;
+        
+
         gainMultiplier = 1;
         _clipping = true;
     }
@@ -214,14 +212,16 @@ status static zscoreBufferSize;
             fileWriteFiltered = [NSString stringWithFormat:@"%d", totalRead-pointsToRead+i+1];
             fileWrite = [fileWrite stringByAppendingFormat:@",%@", strNow];
             fileWriteFiltered = [fileWriteFiltered stringByAppendingFormat:@",%@", strNow];
+            
+
+            
             for (int j = 0; j < noOfChannels; j++) {
                 
                 //preping string for file write (raw)
-
                 
-                double emgData = data[(pointsToRead*j)+i];
+                double emgData = data[(pointsToRead*j)+i]; // gain
                 
-                if (zscoreStat == deactivated) {
+                if (zscoreStat == processing) {
                     [[zscoreBuffer objectAtIndex:j] addObject:[[NSNumber alloc] initWithDouble:emgData]];
                     if ([[zscoreBuffer objectAtIndex:j] count] == zscoreBufferSize)
                     {
@@ -248,11 +248,15 @@ status static zscoreBufferSize;
                 //raw data after base align and rectification
                 fileWrite = [fileWrite stringByAppendingFormat:@",%lf",rawData];
                 
+                if (kFilterStat == activated) {
+                    finalData = [_koikeFilters pushData:finalData ToFilterChannel:j];
+                }
+                
                 if (normalizeStat == processing) {
                     [[normalizeBuffer objectAtIndex:j] addObject:[[NSNumber alloc] initWithDouble:finalData]];
                     if ([[normalizeBuffer objectAtIndex:j] count] == normalizeBufferSize)
                     {
-                        int firstIndex = (sampleRate * 2 > normalizeBufferSize? 0: sampleRate * 2);
+                        int firstIndex = (sampleRate > normalizeBufferSize? 0: sampleRate);
                         NSIndexSet *index =                         [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(firstIndex, normalizeBufferSize - firstIndex - 1)];
 
                         NSLog(@"%d %d %ld %@", firstIndex, normalizeBufferSize - firstIndex - 1, [normalizeBuffer count], index);
@@ -281,18 +285,18 @@ status static zscoreBufferSize;
                     }
                 }
                 
-                
                 if (normalizeStat == activated) {
-                    double min = [[[normalizeParameters objectAtIndex:j] valueForKey:@"min"] doubleValue];
-                    double max = [[[normalizeParameters objectAtIndex:j] valueForKey:@"max"] doubleValue];
                     
+                    double min = [[[normalizeParameters objectAtIndex:j] valueForKey:@"min"] doubleValue];
+                    double max = [[[normalizeParameters objectAtIndex:j] valueForKey:@"avg"] doubleValue];
                     finalData = ((finalData - (min))/((max) - (min))) * (1-0) + 0;
                 }
                 
-                if (kFilterStat == deactivated) {
-                    finalData = [_koikeFilters pushData:finalData ToFilterChannel:j];
+                if (lpFilterStat == activated) {
+                    finalData = [_lowpassFilters pushData:finalData ToFilterChannel:j];
+//                    NSLog(@"%lf %lf", data, finalData);
+                    
                 }
-                
                 fileWriteFiltered = [fileWriteFiltered stringByAppendingFormat:@",%lf",finalData];
                 
                 if (i ==  floor(sampleRate/60)) {

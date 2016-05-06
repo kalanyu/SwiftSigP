@@ -213,9 +213,15 @@ import CocoaAsyncSocket
             dataReader?.activateKoikefilterWithSamplingRate(Int32(samplingRate));
             (sender as! RoundProgressView).loadProgressForSeconds(1)
         } else if(sender === lowpassButton) {
-            let b = [0.0000291464944656705, 0.0000874394833970116, 0.000087439483397011, 0.0000291464944656705];
-            let a = [-2.8744, 2.7565, -0.8819];
-            dataReader?.activateLowpassFilterWithCoefficients(&b, andDenominator: &a, withOrder: 2)
+            //just copy past from matlab
+//            var b = [0.00002914, 0.00008743, 0.00008743, 0.00002914];
+//            var a = [-2.8744, 2.7565, -0.8819];
+//            var b = [0.0029, 0.0087, 0.0087, 0.0029];
+            
+            var b = [0.0000000000003029, 0.0000000000015145, 0.0000000000030289, 0.0000000000030289, 0.0000000000015145, 0.0000000000003029]
+            var a = [1.0000000000000000, -4.9796671949900722, 9.9188753381375463, -9.8786215487796287, 4.9192858681237484, -0.9798724624819012];
+            
+            dataReader?.activateLowpassFilterWithCoefficients(&b, andDenominator: &a, withOrder: Int32(a.count - 1))
             (sender as! RoundProgressView).loadProgressForSeconds(1)
         }
     }
