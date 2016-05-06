@@ -53,24 +53,30 @@ import CocoaAsyncSocket
         didSet {
             baseAlignButton.roundDelegate = self
             baseAlignButton.title = "Align"
+            baseAlignButton.loadSeconds = 2.0
         }
     }
+    
     @IBOutlet weak var filterButton: RoundProgressView! {
         didSet {
             filterButton.roundDelegate = self
             filterButton.title = "Filter"
+            filterButton.loadSeconds = 1.0
         }
     }
     @IBOutlet weak var normalizeButton: RoundProgressView! {
         didSet {
             normalizeButton.roundDelegate = self
+            normalizeButton.showMarker = true
             normalizeButton.title = "Norm"
+            normalizeButton.loadSeconds = 5.0
         }
     }
     @IBOutlet weak var lowpassButton: RoundProgressView! {
         didSet {
             lowpassButton.roundDelegate = self
             lowpassButton.title = "Lowpass"
+            lowpassButton.loadSeconds = 0.5
         }
     }
 
@@ -115,6 +121,7 @@ import CocoaAsyncSocket
     private var numberOfChannels = 2;
     private var samplingRate = 1000;
 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -203,15 +210,12 @@ import CocoaAsyncSocket
     func roundProgressClicked(sender: NSView) {
         if (sender === baseAlignButton) {
             dataReader?.activateZscoreWithBufferSize(Int32(samplingRate) * 2);
-            (sender as! RoundProgressView).loadProgressForSeconds(2)
         } else if(sender === normalizeButton) {
             serverButton.enabled = !serverButton.enabled
             dataReader?.activateNormalizationWithBufferSize(Int32(samplingRate) * 5);
-            (sender as! RoundProgressView).loadProgressForSeconds(5)
 
         } else if(sender === filterButton) {
             dataReader?.activateKoikefilterWithSamplingRate(Int32(samplingRate));
-            (sender as! RoundProgressView).loadProgressForSeconds(1)
         } else if(sender === lowpassButton) {
             //just copy past from matlab
 //            var b = [0.00002914, 0.00008743, 0.00008743, 0.00002914];
@@ -222,7 +226,6 @@ import CocoaAsyncSocket
             var a = [1.0000000000000000, -4.9796671949900722, 9.9188753381375463, -9.8786215487796287, 4.9192858681237484, -0.9798724624819012];
             
             dataReader?.activateLowpassFilterWithCoefficients(&b, andDenominator: &a, withOrder: Int32(a.count - 1))
-            (sender as! RoundProgressView).loadProgressForSeconds(1)
         }
     }
     

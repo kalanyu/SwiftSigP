@@ -62,6 +62,7 @@ int static zscoreBufferSize;
         normalizeStat = deactivated;
         zscoreStat = deactivated;
         _clipping = true;
+        _normParCollection = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -93,8 +94,7 @@ int static zscoreBufferSize;
         lpFilterStat = deactivated;
         normalizeStat = deactivated;
         zscoreStat = deactivated;
-        
-
+        _normParCollection = [[NSMutableArray alloc] init];
         gainMultiplier = 1;
         _clipping = true;
     }
@@ -259,11 +259,11 @@ int static zscoreBufferSize;
                         int firstIndex = (sampleRate > normalizeBufferSize? 0: sampleRate);
                         NSIndexSet *index =                         [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(firstIndex, normalizeBufferSize - firstIndex - 1)];
 
-                        NSLog(@"%d %d %ld %@", firstIndex, normalizeBufferSize - firstIndex - 1, [normalizeBuffer count], index);
+//                        NSLog(@"%d %d %ld %@", firstIndex, normalizeBufferSize - firstIndex - 1, [normalizeBuffer count], index);
                         NSArray *selectedRange = [[normalizeBuffer objectAtIndex:j] objectsAtIndexes:index];
                         NSNumber *max = [[selectedRange sortedArrayUsingSelector:@selector(compare:)] lastObject];
                         
-                        max = [NSNumber numberWithDouble: max.doubleValue * 0.7]; //70% of maximum voluntary contraction
+                        max = [NSNumber numberWithDouble: max.doubleValue]; //70% of maximum voluntary contraction
                         
                         NSNumber *min = [[selectedRange sortedArrayUsingSelector:@selector(compare:)] objectAtIndex:0];
                         double sum = 0;
@@ -278,15 +278,27 @@ int static zscoreBufferSize;
                         }
                         std = sqrt(std / [selectedRange count]);
                         [normalizeParameters replaceObjectAtIndex:j withObject:[[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:sum], @"avg",min,@"min",max,@"max", [NSNumber numberWithDouble:std], @"std", nil]];
-                        NSLog(@"%@",normalizeParameters);
                         if (j+1 == noOfChannels) {
-                            normalizeStat = activated;
+                            [_normParCollection addObject:normalizeParameters];
+                            if ([_normParCollection count] == 3) {
+                                double selectIndex = 0;
+                                for (int i = 1; i < _normParCollection.count; i++) {
+                                    if ([[[_normParCollection objectAtIndex:i] valueForKey:@"max"] doubleValue] < [[[_normParCollection objectAtIndex:selectIndex] valueForKey:@"max"] doubleValue]) {
+                                        selectIndex = i;
+                                    }
+                                }
+                                //TODO: custom parameter for each channel
+                                normalizeParameters = [_normParCollection objectAtIndex:selectIndex];
+                                NSLog(@"%@ %@", _normParCollection, normalizeParameters);
+                                normalizeStat = activated;
+                            } else {
+                                normalizeStat = deactivated;
+                            }
                         }
                     }
                 }
                 
                 if (normalizeStat == activated) {
-                    
                     double min = [[[normalizeParameters objectAtIndex:j] valueForKey:@"min"] doubleValue];
                     double max = [[[normalizeParameters objectAtIndex:j] valueForKey:@"avg"] doubleValue];
                     finalData = ((finalData - (min))/((max) - (min))) * (1-0) + 0;

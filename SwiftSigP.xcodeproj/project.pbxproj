@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0BEA07071C6AFC6B00B97C6D /* nidaqmxbase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60E8AD581C5F121500EB2810 /* nidaqmxbase.framework */; };
+		6009FF0D1CDC34E4007B2566 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6009FF0A1CDC34C8007B2566 /* CocoaAsyncSocket.framework */; };
 		602137201CC881D900435991 /* IirFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6021371E1CC881D900435991 /* IirFilter.cpp */; };
 		602137281CC89A0900435991 /* LowpassFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 602137271CC89A0900435991 /* LowpassFilter.mm */; };
 		602F13CC1BD7CCCD009A6F07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602F13CB1BD7CCCD009A6F07 /* AppDelegate.swift */; };
@@ -38,23 +39,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C345678E1CBCC44F008A5391 /* PBXContainerItemProxy */ = {
+		6009FF071CDC34C8007B2566 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */;
+			containerPortal = 6009FF011CDC34C8007B2566 /* CocoaAsyncSocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6CD990101B77868C0011A685;
 			remoteInfo = "iOS CocoaAsyncSocket";
 		};
-		C34567901CBCC44F008A5391 /* PBXContainerItemProxy */ = {
+		6009FF091CDC34C8007B2566 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */;
+			containerPortal = 6009FF011CDC34C8007B2566 /* CocoaAsyncSocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 9FC41F131B9D965000578BEB;
 			remoteInfo = "Mac CocoaAsyncSocket";
 		};
-		C34567921CBCC44F008A5391 /* PBXContainerItemProxy */ = {
+		6009FF0B1CDC34C8007B2566 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */;
+			containerPortal = 6009FF011CDC34C8007B2566 /* CocoaAsyncSocket.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 7D8B70C41BCFA15700D8E273;
 			remoteInfo = "tvOS CocoaAsyncSocket";
@@ -75,6 +76,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6009FF011CDC34C8007B2566 /* CocoaAsyncSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaAsyncSocket.xcodeproj; path = "../../../Dropbox/Swift Scripts/CocoaAsyncSocket/CocoaAsyncSocket.xcodeproj"; sourceTree = "<group>"; };
 		6021371E1CC881D900435991 /* IirFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IirFilter.cpp; sourceTree = "<group>"; };
 		6021371F1CC881D900435991 /* IirFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IirFilter.hpp; sourceTree = "<group>"; };
 		602137261CC89A0900435991 /* LowpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LowpassFilter.h; sourceTree = "<group>"; };
@@ -114,7 +116,6 @@
 		60FE590B1BE1D8640037E9F0 /* NSSpashBGView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSSpashBGView.swift; sourceTree = "<group>"; };
 		60FE590E1BE1D86E0037E9F0 /* CountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountView.swift; sourceTree = "<group>"; };
 		60FE59101BE1D9AB0037E9F0 /* HashDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashDrawer.swift; sourceTree = "<group>"; };
-		C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaAsyncSocket.xcodeproj; path = ../CocoaAsyncSocket/CocoaAsyncSocket.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +123,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6009FF0D1CDC34E4007B2566 /* CocoaAsyncSocket.framework in Frameworks */,
 				0BEA07071C6AFC6B00B97C6D /* nidaqmxbase.framework in Frameworks */,
 				60E8AD5B1C5F121500EB2810 /* nidaqmxbaselv.framework in Frameworks */,
 			);
@@ -130,10 +132,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6009FF021CDC34C8007B2566 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6009FF081CDC34C8007B2566 /* CocoaAsyncSocket.framework */,
+				6009FF0A1CDC34C8007B2566 /* CocoaAsyncSocket.framework */,
+				6009FF0C1CDC34C8007B2566 /* CocoaAsyncSocket.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		602F13BF1BD7CCCC009A6F07 = {
 			isa = PBXGroup;
 			children = (
-				C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */,
+				6009FF011CDC34C8007B2566 /* CocoaAsyncSocket.xcodeproj */,
 				60E8AD581C5F121500EB2810 /* nidaqmxbase.framework */,
 				60E8AD591C5F121500EB2810 /* nidaqmxbaselv.framework */,
 				602F13CA1BD7CCCD009A6F07 /* SwiftSigP */,
@@ -217,16 +229,6 @@
 			name = "NIDAQ library";
 			sourceTree = "<group>";
 		};
-		C34567891CBCC44F008A5391 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C345678F1CBCC44F008A5391 /* CocoaAsyncSocket.framework */,
-				C34567911CBCC44F008A5391 /* CocoaAsyncSocket.framework */,
-				C34567931CBCC44F008A5391 /* CocoaAsyncSocket.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -276,8 +278,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = C34567891CBCC44F008A5391 /* Products */;
-					ProjectRef = C34567881CBCC44F008A5391 /* CocoaAsyncSocket.xcodeproj */;
+					ProductGroup = 6009FF021CDC34C8007B2566 /* Products */;
+					ProjectRef = 6009FF011CDC34C8007B2566 /* CocoaAsyncSocket.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -288,25 +290,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		C345678F1CBCC44F008A5391 /* CocoaAsyncSocket.framework */ = {
+		6009FF081CDC34C8007B2566 /* CocoaAsyncSocket.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CocoaAsyncSocket.framework;
-			remoteRef = C345678E1CBCC44F008A5391 /* PBXContainerItemProxy */;
+			remoteRef = 6009FF071CDC34C8007B2566 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C34567911CBCC44F008A5391 /* CocoaAsyncSocket.framework */ = {
+		6009FF0A1CDC34C8007B2566 /* CocoaAsyncSocket.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CocoaAsyncSocket.framework;
-			remoteRef = C34567901CBCC44F008A5391 /* PBXContainerItemProxy */;
+			remoteRef = 6009FF091CDC34C8007B2566 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C34567931CBCC44F008A5391 /* CocoaAsyncSocket.framework */ = {
+		6009FF0C1CDC34C8007B2566 /* CocoaAsyncSocket.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = CocoaAsyncSocket.framework;
-			remoteRef = C34567921CBCC44F008A5391 /* PBXContainerItemProxy */;
+			remoteRef = 6009FF0B1CDC34C8007B2566 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

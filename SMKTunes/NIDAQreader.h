@@ -24,6 +24,7 @@
     NSMutableArray *zscoreBuffer;
     NSMutableArray *zscoreParameters;
     NSMutableArray *normalizeParameters;
+    
     id<NIDAQreaderProtocol> delegate;
     float64 sampleRate, currentIndex;
     int32 pointsToRead,  totalRead, noOfChannels, gainMultiplier;
@@ -50,6 +51,7 @@
 @property (nonatomic, retain) NSMutableArray *zscoreBuffer;
 @property (nonatomic, retain) NSMutableArray *zscoreParameters;
 @property (nonatomic, retain) NSMutableArray *normalizeParameters;
+@property (nonatomic, retain) NSMutableArray *normParCollection;
 @property (nonatomic, retain) NSFileHandle *fileHandle, *fileHandle2;
 @property (nonatomic, retain) NSString *fileName, *fileName_raw;
 

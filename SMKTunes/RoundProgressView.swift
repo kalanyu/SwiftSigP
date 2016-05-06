@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Foundation
 
 protocol RoundProgressProtocol {
     func roundProgressClicked(sender: NSView)
@@ -15,11 +16,14 @@ protocol RoundProgressProtocol {
 @IBDesignable class RoundProgressView: NSView {
     private let innerRing = CAShapeLayer()
     private let outerRing = CAShapeLayer()
-
+    private var state = NSOffState
     private let lineWidth : CGFloat = 10
     private let titleLabel = NSTextLabel()
     
+    var showMarker = false
+    
     var roundDelegate : RoundProgressProtocol?
+    var loadSeconds = 1.0
     
     var title : String {
         get {
@@ -39,9 +43,9 @@ protocol RoundProgressProtocol {
         
         innerRing.shouldRasterize = true
         innerRing.rasterizationScale = 2
-        innerRing.strokeColor = NSColor(red: 255/255.0, green: 133/255.0, blue: 156/255.0, alpha: 1).CGColor
+        innerRing.strokeColor = PrismColor()[1].CGColor
         innerRing.fillColor = NSColor.clearColor().CGColor
-        innerRing.lineWidth = lineWidth
+        innerRing.lineWidth = lineWidth * 0.8
         innerRing.lineCap = kCALineCapRound
         innerRing.lineDashPattern = nil
         innerRing.lineDashPhase = 0.0
@@ -73,6 +77,7 @@ protocol RoundProgressProtocol {
     override func drawRect(dirtyRect: NSRect) {
         super.drawRect(dirtyRect)
         
+        if let currentContext = NSGraphicsContext.currentContext() {
         
         //CGPathMoveToPoint(path, nil, 0, 0)
         //CGPathAddArc(path, nil, 0, 0, 300, 0, CGFloat(M_PI), false)
@@ -80,7 +85,7 @@ protocol RoundProgressProtocol {
         Swift.print(self.bounds.width)
         var circleSize : CGFloat = min(self.bounds.width/2, self.bounds.height/2)
         let margin = lineWidth + 10
-        CGPathAddArc(path, nil, self.bounds.midX, self.bounds.midY, circleSize - margin, CGFloat(-M_PI/2), CGFloat(19 * M_PI / 12.6), true)
+        CGPathAddArc(path, nil, self.bounds.midX, self.bounds.midY, circleSize - (lineWidth + innerRing.lineWidth) , CGFloat(-M_PI/2), CGFloat(19 * M_PI / 12.6), true)
         //CGPathAddArc(path, nil, 100, 100, 100, 0, (360 * CGFloat(M_PI))/180, true);
         
         circleSize = min(self.bounds.width, self.bounds.height) - margin
@@ -91,7 +96,42 @@ protocol RoundProgressProtocol {
         outerRing.path = path2
         innerRing.path = path
         innerRing.strokeEnd = 0
+        
+            if showMarker {
+                CGContextSaveGState(currentContext.CGContext)
+                //3 - move top left of context to the previous center position
+                CGContextTranslateCTM(currentContext.CGContext, bounds.width/2, bounds.height/2)
+                
+                let markerHeight = self.lineWidth / 4
+                let markerWidth = self.lineWidth * 2.5
+                
+                for i in 0...1 {
+                    let markerPath = CGPathCreateWithRect(CGRect(x: -markerHeight / 2, y: 0, width: markerHeight, height: markerWidth), nil)
+                    //4 - save the centred context
+                    CGContextSaveGState(currentContext.CGContext)
+                    
+                    //5 - calculate the rotation angle
+                    
+                    //rotate and translate
+                    CGContextRotateCTM(currentContext.CGContext, deg2rad(180.0 * CGFloat(i)) + CGFloat(M_PI/2))
+                    CGContextTranslateCTM(currentContext.CGContext, 0, circleSize/2 - markerWidth)
+                    CGContextAddPath(currentContext.CGContext, markerPath)
+
+                    let color = PrismColor()
+                    color[3].set()
+
+                    
+                    //6 - fill the marker rectangle
+                    CGContextFillPath(currentContext.CGContext)
+                    
+                    CGContextRestoreGState(currentContext.CGContext)
+                }
+                    
+                CGContextRestoreGState(currentContext.CGContext)
+                        
+            }
         // Drawing code here.
+        }
     }
     
     override func layout() {
@@ -101,9 +141,11 @@ protocol RoundProgressProtocol {
         titleLabel.frame.origin = CGPoint(x: self.bounds.midX - titleLabel.bounds.width/2, y: self.bounds.midY - titleLabel.bounds.height/2)
     }
     
-    func loadProgressForSeconds(seconds: Double) {
+    private func loadProgressForSeconds(seconds: Double) {
         CATransaction.begin()
-        
+//        CATransaction.setCompletionBlock {
+//            self.state = NSOnState
+//        }
         let animate = CABasicAnimation(keyPath: "strokeEnd")
         animate.toValue = 1
         animate.duration = seconds
@@ -112,6 +154,30 @@ protocol RoundProgressProtocol {
         animate.removedOnCompletion = false
 
         innerRing.addAnimation(animate, forKey: "strokeEnd")
+        CATransaction.commit()
+    }
+    
+    private func removeProgress() {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock({
+            let animate = CABasicAnimation(keyPath: "strokeEnd")
+            animate.toValue = 0
+            animate.duration = 0
+            animate.repeatCount = 1
+            animate.fillMode = kCAFillModeForwards
+            animate.removedOnCompletion = false
+            self.innerRing.addAnimation(animate, forKey: "strokeEnd")
+            CATransaction.commit()
+        })
+        let animate = CABasicAnimation(keyPath: "opacity")
+        animate.toValue = 0
+        animate.duration = 0.5
+        animate.repeatCount = 1
+        animate.fillMode = kCAFillModeForwards
+        animate.removedOnCompletion = true
+        
+        innerRing.addAnimation(animate, forKey: "opacity")
+
         CATransaction.commit()
     }
 
@@ -141,8 +207,19 @@ protocol RoundProgressProtocol {
     }
     
     override func mouseDown(theEvent: NSEvent) {
+        state = (state == NSOnState ? NSOffState : NSOnState)
+        
         if let delegate = roundDelegate {
-            delegate.roundProgressClicked(self)
+            if state == NSOnState {
+                delegate.roundProgressClicked(self)
+                loadProgressForSeconds(self.loadSeconds)
+            } else {
+                removeProgress()
+            }
         }
+    }
+    
+    private func deg2rad(degree: CGFloat) -> CGFloat {
+        return degree * CGFloat(M_PI) / CGFloat(180.0)
     }
 }
