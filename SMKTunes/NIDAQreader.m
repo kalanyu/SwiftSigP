@@ -278,18 +278,31 @@ int static zscoreBufferSize;
                         }
                         std = sqrt(std / [selectedRange count]);
                         [normalizeParameters replaceObjectAtIndex:j withObject:[[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithDouble:sum], @"avg",min,@"min",max,@"max", [NSNumber numberWithDouble:std], @"std", nil]];
-                        if (j+1 == noOfChannels) {
+                        if (j+1 == noOfChannels)
+                        {
                             [_normParCollection addObject:normalizeParameters];
-                            if ([_normParCollection count] == 3) {
-                                double selectIndex = 0;
-                                for (int i = 1; i < _normParCollection.count; i++) {
-                                    if ([[[_normParCollection objectAtIndex:i] valueForKey:@"max"] doubleValue] < [[[_normParCollection objectAtIndex:selectIndex] valueForKey:@"max"] doubleValue]) {
-                                        selectIndex = i;
+                            if ([_normParCollection count] == 3)
+                            {
+                                
+                                for (int nc = 0; i < noOfChannels; nc++)
+                                {
+                                    double selectIndex = 0;
+ 
+                                    for (int pc = 0; i < _normParCollection.count; pc++)
+                                    {
+                                        NSMutableDictionary* channelParam = [[_normParCollection objectAtIndex:pc] objectAtIndex:nc];
+                                        NSMutableDictionary* selectedParam = [[_normParCollection objectAtIndex:selectIndex] objectAtIndex:nc];
+                                        if ([[channelParam valueForKey:@"max"] doubleValue] > [[selectedParam valueForKey:@"max"] doubleValue])
+                                        {
+                                            selectIndex = pc;
+                                        }
                                     }
+                                    
+                                    [normalizeParameters replaceObjectAtIndex:nc withObject:[[_normParCollection objectAtIndex:selectIndex] objectAtIndex:nc]];
+                                    
                                 }
                                 //TODO: custom parameter for each channel
-                                normalizeParameters = [_normParCollection objectAtIndex:selectIndex];
-                                NSLog(@"%@ %@", _normParCollection, normalizeParameters);
+//                                NSLog(@"%@ %@", _normParCollection, normalizeParameters);
                                 normalizeStat = activated;
                             } else {
                                 normalizeStat = deactivated;

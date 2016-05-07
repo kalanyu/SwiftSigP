@@ -45,9 +45,9 @@ class SRPlotSegment : NSObject {
         
         //Create Lines
         //FIXME: Will Bezier path gives smoother lines?
-        for var c = 0; c < dataStorage.count; ++c
+        for c in 0 ..< dataStorage.count
         {
-            for var i = 0 ; i < 59 ; ++i {
+            for i in 0  ..< 59  {
                 let data = minMaxNormalization(dataStorage[c][i], min: -axeSystem!.graph.maxDataRange, max: axeSystem!.graph.maxDataRange)
                 let nextData = minMaxNormalization(dataStorage[c][i+1], min: -axeSystem!.graph.maxDataRange, max: axeSystem!.graph.maxDataRange)
                 //merge axis and  min max normalization using its range
@@ -72,7 +72,7 @@ class SRPlotSegment : NSObject {
     func reset()
     {
         // Clear out our components and reset the index to 60 to start filling values again...
-        for var i = 0; i < dataStorage.count; ++i {
+        for i in 0 ..< dataStorage.count {
             dataStorage[i] = [Double](count:60, repeatedValue: 0)
         }
         
@@ -103,11 +103,11 @@ class SRPlotSegment : NSObject {
         if index > 0
         {
             // First decrement, both to get to a zero-based index and to flag one fewer position left
-            --index;
+            index -= 1;
             
             // prevent index out of bounds issue
             let lastAvailableChannel = min(data.count, dataStorage.count)
-            for var i = 0 ; i < lastAvailableChannel ; ++i {
+            for i in 0  ..< lastAvailableChannel  {
                 dataStorage[i][index] = data[i]
             }
             // And inform Core Animation to redraw the layer.

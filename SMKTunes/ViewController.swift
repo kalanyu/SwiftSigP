@@ -186,7 +186,7 @@ import CocoaAsyncSocket
     
     func addData2() {
         
-        let cgCount = sin(Double(count++) * 1/60) * 15000
+        let cgCount = sin(Double(count += 1) * 1/60) * 15000
         //            let cgCount = 0.0
         graphView1.addData([cgCount+1000, cgCount+2000, cgCount+3000, cgCount+400, cgCount+500 , cgCount+600])
         graphView2.addData([cgCount+1000, cgCount+2000, cgCount+3000, cgCount+400, cgCount+500 , cgCount+600])

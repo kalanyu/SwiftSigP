@@ -128,13 +128,11 @@ class SRPlotAxe: NSObject, NSWindowDelegate {
             return
         }
         
-        
         if (layer === self.layer) {
             graph.drawAxesInRect(ctx, bounds: self.layer.bounds, axeOrigin: origin!, xPointsToShow: xPointsToShow!, yPointsToShow: yPointsToShow!, numberOfTicks: numberOfSubticks, maxDataRange: self.maxDataRange)
         } else if (layer === self.hashLayer) {
             hashSystem.drawHashInRect(ctx, bounds: self.layer.bounds, axeOrigin: origin!, xPointsToShow: xPointsToShow!, yPointsToShow: yPointsToShow!, numberOfTicks: numberOfSubticks, maxDataRange: self.maxDataRange)
         }
-        
         
     }
     

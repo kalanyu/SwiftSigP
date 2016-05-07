@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -690,7 +690,7 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cUN-u5-Cj3" customClass="RoundProgressView" customModule="SwiftSigP" customModuleProvider="target">
                                         <rect key="frame" x="646" y="598" width="150" height="150"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="cUN-u5-Cj3" secondAttribute="height" multiplier="1:1" id="gcm-ps-ugR"/>
+                                            <constraint firstAttribute="width" secondItem="cUN-u5-Cj3" secondAttribute="height" multiplier="1:1" id="lVx-il-hTV"/>
                                         </constraints>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ta4-ev-FP5" customClass="RoundProgressView" customModule="SwiftSigP" customModuleProvider="target">
@@ -699,18 +699,8 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Q4l-lF-Ij4" customClass="RoundProgressView" customModule="SwiftSigP" customModuleProvider="target">
                                         <rect key="frame" x="804" y="598" width="150" height="150"/>
                                     </customView>
-                                    <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g76-GB-S9W">
-                                        <rect key="frame" x="918" y="486" width="101" height="24"/>
-                                        <buttonCell key="cell" type="bevel" title="Read" bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="uVR-CH-tfr">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
-                                        </buttonCell>
-                                        <connections>
-                                            <action selector="ReadFromDAQ:" target="XfG-lQ-9wD" id="tch-xA-bby"/>
-                                        </connections>
-                                    </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rxE-SV-wR6">
-                                        <rect key="frame" x="843" y="486" width="72" height="24"/>
+                                        <rect key="frame" x="780" y="486" width="72" height="24"/>
                                         <buttonCell key="cell" type="bevel" title="Rectify" bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="jtR-Lf-utZ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
@@ -720,7 +710,7 @@
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-fq-rPw">
-                                        <rect key="frame" x="1022" y="486" width="67" height="24"/>
+                                        <rect key="frame" x="1078" y="478" width="67" height="32"/>
                                         <buttonCell key="cell" type="bevel" title="Server" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="tYV-hs-bMJ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
@@ -732,47 +722,64 @@
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="hgq-74-9cK" customClass="RoundProgressView" customModule="SwiftSigP" customModuleProvider="target">
                                         <rect key="frame" x="962" y="598" width="150" height="150"/>
                                     </customView>
+                                    <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g76-GB-S9W">
+                                        <rect key="frame" x="939" y="486" width="55" height="24"/>
+                                        <buttonCell key="cell" type="bevel" title="Read" bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="uVR-CH-tfr">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="ReadFromDAQ:" target="XfG-lQ-9wD" id="tch-xA-bby"/>
+                                        </connections>
+                                    </button>
+                                    <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A1q-xc-6sG">
+                                        <rect key="frame" x="916" y="404" width="101" height="24"/>
+                                        <buttonCell key="cell" type="bevel" title="Address : " bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="Jd8-h3-t9s">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="ReadFromDAQ:" target="XfG-lQ-9wD" id="KRj-01-hTe"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="gW3-fq-rPw" secondAttribute="trailing" constant="191" id="0nV-8H-Es2"/>
-                                    <constraint firstItem="Ta4-ev-FP5" firstAttribute="leading" secondItem="hgq-74-9cK" secondAttribute="trailing" constant="8" id="49e-GQ-tjC"/>
+                                    <constraint firstItem="Q4l-lF-Ij4" firstAttribute="top" secondItem="cUN-u5-Cj3" secondAttribute="top" id="39B-Ju-msA"/>
+                                    <constraint firstItem="rxE-SV-wR6" firstAttribute="top" secondItem="g76-GB-S9W" secondAttribute="top" id="3ME-38-lcd"/>
+                                    <constraint firstItem="gW3-fq-rPw" firstAttribute="top" secondItem="g76-GB-S9W" secondAttribute="top" id="45D-a6-yyf"/>
                                     <constraint firstItem="Ti3-Uq-eWG" firstAttribute="top" secondItem="rgv-9L-pkK" secondAttribute="top" constant="20" id="4KV-IA-ZlS"/>
-                                    <constraint firstItem="hgq-74-9cK" firstAttribute="top" secondItem="cUN-u5-Cj3" secondAttribute="top" id="4Mi-up-UcK"/>
+                                    <constraint firstItem="3zg-Kq-dXx" firstAttribute="top" secondItem="A1q-xc-6sG" secondAttribute="bottom" constant="19" id="4LF-IJ-DR4"/>
+                                    <constraint firstItem="Q4l-lF-Ij4" firstAttribute="leading" secondItem="cUN-u5-Cj3" secondAttribute="trailing" constant="8" id="4xu-fL-jdh"/>
                                     <constraint firstItem="1Tt-9Z-en7" firstAttribute="width" secondItem="Ti3-Uq-eWG" secondAttribute="width" id="5ND-t7-2nm"/>
+                                    <constraint firstItem="hgq-74-9cK" firstAttribute="width" secondItem="Q4l-lF-Ij4" secondAttribute="width" id="5e0-GW-Teg"/>
+                                    <constraint firstItem="hgq-74-9cK" firstAttribute="height" secondItem="Q4l-lF-Ij4" secondAttribute="height" id="7bg-DU-RYs"/>
+                                    <constraint firstItem="g76-GB-S9W" firstAttribute="centerX" secondItem="3zg-Kq-dXx" secondAttribute="centerX" id="8O8-I7-g4n"/>
+                                    <constraint firstItem="A1q-xc-6sG" firstAttribute="centerX" secondItem="3zg-Kq-dXx" secondAttribute="centerX" id="Bdg-Qc-qoV"/>
+                                    <constraint firstItem="rxE-SV-wR6" firstAttribute="leading" secondItem="Ti3-Uq-eWG" secondAttribute="trailing" constant="152" id="CRD-hB-caJ"/>
                                     <constraint firstItem="Ti3-Uq-eWG" firstAttribute="leading" secondItem="rgv-9L-pkK" secondAttribute="leading" constant="20" id="Cuc-3s-skF"/>
-                                    <constraint firstAttribute="trailing" secondItem="Ta4-ev-FP5" secondAttribute="trailing" constant="10" id="Ecz-OU-7h9"/>
-                                    <constraint firstItem="Q4l-lF-Ij4" firstAttribute="top" secondItem="cUN-u5-Cj3" secondAttribute="top" id="G7a-PA-Wae"/>
+                                    <constraint firstItem="Ta4-ev-FP5" firstAttribute="height" secondItem="hgq-74-9cK" secondAttribute="height" id="IC9-BF-6jV"/>
+                                    <constraint firstItem="Ta4-ev-FP5" firstAttribute="width" secondItem="hgq-74-9cK" secondAttribute="width" id="IX7-3X-Uvn"/>
                                     <constraint firstItem="1Tt-9Z-en7" firstAttribute="height" secondItem="Ti3-Uq-eWG" secondAttribute="height" constant="10" id="JT7-lV-Xph"/>
-                                    <constraint firstItem="g76-GB-S9W" firstAttribute="leading" secondItem="rxE-SV-wR6" secondAttribute="trailing" constant="3" id="JYV-n9-tWM"/>
-                                    <constraint firstItem="Q4l-lF-Ij4" firstAttribute="width" secondItem="cUN-u5-Cj3" secondAttribute="width" id="KAy-eU-xg7"/>
-                                    <constraint firstItem="g76-GB-S9W" firstAttribute="top" secondItem="gW3-fq-rPw" secondAttribute="top" id="KSo-5G-4SB"/>
-                                    <constraint firstItem="rxE-SV-wR6" firstAttribute="leading" secondItem="Ti3-Uq-eWG" secondAttribute="trailing" constant="215" id="KXt-qd-YAF"/>
-                                    <constraint firstItem="Ta4-ev-FP5" firstAttribute="height" secondItem="cUN-u5-Cj3" secondAttribute="height" id="LCP-P8-3J1"/>
-                                    <constraint firstItem="gW3-fq-rPw" firstAttribute="leading" secondItem="g76-GB-S9W" secondAttribute="trailing" constant="3" id="OMd-Sz-7W3"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ta4-ev-FP5" secondAttribute="trailing" constant="10" id="KxU-h2-CmH"/>
                                     <constraint firstItem="1Tt-9Z-en7" firstAttribute="top" secondItem="Ti3-Uq-eWG" secondAttribute="bottom" constant="8" id="Pt9-q4-e9R"/>
-                                    <constraint firstItem="Q4l-lF-Ij4" firstAttribute="height" secondItem="cUN-u5-Cj3" secondAttribute="height" id="Q6m-5U-mKL"/>
-                                    <constraint firstItem="cUN-u5-Cj3" firstAttribute="top" secondItem="Ti3-Uq-eWG" secondAttribute="top" id="Rgu-R0-Khp"/>
-                                    <constraint firstItem="cUN-u5-Cj3" firstAttribute="leading" secondItem="3zg-Kq-dXx" secondAttribute="leading" constant="-16" id="VQV-t6-KaN"/>
+                                    <constraint firstItem="A1q-xc-6sG" firstAttribute="top" secondItem="g76-GB-S9W" secondAttribute="bottom" constant="58" id="QWv-6I-zOt"/>
+                                    <constraint firstItem="g76-GB-S9W" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Q4l-lF-Ij4" secondAttribute="bottom" constant="88" id="Qeb-N2-hlm"/>
+                                    <constraint firstItem="hgq-74-9cK" firstAttribute="top" secondItem="Q4l-lF-Ij4" secondAttribute="top" id="UbL-ad-TMt"/>
+                                    <constraint firstItem="Ta4-ev-FP5" firstAttribute="leading" secondItem="hgq-74-9cK" secondAttribute="trailing" constant="8" id="VnI-lS-n2g"/>
                                     <constraint firstItem="3zg-Kq-dXx" firstAttribute="height" secondItem="1Tt-9Z-en7" secondAttribute="height" id="WgM-OA-2NJ"/>
-                                    <constraint firstItem="Ta4-ev-FP5" firstAttribute="width" secondItem="cUN-u5-Cj3" secondAttribute="width" id="XBb-o6-Qfi"/>
-                                    <constraint firstItem="rxE-SV-wR6" firstAttribute="top" secondItem="g76-GB-S9W" secondAttribute="top" id="YMW-dQ-MQW"/>
-                                    <constraint firstItem="hgq-74-9cK" firstAttribute="height" secondItem="cUN-u5-Cj3" secondAttribute="height" id="ZdF-2G-lTr"/>
-                                    <constraint firstItem="Q4l-lF-Ij4" firstAttribute="leading" secondItem="cUN-u5-Cj3" secondAttribute="trailing" constant="8" id="aml-qM-58T"/>
-                                    <constraint firstItem="hgq-74-9cK" firstAttribute="leading" secondItem="Q4l-lF-Ij4" secondAttribute="trailing" constant="8" id="atE-dA-Uog"/>
-                                    <constraint firstItem="Ta4-ev-FP5" firstAttribute="bottom" secondItem="hgq-74-9cK" secondAttribute="bottom" id="bux-bg-p1Z"/>
-                                    <constraint firstItem="Ta4-ev-FP5" firstAttribute="top" secondItem="hgq-74-9cK" secondAttribute="top" id="cIy-he-sxy"/>
-                                    <constraint firstItem="Q4l-lF-Ij4" firstAttribute="width" secondItem="Q4l-lF-Ij4" secondAttribute="height" multiplier="1:1" id="cV7-Cb-7jM"/>
-                                    <constraint firstItem="hgq-74-9cK" firstAttribute="width" secondItem="cUN-u5-Cj3" secondAttribute="width" id="eYl-0r-hGK"/>
+                                    <constraint firstItem="Q4l-lF-Ij4" firstAttribute="width" secondItem="cUN-u5-Cj3" secondAttribute="width" id="aRT-gG-Kva"/>
                                     <constraint firstAttribute="bottom" secondItem="3zg-Kq-dXx" secondAttribute="bottom" constant="20" id="euo-dQ-83t"/>
+                                    <constraint firstItem="hgq-74-9cK" firstAttribute="leading" secondItem="Q4l-lF-Ij4" secondAttribute="trailing" constant="8" id="fBq-9C-y0B"/>
+                                    <constraint firstItem="cUN-u5-Cj3" firstAttribute="top" secondItem="Ti3-Uq-eWG" secondAttribute="top" id="fd4-cn-ixC"/>
                                     <constraint firstItem="3zg-Kq-dXx" firstAttribute="width" secondItem="1Tt-9Z-en7" secondAttribute="width" id="fyF-jg-B9W"/>
+                                    <constraint firstAttribute="trailing" secondItem="gW3-fq-rPw" secondAttribute="trailing" constant="135" id="h21-xN-j7r"/>
                                     <constraint firstAttribute="trailing" secondItem="3zg-Kq-dXx" secondAttribute="trailing" constant="10" id="hE2-tU-0Lo"/>
-                                    <constraint firstItem="g76-GB-S9W" firstAttribute="top" secondItem="Q4l-lF-Ij4" secondAttribute="bottom" constant="88" id="iJn-iE-TPf"/>
                                     <constraint firstItem="3zg-Kq-dXx" firstAttribute="leading" secondItem="1Tt-9Z-en7" secondAttribute="trailing" constant="34" id="m74-CQ-1PU"/>
                                     <constraint firstItem="1Tt-9Z-en7" firstAttribute="leading" secondItem="rgv-9L-pkK" secondAttribute="leading" constant="20" id="mUx-UF-eoH"/>
-                                    <constraint firstItem="hgq-74-9cK" firstAttribute="trailing" secondItem="3zg-Kq-dXx" secondAttribute="trailing" constant="-158" id="oC4-rd-xzx"/>
-                                    <constraint firstItem="3zg-Kq-dXx" firstAttribute="top" secondItem="g76-GB-S9W" secondAttribute="bottom" constant="101" id="ock-RY-pNS"/>
-                                    <constraint firstItem="gW3-fq-rPw" firstAttribute="bottom" secondItem="g76-GB-S9W" secondAttribute="bottom" id="sRZ-nK-GxT"/>
                                     <constraint firstItem="3zg-Kq-dXx" firstAttribute="top" secondItem="Ti3-Uq-eWG" secondAttribute="bottom" constant="8" id="sol-u0-eLp"/>
+                                    <constraint firstItem="Q4l-lF-Ij4" firstAttribute="height" secondItem="cUN-u5-Cj3" secondAttribute="height" id="txZ-c3-Yw0"/>
+                                    <constraint firstItem="cUN-u5-Cj3" firstAttribute="leading" secondItem="Ti3-Uq-eWG" secondAttribute="trailing" constant="18" id="u26-8X-bAE"/>
+                                    <constraint firstItem="Ta4-ev-FP5" firstAttribute="top" secondItem="hgq-74-9cK" secondAttribute="top" id="vQK-Sl-Chm"/>
                                 </constraints>
                             </customView>
                         </subviews>

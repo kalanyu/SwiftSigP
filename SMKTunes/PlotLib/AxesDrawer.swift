@@ -59,7 +59,7 @@ class AxesDrawer
     func drawAxesInRect(context: CGContext, bounds: CGRect, axeOrigin: CGPoint, xPointsToShow: CGFloat, yPointsToShow: CGFloat = 1, numberOfTicks: Int = 0, maxDataRange: Int = 1)
     {
         //DRAWING IN LAYER CANNOT BE DONE USING NSPath Stroke
-        color.set()
+//        color.set()
         self.numberOfSubticks = CGFloat(numberOfTicks)
         self.maxDataRange = max(maxDataRange, 1)
 
@@ -126,22 +126,21 @@ class AxesDrawer
         CGContextStrokePath(context)
         path.removeAllPoints()
         
-        
-        var gridSpacing : CGFloat
         //for now, disabling this decreases 30% of CPU usage
         CGContextBeginPath(context)
     
-        for gridSpacing = align(bounds.minX + padding.x) ; gridSpacing < bounds.maxX ; gridSpacing += align(ppX) {
+        for gridSpacing in align(bounds.minX + padding.x).stride(to: bounds.maxX, by: align(ppX)) {
             path.moveToPoint(CGPoint(x: align(gridSpacing), y: align(bounds.minY + padding.y)))
             path.lineToPoint(CGPoint(x: align(gridSpacing), y: bounds.maxY))
         }
         
-        for gridSpacing = align(posY) ; gridSpacing < bounds.maxY ; gridSpacing += align(ppY) / numberOfSubticks {
+        for gridSpacing in align(posY).stride(to: bounds.maxY, by: align(ppY) / numberOfSubticks) {
             path.moveToPoint(CGPoint(x: bounds.minX + padding.x, y: align(gridSpacing)))
             path.lineToPoint(CGPoint(x: bounds.maxX, y: align(gridSpacing)))
         }
         
-        for gridSpacing = align(posY) ; gridSpacing > bounds.minY ; gridSpacing -= align(ppY) / numberOfSubticks {
+
+        for gridSpacing in align(posY).stride(to: bounds.minY, by: align(ppY)) {
             path.moveToPoint(CGPoint(x: bounds.minX + padding.x, y: align(gridSpacing)))
             path.lineToPoint(CGPoint(x: bounds.maxX, y: align(gridSpacing)))
         }

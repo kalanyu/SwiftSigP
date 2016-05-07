@@ -67,7 +67,7 @@ class HashDrawer
     func drawHashInRect(context: CGContext, bounds: CGRect, axeOrigin: CGPoint, xPointsToShow: CGFloat, yPointsToShow: CGFloat = 1, numberOfTicks: Int = 0, maxDataRange: Int = 1)
     {
         //DRAWING IN LAYER CANNOT BE DONE USING NSPath Stroke
-        color.set()
+//        color.set()
         self.numberOfSubticks = CGFloat(numberOfTicks)
         self.maxDataRange = max(maxDataRange, 1)
         
@@ -185,7 +185,7 @@ class HashDrawer
                 }
                 subBbox.insetInPlace(dx: -(pointsPerHashmark / numberOfSubticks), dy: -(pointsPerHashmark / numberOfSubticks))
                 
-                ++i
+                i += 1
             }
             
             //                var label = formatter.stringFromNumber((origin.x-bbox.minX)/pointsPerUnit)!
