@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LowpassFilter : NSObject
+@interface IIRFilter : NSObject
 
 - (id)initWithNumeratorCoefficients:(double *)num andDenominatorCoefficients:(double *)den withOrder:(int)order andNumberOfChannels:(int) noOfChannels;
 - (double)pushData:(double)data ToFilterChannel:(int)channel;

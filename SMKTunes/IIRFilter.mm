@@ -6,36 +6,36 @@
 //  Copyright © 2016 KoikeLab. All rights reserved.
 //
 
-#import "LowpassFilter.h"
+#import "IIRFilter.h"
 #import "IirFilter.hpp"
 #include <stdio.h>
 #include <time.h>
 #include <new> //use to standard placement form of new
 #include <math.h>
 
-@interface LowpassFilter()
-@property CIirFilter* lowpassFilters;
+@interface IIRFilter()
+@property CIirFilter* iirFilters;
 @end
 
-@implementation LowpassFilter
+@implementation IIRFilter
 
 - (id)initWithNumeratorCoefficients:(double *)num andDenominatorCoefficients:(double *)den withOrder:(int)order andNumberOfChannels:(int)noOfChannels {
     self = [super init];
     if (self) {
-        _lowpassFilters = static_cast<CIirFilter *>(::operator new(sizeof(CIirFilter) * noOfChannels));
+        _iirFilters = static_cast<CIirFilter *>(::operator new(sizeof(CIirFilter) * noOfChannels));
         for (size_t i = 0; i < noOfChannels; i++) {
-            ::new (&_lowpassFilters[i]) CIirFilter(num, den, order);
+            ::new (&_iirFilters[i]) CIirFilter(num, den, order);
         }
     }
     return self;
 }
 
 - (double)pushData:(double)data ToFilterChannel:(int)channel {
-    return _lowpassFilters[channel].PushInput(data);;
+    return _iirFilters[channel].PushInput(data);;
 }
 
 - (void)dealloc {
-    delete _lowpassFilters;
+    delete _iirFilters;
 }
 
 @end

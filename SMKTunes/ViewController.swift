@@ -72,6 +72,7 @@ import CocoaAsyncSocket
             normalizeButton.loadSeconds = 5.0
         }
     }
+    
     @IBOutlet weak var lowpassButton: RoundProgressView! {
         didSet {
             lowpassButton.roundDelegate = self
@@ -80,25 +81,16 @@ import CocoaAsyncSocket
         }
     }
 
-    @IBOutlet weak var serverButton: NSButton! {
-        didSet {
-            serverButton.enabled = false
-        }
-    }
+    @IBOutlet weak var serverButton: NSButton!
     @IBOutlet weak var rectifyButton: NSButton! {
         didSet {
             rectifyButton.enabled = false
             rectifyButton.title = "Rectify"
         }
     }
+    @IBOutlet weak var addressLabel: NSButton!
     
-    @IBOutlet weak var artworkView: NSImageView!
-    
-    @IBOutlet weak var currentTrackLabel: NSTextField!
-    @IBOutlet weak var currentStatusLabel: NSTextField!
-    @IBOutlet weak var currentVolumeLabel: NSTextField!
-    @IBOutlet weak var artistField: NSTextField!
-    @IBOutlet weak var commandField: NSTextField!
+
     
     private var anotherDataTimer: NSTimer?
     var count = 0
@@ -211,7 +203,7 @@ import CocoaAsyncSocket
         if (sender === baseAlignButton) {
             dataReader?.activateZscoreWithBufferSize(Int32(samplingRate) * 2);
         } else if(sender === normalizeButton) {
-            serverButton.enabled = !serverButton.enabled
+//            serverButton.enabled = !serverButton.enabled
             dataReader?.activateNormalizationWithBufferSize(Int32(samplingRate) * 5);
 
         } else if(sender === filterButton) {
@@ -223,7 +215,7 @@ import CocoaAsyncSocket
 //            var b = [0.0029, 0.0087, 0.0087, 0.0029];
             
             var b = [0.0000000000003029, 0.0000000000015145, 0.0000000000030289, 0.0000000000030289, 0.0000000000015145, 0.0000000000003029]
-            var a = [1.0000000000000000, -4.9796671949900722, 9.9188753381375463, -9.8786215487796287, 4.9192858681237484, -0.9798724624819012];
+            var a = [1.0000000000000000, -4.9796671949900722, 9.9188753381375463, -9.8786215487796287, 4.9192858681237484, -0.9798724624819012]
             
             dataReader?.activateLowpassFilterWithCoefficients(&b, andDenominator: &a, withOrder: Int32(a.count - 1))
         }
@@ -239,6 +231,10 @@ import CocoaAsyncSocket
 
             dataReader!.delegate = self;
             
+            var b = [0.9918, -3.9673, 5.9509, -3.9673, 0.9918]
+            var a = [1.0000, -3.9836, 5.9509, -3.9510, 0.9837]
+            dataReader?.activateHighpassFilterWithCoefficients(&b, andDenominator: &a, withOrder: Int32(a.count - 1))
+
             //        NSLog(@"%d channel %d sample rate",[channelSlider intValue], [dataRateSlider intValue]);
 
             //TODO: add delegate to announce error
@@ -252,7 +248,7 @@ import CocoaAsyncSocket
         }
         else {
             self.dataReader?.stop()
-            serverButton.enabled = false
+//            serverButton.enabled = false
             rectifyButton.enabled = false
             sender.title = "Read"
         }
@@ -340,11 +336,15 @@ import CocoaAsyncSocket
               return
             }
             
-            print("server started on port : \(port)");
+            print("server started on adress: \(address) ");
+            addressLabel.title = address;
+            
             button.title = "Stop"
         }
         else {
             terminateServer()
+            addressLabel.title = "OFFLINE";
+
             button.title = "Server"
         }
 

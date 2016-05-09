@@ -107,7 +107,7 @@ import Cocoa
 //                Swift.print(displaySize, "increasing")
                 displaySize += 1
             } else {
-                Swift.print(displaySize)
+//                Swift.print(displaySize)
                 return displaySize
             }
         }

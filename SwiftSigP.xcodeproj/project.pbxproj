@@ -10,7 +10,7 @@
 		0BEA07071C6AFC6B00B97C6D /* nidaqmxbase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60E8AD581C5F121500EB2810 /* nidaqmxbase.framework */; };
 		6009FF0D1CDC34E4007B2566 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6009FF0A1CDC34C8007B2566 /* CocoaAsyncSocket.framework */; };
 		602137201CC881D900435991 /* IirFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6021371E1CC881D900435991 /* IirFilter.cpp */; };
-		602137281CC89A0900435991 /* LowpassFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 602137271CC89A0900435991 /* LowpassFilter.mm */; };
+		602137281CC89A0900435991 /* IIRFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 602137271CC89A0900435991 /* IIRFilter.mm */; };
 		602F13CC1BD7CCCD009A6F07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602F13CB1BD7CCCD009A6F07 /* AppDelegate.swift */; };
 		602F13CE1BD7CCCD009A6F07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602F13CD1BD7CCCD009A6F07 /* ViewController.swift */; };
 		602F13D01BD7CCCD009A6F07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 602F13CF1BD7CCCD009A6F07 /* Assets.xcassets */; };
@@ -79,8 +79,8 @@
 		6009FF011CDC34C8007B2566 /* CocoaAsyncSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaAsyncSocket.xcodeproj; path = "../../../Dropbox/Swift Scripts/CocoaAsyncSocket/CocoaAsyncSocket.xcodeproj"; sourceTree = "<group>"; };
 		6021371E1CC881D900435991 /* IirFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IirFilter.cpp; sourceTree = "<group>"; };
 		6021371F1CC881D900435991 /* IirFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IirFilter.hpp; sourceTree = "<group>"; };
-		602137261CC89A0900435991 /* LowpassFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LowpassFilter.h; sourceTree = "<group>"; };
-		602137271CC89A0900435991 /* LowpassFilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LowpassFilter.mm; sourceTree = "<group>"; };
+		602137261CC89A0900435991 /* IIRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIRFilter.h; sourceTree = "<group>"; };
+		602137271CC89A0900435991 /* IIRFilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IIRFilter.mm; sourceTree = "<group>"; };
 		602F13C81BD7CCCD009A6F07 /* SwiftSigP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftSigP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		602F13CB1BD7CCCD009A6F07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		602F13CD1BD7CCCD009A6F07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -223,8 +223,8 @@
 				60E8AD501C5EEF3B00EB2810 /* NIDAQreader.m */,
 				6021371F1CC881D900435991 /* IirFilter.hpp */,
 				6021371E1CC881D900435991 /* IirFilter.cpp */,
-				602137261CC89A0900435991 /* LowpassFilter.h */,
-				602137271CC89A0900435991 /* LowpassFilter.mm */,
+				602137261CC89A0900435991 /* IIRFilter.h */,
+				602137271CC89A0900435991 /* IIRFilter.mm */,
 			);
 			name = "NIDAQ library";
 			sourceTree = "<group>";
@@ -339,7 +339,7 @@
 				602F13CE1BD7CCCD009A6F07 /* ViewController.swift in Sources */,
 				60B5571D1BD8D5B4001EA27F /* NSBezierPath+CGPath.swift in Sources */,
 				60E8AD571C5EF3B200EB2810 /* IKoikeFilter.mm in Sources */,
-				602137281CC89A0900435991 /* LowpassFilter.mm in Sources */,
+				602137281CC89A0900435991 /* IIRFilter.mm in Sources */,
 				60FE590F1BE1D86E0037E9F0 /* CountView.swift in Sources */,
 				602F13CC1BD7CCCD009A6F07 /* AppDelegate.swift in Sources */,
 				60FE590C1BE1D8640037E9F0 /* CALayer+FadableBG.swift in Sources */,

@@ -86,7 +86,7 @@ protocol RoundProgressProtocol {
         //CGPathMoveToPoint(path, nil, 0, 0)
         //CGPathAddArc(path, nil, 0, 0, 300, 0, CGFloat(M_PI), false)
         let path = CGPathCreateMutable()
-        Swift.print(self.bounds.width)
+//        Swift.print(self.bounds.width)
         var circleSize : CGFloat = min(self.bounds.width/2, self.bounds.height/2)
         let margin = lineWidth + 10
         CGPathAddArc(path, nil, self.bounds.midX, self.bounds.midY, circleSize - (lineWidth + innerRing.lineWidth) , CGFloat(-M_PI/2), CGFloat(19 * M_PI / 12.6), true)

@@ -8,7 +8,7 @@
 
 #import "NIDAQreader.h"
 #import "IKoikeFilter.h"
-#import "LowPassFilter.h"
+#import "IIRFilter.h"
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
@@ -19,7 +19,9 @@
 @interface  NIDAQreader()
 //private
 @property (nonatomic, retain) IKoikeFilter* koikeFilters;
-@property (nonatomic, retain) LowpassFilter* lowpassFilters;
+@property (nonatomic, retain) IIRFilter* lowpassFilters;
+@property (nonatomic, retain) IIRFilter* highPassFilters;
+
 @end
 
 @implementation NIDAQreader
@@ -37,6 +39,7 @@ typedef NS_ENUM(NSInteger, status) { deactivated, activated, processing };
 
 status static kFilterStat;
 status static lpFilterStat;
+status static hpFilterStat;
 status static normalizeStat;
 int static normalizeBufferSize;
 status static zscoreStat;
@@ -221,6 +224,11 @@ int static zscoreBufferSize;
                 
                 double emgData = data[(pointsToRead*j)+i]; // gain
                 
+                if (hpFilterStat == activated) {
+                    emgData = [_highPassFilters pushData:emgData ToFilterChannel:j];
+
+                }
+                
                 if (zscoreStat == processing) {
                     [[zscoreBuffer objectAtIndex:j] addObject:[[NSNumber alloc] initWithDouble:emgData]];
                     if ([[zscoreBuffer objectAtIndex:j] count] == zscoreBufferSize)
@@ -397,13 +405,26 @@ Error:
 - (void)activateLowpassFilterWithCoefficients:(double *)numerator andDenominator:(double *)denominator withOrder :(int)order {
     if (lpFilterStat == deactivated) {
         //alloc a block of memory of C++ object arrays using ::operator new
-        _lowpassFilters = [[LowpassFilter alloc] initWithNumeratorCoefficients:numerator andDenominatorCoefficients:denominator withOrder:order andNumberOfChannels:noOfChannels];
+        _lowpassFilters = [[IIRFilter alloc] initWithNumeratorCoefficients:numerator andDenominatorCoefficients:denominator withOrder:order andNumberOfChannels:noOfChannels];
         lpFilterStat = activated;
     }
     else if(lpFilterStat == activated)
     {
         lpFilterStat = deactivated;
         _lowpassFilters = nil;
+    }
+}
+
+- (void)activateHighpassFilterWithCoefficients:(double *)numerator andDenominator:(double *)denominator withOrder:(int)order {
+    if (hpFilterStat == deactivated) {
+        //alloc a block of memory of C++ object arrays using ::operator new
+        _highPassFilters = [[IIRFilter alloc] initWithNumeratorCoefficients:numerator andDenominatorCoefficients:denominator withOrder:order andNumberOfChannels:noOfChannels];
+        hpFilterStat = activated;
+    }
+    else if(hpFilterStat == activated)
+    {
+        hpFilterStat = deactivated;
+        _highPassFilters = nil;
     }
 }
 

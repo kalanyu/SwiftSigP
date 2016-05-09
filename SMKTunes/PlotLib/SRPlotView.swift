@@ -145,7 +145,7 @@ import Cocoa
     //MARK: Core functions
     func addData(data: [Double])
     {
-        self.performSelectorOnMainThread(#selector(SRPlotView.addDataInMainthread(_:)), withObject: data, waitUntilDone: true)
+        self.performSelectorOnMainThread("addDataInMainthread:", withObject: data, waitUntilDone: true)
     }
     
     func addDataInMainthread(data: [Double]) {
