@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SRPlotAxe: NSObject, NSWindowDelegate {
+class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
     //TODO: Separate axis layer and hashmarks drawer for less redraws and improved performance
     //TODO: Support axe origin shift
     enum SRPlotSignalType {
@@ -123,7 +123,7 @@ class SRPlotAxe: NSObject, NSWindowDelegate {
         self.maxDataRange = maxDataRange
     }
     
-    override func drawLayer(layer: CALayer, inContext ctx: CGContext) {
+    func drawLayer(layer: CALayer, inContext ctx: CGContext) {
         guard layer === self.layer || layer === self.hashLayer else {
             return
         }
@@ -136,7 +136,7 @@ class SRPlotAxe: NSObject, NSWindowDelegate {
         
     }
     
-    override func layoutSublayersOfLayer(layer: CALayer) {
+    func layoutSublayersOfLayer(layer: CALayer) {
         //=== identical to : refers to the same memory
         //== equal in value
         guard layer === self.dataLayer && self.dataLayer.sublayers?.count > 0 else {
@@ -162,7 +162,7 @@ class SRPlotAxe: NSObject, NSWindowDelegate {
         layer.transform = CATransform3DRotate(translation, CGFloat(M_PI), 0, 1, 0)
     }
     
-    override func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
+    func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
         //disable implicit animation of any kind
         return NSNull()
     }

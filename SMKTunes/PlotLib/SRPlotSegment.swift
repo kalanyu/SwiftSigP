@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SRPlotSegment : NSObject {
+class SRPlotSegment : NSObject, CALayerDelegate {
 
     let layer = CALayer()
     
@@ -33,7 +33,7 @@ class SRPlotSegment : NSObject {
     }
 
     
-    override func drawLayer(layer: CALayer, inContext ctx: CGContext) {
+    func drawLayer(layer: CALayer, inContext ctx: CGContext) {
         //skip drawing if graph layer does not exist
         if self.axeSystem == nil {
             return
@@ -117,7 +117,7 @@ class SRPlotSegment : NSObject {
         return index == 0;
     }
     
-    override func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
+    func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
         //nil, null, Nil, NSNull, [NSNull null]? Dang it
         return NSNull()
     }

@@ -291,7 +291,7 @@ class HashDrawer
         path.lineToPoint(CGPoint(x: location.x+dx, y: location.y+dy))
         
         CGContextBeginPath(context)
-        CGContextAddPath(context, path.toCGPath())
+        CGContextAddPath(context, path.toCGPath()!)
         CGContextStrokePath(context)
         
         if displayLabels {

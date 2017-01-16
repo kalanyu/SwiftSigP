@@ -270,7 +270,7 @@ import CocoaAsyncSocket
             if writeOK {
                 for socket in connectedSockets! {
                     let status = "\(channel1),\(channel2),\(rawChannel1),\(rawChannel2),\(timestamp)\n\r".dataUsingEncoding(NSUTF8StringEncoding)
-                    socket.writeData(status, withTimeout: -1, tag: 1)
+                    socket.writeData(status!, withTimeout: -1, tag: 1)
                     
     //                print(String(data: status!, encoding: NSUTF8StringEncoding))
                 }
@@ -410,7 +410,7 @@ import CocoaAsyncSocket
         defer { objc_sync_exit(connectedSockets) }
         
         for socket in sockets {
-            socket.writeData("Shutting down server".dataUsingEncoding(NSUTF8StringEncoding), withTimeout: -1, tag: 1)
+            socket.writeData("Shutting down server".dataUsingEncoding(NSUTF8StringEncoding)!, withTimeout: -1, tag: 1)
             socket.disconnectAfterReadingAndWriting()
         }
         

@@ -24,7 +24,7 @@ protocol NSSPlashViewDelegate {
     func splashAnimationEnded(startedFrom from: SplashDirection)
 }
 
-class NSSpashBGView: NSView {
+class NSSpashBGView: NSView, CALayerDelegate {
     
     var delegate: NSSPlashViewDelegate?
     let splashLayer = CALayer()
@@ -56,14 +56,14 @@ class NSSpashBGView: NSView {
         // Drawing code here.
     }
     
-    override func drawLayer(layer: CALayer, inContext ctx: CGContext) {
+    func drawLayer(layer: CALayer, inContext ctx: CGContext) {
         
         if layer === splashLayer {
 
             let circlePath = NSBezierPath()
             CGContextBeginPath(ctx)
             circlePath.appendBezierPathWithOvalInRect(CGRectMake(0 - (initialSplashSize/2),0 - (initialSplashSize/2), initialSplashSize, initialSplashSize))
-            CGContextAddPath(ctx, circlePath.toCGPath())
+            CGContextAddPath(ctx, circlePath.toCGPath()!)
             CGContextClosePath(ctx)
             CGContextSetFillColorWithColor(ctx, splashColor.CGColor)
             CGContextFillPath(ctx)
@@ -120,7 +120,7 @@ class NSSpashBGView: NSView {
     }
     
     
-    override func layoutSublayersOfLayer(layer: CALayer) {
+    func layoutSublayersOfLayer(layer: CALayer) {
         splashLayer.setNeedsDisplay()
         self.layer?.setNeedsDisplay()
     }

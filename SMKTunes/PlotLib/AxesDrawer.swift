@@ -120,7 +120,7 @@ class AxesDrawer
         path.moveToPoint(CGPoint(x: bounds.minX + padding.x, y: bounds.minY + padding.y + lineHalfWidth))
         path.lineToPoint(CGPoint(x: bounds.maxX, y: bounds.minY + padding.y + lineHalfWidth))
         
-        CGContextAddPath(context, path.toCGPath())
+        CGContextAddPath(context, path.toCGPath()!)
         CGContextSetStrokeColorWithColor(context, NSColor.grayColor().CGColor)
         CGContextSetLineWidth(context, 1)
         CGContextStrokePath(context)
@@ -145,7 +145,7 @@ class AxesDrawer
             path.lineToPoint(CGPoint(x: bounds.maxX, y: align(gridSpacing)))
         }
     
-        CGContextAddPath(context, path.toCGPath())
+        CGContextAddPath(context, path.toCGPath()!)
         CGContextSetStrokeColorWithColor(context, color.CGColor)
         CGContextSetLineWidth(context, 0.25)
         CGContextStrokePath(context)
