@@ -13,9 +13,9 @@ class AxesDrawer
     var maxDataRange : Int = 1
     
     //padding parameter, moves the axes further in
-    var padding = CGPointZero
+    var padding = CGPoint.zero
     
-    var color = NSColor.grayColor()
+    var color = NSColor.gray
     
 //    var color = NSColor.redColor()
     
@@ -25,14 +25,14 @@ class AxesDrawer
     
     
     //public variables for declaring drawing coordinates to data-drawers
-    var pointsPerUnit = CGPointZero
-    var bounds = CGRectZero
-    var position = CGPointZero
-    var plotFrame = CGRectZero
+    var pointsPerUnit = CGPoint.zero
+    var bounds = CGRect.zero
+    var position = CGPoint.zero
+    var plotFrame = CGRect.zero
     var numberOfSubticks : CGFloat = 0
     var displayLabels = true
     
-    var anchorPoint = CGPointZero
+    var anchorPoint = CGPoint.zero
     
     convenience init(color: NSColor, contentScaleFactor: CGFloat) {
         self.init()
@@ -56,7 +56,7 @@ class AxesDrawer
     // pointsPerUnit is essentially the "scale" of the axes
     // e.g. if you wanted there to be 100 points along an axis between -1 and 1,
     //    you'd set pointsPerUnit to 50
-    func drawAxesInRect(context: CGContext, bounds: CGRect, axeOrigin: CGPoint, xPointsToShow: CGFloat, yPointsToShow: CGFloat = 1, numberOfTicks: Int = 0, maxDataRange: Int = 1)
+    func drawAxesInRect(_ context: CGContext, bounds: CGRect, axeOrigin: CGPoint, xPointsToShow: CGFloat, yPointsToShow: CGFloat = 1, numberOfTicks: Int = 0, maxDataRange: Int = 1)
     {
         //DRAWING IN LAYER CANNOT BE DONE USING NSPath Stroke
 //        color.set()
@@ -86,7 +86,7 @@ class AxesDrawer
         self.position = position
     
         let path = NSBezierPath()
-        CGContextBeginPath(context)
+        context.beginPath()
     
         path.lineWidth = 1
         
@@ -94,61 +94,61 @@ class AxesDrawer
         
 
 //        CGContextSetFillColorWithColor(context, NSColor(red: 0, green: 0, blue: 0, alpha: 0.9).CGColor)
-        CGContextSetFillColorWithColor(context, NSColor(red: 1, green: 1, blue: 1, alpha: 0.95).CGColor)
+        context.setFillColor(NSColor(red: 1, green: 1, blue: 1, alpha: 0.95).cgColor)
 
-        CGContextFillRect(context, CGRect(x: bounds.minX + padding.x, y: bounds.minY + padding.y, width:  bounds.width, height: bounds.height))
+        context.fill(CGRect(x: bounds.minX + padding.x, y: bounds.minY + padding.y, width:  bounds.width, height: bounds.height))
         
         //draw x-axis
-        path.moveToPoint(CGPoint(x: bounds.minX + padding.x, y: align(position.y + lineHalfWidth)))
-        path.lineToPoint(CGPoint(x: bounds.maxX, y: align(position.y + lineHalfWidth)))
+        path.move(to: CGPoint(x: bounds.minX + padding.x, y: align(position.y + lineHalfWidth)))
+        path.line(to: CGPoint(x: bounds.maxX, y: align(position.y + lineHalfWidth)))
         
         //draw y-axis
-        path.moveToPoint(CGPoint(x: align(position.x + lineHalfWidth), y: align(bounds.minY + padding.y) ))
-        path.lineToPoint(CGPoint(x: align(position.x + lineHalfWidth), y: bounds.maxY))
+        path.move(to: CGPoint(x: align(position.x + lineHalfWidth), y: align(bounds.minY + padding.y) ))
+        path.line(to: CGPoint(x: align(position.x + lineHalfWidth), y: bounds.maxY))
         
         //closing the borders on all four sides (incase where the origin is not (0,0)
-        path.moveToPoint(CGPoint(x: bounds.minX + padding.x, y: bounds.minY + padding.y + lineHalfWidth))
-        path.lineToPoint(CGPoint(x: bounds.minX + padding.x, y: bounds.maxY - lineHalfWidth))
+        path.move(to: CGPoint(x: bounds.minX + padding.x, y: bounds.minY + padding.y + lineHalfWidth))
+        path.line(to: CGPoint(x: bounds.minX + padding.x, y: bounds.maxY - lineHalfWidth))
 
         
-        path.moveToPoint(CGPoint(x: bounds.minX + padding.x, y: bounds.maxY - lineHalfWidth))
-        path.lineToPoint(CGPoint(x: bounds.maxX, y: bounds.maxY - lineHalfWidth))
+        path.move(to: CGPoint(x: bounds.minX + padding.x, y: bounds.maxY - lineHalfWidth))
+        path.line(to: CGPoint(x: bounds.maxX, y: bounds.maxY - lineHalfWidth))
         
-        path.moveToPoint(CGPoint(x: bounds.maxX - lineHalfWidth, y: bounds.maxY - lineHalfWidth))
-        path.lineToPoint(CGPoint(x: bounds.maxX - lineHalfWidth, y: bounds.minY + padding.y))
+        path.move(to: CGPoint(x: bounds.maxX - lineHalfWidth, y: bounds.maxY - lineHalfWidth))
+        path.line(to: CGPoint(x: bounds.maxX - lineHalfWidth, y: bounds.minY + padding.y))
         
-        path.moveToPoint(CGPoint(x: bounds.minX + padding.x, y: bounds.minY + padding.y + lineHalfWidth))
-        path.lineToPoint(CGPoint(x: bounds.maxX, y: bounds.minY + padding.y + lineHalfWidth))
+        path.move(to: CGPoint(x: bounds.minX + padding.x, y: bounds.minY + padding.y + lineHalfWidth))
+        path.line(to: CGPoint(x: bounds.maxX, y: bounds.minY + padding.y + lineHalfWidth))
         
-        CGContextAddPath(context, path.toCGPath()!)
-        CGContextSetStrokeColorWithColor(context, NSColor.grayColor().CGColor)
-        CGContextSetLineWidth(context, 1)
-        CGContextStrokePath(context)
+        context.addPath(path.toCGPath()!)
+        context.setStrokeColor(NSColor.gray.cgColor)
+        context.setLineWidth(1)
+        context.strokePath()
         path.removeAllPoints()
         
         //for now, disabling this decreases 30% of CPU usage
-        CGContextBeginPath(context)
+        context.beginPath()
     
-        for gridSpacing in align(bounds.minX + padding.x).stride(to: bounds.maxX, by: align(ppX)) {
-            path.moveToPoint(CGPoint(x: align(gridSpacing), y: align(bounds.minY + padding.y)))
-            path.lineToPoint(CGPoint(x: align(gridSpacing), y: bounds.maxY))
+        for gridSpacing in stride(from: align(bounds.minX + padding.x), to: bounds.maxX, by: align(ppX)) {
+            path.move(to: CGPoint(x: align(gridSpacing), y: align(bounds.minY + padding.y)))
+            path.line(to: CGPoint(x: align(gridSpacing), y: bounds.maxY))
         }
         
-        for gridSpacing in align(posY).stride(to: bounds.maxY, by: align(ppY) / numberOfSubticks) {
-            path.moveToPoint(CGPoint(x: bounds.minX + padding.x, y: align(gridSpacing)))
-            path.lineToPoint(CGPoint(x: bounds.maxX, y: align(gridSpacing)))
+        for gridSpacing in stride(from: align(posY), to: bounds.maxY, by: align(ppY) / numberOfSubticks) {
+            path.move(to: CGPoint(x: bounds.minX + padding.x, y: align(gridSpacing)))
+            path.line(to: CGPoint(x: bounds.maxX, y: align(gridSpacing)))
         }
         
 
-        for gridSpacing in align(posY).stride(to: bounds.minY, by: align(ppY)) {
-            path.moveToPoint(CGPoint(x: bounds.minX + padding.x, y: align(gridSpacing)))
-            path.lineToPoint(CGPoint(x: bounds.maxX, y: align(gridSpacing)))
+        for gridSpacing in stride(from: align(posY), to: bounds.minY, by: align(ppY)) {
+            path.move(to: CGPoint(x: bounds.minX + padding.x, y: align(gridSpacing)))
+            path.line(to: CGPoint(x: bounds.maxX, y: align(gridSpacing)))
         }
     
-        CGContextAddPath(context, path.toCGPath()!)
-        CGContextSetStrokeColorWithColor(context, color.CGColor)
-        CGContextSetLineWidth(context, 0.25)
-        CGContextStrokePath(context)
+        context.addPath(path.toCGPath()!)
+        context.setStrokeColor(color.cgColor)
+        context.setLineWidth(0.25)
+        context.strokePath()
         
     }
 
@@ -160,18 +160,18 @@ class AxesDrawer
     // if contentScaleFactor is left to its default (1), then things will be on the nearest "point" boundary instead
     // the lines will still be sharp in that case, but might be a pixel (or more theoretically) off of where they should be
     
-    private func alignedPoint(x x: CGFloat, y: CGFloat, insideBounds: CGRect? = nil) -> CGPoint?
+    fileprivate func alignedPoint(x: CGFloat, y: CGFloat, insideBounds: CGRect? = nil) -> CGPoint?
     {
         let point = CGPoint(x: align(x), y: align(y))
         if let permissibleBounds = insideBounds {
-            if (!CGRectContainsPoint(permissibleBounds, point)) {
+            if (!permissibleBounds.contains(point)) {
                 return nil
             }
         }
         return point
     }
     
-    private func align(coordinate: CGFloat) -> CGFloat {
+    fileprivate func align(_ coordinate: CGFloat) -> CGFloat {
         return round(coordinate * contentScaleFactor) / contentScaleFactor
     }
 }

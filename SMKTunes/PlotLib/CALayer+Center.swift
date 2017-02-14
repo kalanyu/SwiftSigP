@@ -25,8 +25,8 @@ extension CALayer {
         return centerInLayer(self.superlayer!)
     }
 
-    func centerInLayer(layer: CALayer) -> Bool {
-        self.position = CGPointMake(layer.bounds.width/2, layer.bounds.height/2)
+    func centerInLayer(_ layer: CALayer) -> Bool {
+        self.position = CGPoint(x: layer.bounds.width/2, y: layer.bounds.height/2)
         //success
         return true
     }

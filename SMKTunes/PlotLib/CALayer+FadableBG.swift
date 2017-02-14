@@ -14,12 +14,12 @@ extension CALayer {
         CATransaction.begin()
         let animation = CABasicAnimation(keyPath: "backgroundColor")
         CATransaction.setCompletionBlock({
-            self.backgroundColor = NSColor.blueColor().CGColor
+            self.backgroundColor = NSColor.blue.cgColor
         })
         animation.duration = 2.0
         animation.timingFunction = CAMediaTimingFunction(name: timing)
-        animation.toValue = NSColor.blueColor().CGColor
-        self.addAnimation(animation, forKey: "backgroundColor")
+        animation.toValue = NSColor.blue.cgColor
+        self.add(animation, forKey: "backgroundColor")
         
         CATransaction.commit()
     }

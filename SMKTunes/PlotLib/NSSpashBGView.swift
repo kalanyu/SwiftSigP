@@ -16,8 +16,8 @@ struct SplashBGPosition {
 }
 
 enum SplashDirection {
-    case Left
-    case Right
+    case left
+    case right
 }
 
 protocol NSSPlashViewDelegate {
@@ -28,16 +28,16 @@ class NSSpashBGView: NSView, CALayerDelegate {
     
     var delegate: NSSPlashViewDelegate?
     let splashLayer = CALayer()
-    private var splashColor : NSColor = NSColor.whiteColor()
-    private let initialSplashSize : CGFloat = 50
+    fileprivate var splashColor : NSColor = NSColor.white
+    fileprivate let initialSplashSize : CGFloat = 50
     
     required override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         
         self.wantsLayer = true
         self.splashLayer.delegate = self
-        self.splashLayer.autoresizingMask = [.LayerWidthSizable, .LayerHeightSizable]
-        self.layer?.autoresizingMask = [.LayerWidthSizable, .LayerHeightSizable]
+        self.splashLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        self.layer?.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
         self.layer?.addSublayer(splashLayer)
     }
     
@@ -46,27 +46,27 @@ class NSSpashBGView: NSView, CALayerDelegate {
         
         self.wantsLayer = true
         self.splashLayer.delegate = self
-        self.layer?.autoresizingMask = [.LayerWidthSizable, .LayerHeightSizable]
-        self.splashLayer.autoresizingMask = [.LayerWidthSizable, .LayerHeightSizable]
+        self.layer?.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        self.splashLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
         self.layer?.addSublayer(splashLayer)
     }
     
-    override func drawRect(dirtyRect: NSRect) {
-        super.drawRect(dirtyRect)
+    override func draw(_ dirtyRect: NSRect) {
+        super.draw(dirtyRect)
         // Drawing code here.
     }
     
-    func drawLayer(layer: CALayer, inContext ctx: CGContext) {
+    func draw(_ layer: CALayer, in ctx: CGContext) {
         
         if layer === splashLayer {
 
             let circlePath = NSBezierPath()
-            CGContextBeginPath(ctx)
-            circlePath.appendBezierPathWithOvalInRect(CGRectMake(0 - (initialSplashSize/2),0 - (initialSplashSize/2), initialSplashSize, initialSplashSize))
-            CGContextAddPath(ctx, circlePath.toCGPath()!)
-            CGContextClosePath(ctx)
-            CGContextSetFillColorWithColor(ctx, splashColor.CGColor)
-            CGContextFillPath(ctx)
+            ctx.beginPath()
+            circlePath.appendOval(in: CGRect(x: 0 - (initialSplashSize/2),y: 0 - (initialSplashSize/2), width: initialSplashSize, height: initialSplashSize))
+            ctx.addPath(circlePath.toCGPath()!)
+            ctx.closePath()
+            ctx.setFillColor(splashColor.cgColor)
+            ctx.fillPath()
         }
     }
     
@@ -88,7 +88,7 @@ class NSSpashBGView: NSView, CALayerDelegate {
         splashLayer.setNeedsDisplay()
         self.splashLayer.transform = CATransform3DMakeScale(1, 1, 1)
 
-        if splashDirection == .Right {
+        if splashDirection == .right {
             CATransaction.begin()
             CATransaction.setAnimationDuration(0)
             let translate = CATransform3DTranslate(self.splashLayer.transform, self.bounds.maxX, 0, 0)
@@ -102,8 +102,8 @@ class NSSpashBGView: NSView, CALayerDelegate {
         
         CATransaction.setCompletionBlock({
 //            self.splashLayer.transform = CATransform3DScale(self.splashLayer.transform, round(self.bounds.size.width * 3 / self.initialSplashSize), round(self.bounds.size.width * 3 / self.initialSplashSize), 1)
-            self.layer?.backgroundColor = self.splashColor.CGColor
-            self.splashLayer.backgroundColor = self.splashColor.CGColor
+            self.layer?.backgroundColor = self.splashColor.cgColor
+            self.splashLayer.backgroundColor = self.splashColor.cgColor
             self.delegate?.splashAnimationEnded(startedFrom: splashDirection)
             
 //            self.splashLayer.removeFromSuperlayer()
@@ -112,15 +112,15 @@ class NSSpashBGView: NSView, CALayerDelegate {
         let animation = CABasicAnimation(keyPath: "transform")
         animation.duration = 0.3
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        animation.toValue = NSValue(CATransform3D: CATransform3DScale(self.splashLayer.transform, round(self.bounds.size.width * 3 / initialSplashSize), round(self.bounds.size.width * 3 / initialSplashSize), 1))
+        animation.toValue = NSValue(caTransform3D: CATransform3DScale(self.splashLayer.transform, round(self.bounds.size.width * 3 / initialSplashSize), round(self.bounds.size.width * 3 / initialSplashSize), 1))
         animation.fillMode = kCAFillModeForwards
-        animation.removedOnCompletion = false
-        self.splashLayer.addAnimation(animation, forKey: "transform")
+        animation.isRemovedOnCompletion = false
+        self.splashLayer.add(animation, forKey: "transform")
         CATransaction.commit()
     }
     
     
-    func layoutSublayersOfLayer(layer: CALayer) {
+    func layoutSublayers(of layer: CALayer) {
         splashLayer.setNeedsDisplay()
         self.layer?.setNeedsDisplay()
     }

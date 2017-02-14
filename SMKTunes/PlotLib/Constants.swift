@@ -19,8 +19,8 @@ enum SystemMessages: String {
 }
 
 enum SMKControlMode {
-    case TV
-    case Robot
+    case tv
+    case robot
 }
 
 //FIXME: add another extension
@@ -28,11 +28,11 @@ class NSTextLabel: NSTextField {
     
     required override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        self.bezeled = false
+        self.isBezeled = false
         self.drawsBackground = false
-        self.editable = false
-        self.selectable = false
-        self.font = NSFont.systemFontOfSize(15)
+        self.isEditable = false
+        self.isSelectable = false
+        self.font = NSFont.systemFont(ofSize: 15)
     }
 
     required init?(coder: NSCoder) {

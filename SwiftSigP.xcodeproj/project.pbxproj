@@ -262,6 +262,7 @@
 				TargetAttributes = {
 					602F13C71BD7CCCD009A6F07 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -470,7 +471,7 @@
 				PRODUCT_NAME = SwiftSigP;
 				SWIFT_OBJC_BRIDGING_HEADER = "SMKTunes/SMKTunes-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -490,7 +491,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Swift.KoikeLab.SwiftSigP;
 				PRODUCT_NAME = SwiftSigP;
 				SWIFT_OBJC_BRIDGING_HEADER = "SMKTunes/SMKTunes-Bridging-Header.h";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

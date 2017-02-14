@@ -48,7 +48,7 @@ import Cocoa
             
             var maxFrameWidth : CGFloat = 0
             for label in self.graphAxes.yLockLabels {
-                let textSize = label.sizeWithAttributes([NSFontAttributeName: NSFont.boldSystemFontOfSize(20)])
+                let textSize = label.size(withAttributes: [NSFontAttributeName: NSFont.boldSystemFont(ofSize: 20)])
                 if textSize.width > maxFrameWidth {
                     maxFrameWidth = textSize.width
                     self.axeLayer?.padding.x = maxFrameWidth + 20
@@ -87,28 +87,28 @@ import Cocoa
     //MARK: Initialization
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        titleField = NSTextLabel(frame: CGRectMake(0, 0, 0, 0))
+        titleField = NSTextLabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         titleField?.textColor = NSColor(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1)
-        titleField?.font = NSFont.boldSystemFontOfSize(20)
+        titleField?.font = NSFont.boldSystemFont(ofSize: 20)
 
         self.addSubview(titleField!)
         self.wantsLayer = true
         
         //add layout constraints to the title field
         self.titleField?.translatesAutoresizingMaskIntoConstraints = false
-        let textFieldConstraint = NSLayoutConstraint(item: self.titleField!, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0)
+        let textFieldConstraint = NSLayoutConstraint(item: self.titleField!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
         self.addConstraint(textFieldConstraint)
         
         //TODO: Support for axeOrigin
-        self.axeLayer = SRPlotAxe(frame: self.frame, axeOrigin: CGPointZero, xPointsToShow: totalSecondsToDisplay, yPointsToShow: totalChannelsToDisplay, numberOfSubticks: 1)
+        self.axeLayer = SRPlotAxe(frame: self.frame, axeOrigin: CGPoint.zero, xPointsToShow: totalSecondsToDisplay, yPointsToShow: totalChannelsToDisplay, numberOfSubticks: 1)
         self.layer!.addSublayer(self.axeLayer!.layer)
-        self.graphAxes.anchorPoint = CGPointZero
+        self.graphAxes.anchorPoint = CGPoint.zero
         
         
         //set for split signal plot type
-        self.axeLayer?.signalType = .Split
-        self.axeLayer?.hashSystem.color = NSColor.darkGrayColor()
-        self.titleField?.textColor = NSColor.darkGrayColor()
+        self.axeLayer?.signalType = .split
+        self.axeLayer?.hashSystem.color = NSColor.darkGray
+        self.titleField?.textColor = NSColor.darkGray
 
 //        self.layer?.backgroundColor = CGColorCreateGenericRGB(0, 0 , 0, 0.05)
 //        self.layer?.borderColor = NSColor.darkGrayColor().CGColor
@@ -119,12 +119,12 @@ import Cocoa
     
     required override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        titleField = NSTextLabel(frame: CGRectMake(0, 0, 0, 0))
+        titleField = NSTextLabel(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.addSubview(titleField!)
 
     }
     
-    convenience init(frame frameRect: NSRect, title: String, seconds: Double, channels: Int, samplingRatae: CGFloat, padding: CGPoint = CGPointZero) {
+    convenience init(frame frameRect: NSRect, title: String, seconds: Double, channels: Int, samplingRatae: CGFloat, padding: CGPoint = CGPoint.zero) {
         self.init(frame: frameRect)
         self.title = "Filtered EMG Signals"
         self.totalSecondsToDisplay = CGFloat(seconds)
@@ -138,17 +138,17 @@ import Cocoa
 
         //add layout constraints to the title field
         self.titleField?.translatesAutoresizingMaskIntoConstraints = false
-        let textFieldConstraint = NSLayoutConstraint(item: self.titleField!, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0)
+        let textFieldConstraint = NSLayoutConstraint(item: self.titleField!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
         self.addConstraint(textFieldConstraint)
     }
     
     //MARK: Core functions
-    func addData(data: [Double])
+    func addData(_ data: [Double])
     {
-        self.performSelectorOnMainThread("addDataInMainthread:", withObject: data, waitUntilDone: true)
+        self.performSelector(onMainThread: #selector(SRPlotView.addDataInMainthread(_:)), with: data, waitUntilDone: true)
     }
     
-    func addDataInMainthread(data: [Double]) {
+    func addDataInMainthread(_ data: [Double]) {
         if current == nil {
             current = addSegment()
         }
@@ -207,7 +207,7 @@ import Cocoa
         // We add it at the front of the array because -recycleSegment expects the oldest segment
         // to be at the end of the array. As long as we always insert the youngest segment at the front
         // this will be true.
-        segments.insert(segment, atIndex: 0)
+        segments.insert(segment, at: 0)
         
         //POSITION IN SUPERLAYER COORDINATE SPACE
         segment.layer.frame.size = CGSize(width: graphAxes.pointsPerUnit.x, height: graphAxes.bounds.height)        
@@ -236,7 +236,7 @@ import Cocoa
             last?.layer.position = kSegmentInitialPosition
         // Move the segment from the last position in the array to the first position in the array
             segments.removeLast()
-            segments.insert(last!, atIndex: 0)
+            segments.insert(last!, at: 0)
         // as it is now the youngest segment.
 
             self.axeLayer?.dataLayer.addSublayer(current!.layer)
@@ -258,11 +258,11 @@ import Cocoa
         self.axeLayer?.manageDataSublayers()
     }
     
-    private func resizeFrameWithString(title: String) {
+    fileprivate func resizeFrameWithString(_ title: String) {
         let nsTitle = title as NSString
-        let textSize = nsTitle.sizeWithAttributes([NSFontAttributeName: NSFont.systemFontOfSize(15)])
+        let textSize = nsTitle.size(withAttributes: [NSFontAttributeName: NSFont.systemFont(ofSize: 15)])
         self.titleField?.stringValue = title
-        self.titleField?.frame = CGRectMake(self.bounds.width/2 - textSize.width/2, 0, textSize.width, textSize.height)
+        self.titleField?.frame = CGRect(x: self.bounds.width/2 - textSize.width/2, y: 0, width: textSize.width, height: textSize.height)
         self.titleField?.sizeToFit()
         
         var axeBounds = self.bounds

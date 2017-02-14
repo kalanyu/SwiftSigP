@@ -19,17 +19,17 @@ extension NSView {
     func fade(toAlpha alpha: CGFloat) {
         
         NSAnimationContext.runAnimationGroup({
-            (let context) -> () in
+            (context) -> () in
             
-                if self.hidden && alpha == 1 {
-                    self.hidden = false
+                if self.isHidden && alpha == 1 {
+                    self.isHidden = false
                 }
                 context.duration = 0.25
                 context.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
                 self.animator().alphaValue = alpha
             }, completionHandler: {
                 if alpha == 0 {
-                    self.hidden = true
+                    self.isHidden = true
                 }
         })
 

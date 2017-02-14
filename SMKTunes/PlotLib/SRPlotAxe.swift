@@ -7,13 +7,37 @@
 //
 
 import Cocoa
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
     //TODO: Separate axis layer and hashmarks drawer for less redraws and improved performance
     //TODO: Support axe origin shift
     enum SRPlotSignalType {
-        case Split
-        case Merge
+        case split
+        case merge
     }
     //1. where the moving hash marks will be drawn
     let hashLayer = CALayer()
@@ -32,7 +56,7 @@ class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
     var graph = AxesDrawer()
     var hashSystem = HashDrawer()
     
-    var signalType = SRPlotSignalType.Split
+    var signalType = SRPlotSignalType.split
     
     //axis origin that causes the axe to move
     var origin : CGPoint?
@@ -50,7 +74,7 @@ class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
     
     var samplingRate : Double = 60
     
-    var padding = CGPointZero {
+    var padding = CGPoint.zero {
         didSet {
             graph.padding = padding
             hashSystem.padding = padding
@@ -75,22 +99,22 @@ class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
         self.init()
         
         hashLayer.delegate = self
-        hashLayer.anchorPoint = CGPointZero
+        hashLayer.anchorPoint = CGPoint.zero
         hashLayer.needsDisplayOnBoundsChange = true
-        hashLayer.bounds = CGRectMake(0, 0, frameRect.width, frameRect.height)
-        hashLayer.autoresizingMask = [.LayerWidthSizable, .LayerHeightSizable]
+        hashLayer.bounds = CGRect(x: 0, y: 0, width: frameRect.width, height: frameRect.height)
+        hashLayer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
 //        self.hashLayer.addSublayer(self.layer)
         
         layer.delegate = self
-        layer.anchorPoint = CGPointZero
+        layer.anchorPoint = CGPoint.zero
         //MUST: set anchorpoint first or else set frame will shift it else where due to the coordinate system
         layer.needsDisplayOnBoundsChange = true
 //        Swift.print(layer.bounds)
-        layer.bounds = CGRectMake(0, 0, hashLayer.bounds.width - innerTopRightPadding, hashLayer.bounds.height - innerTopRightPadding)
+        layer.bounds = CGRect(x: 0, y: 0, width: hashLayer.bounds.width - innerTopRightPadding, height: hashLayer.bounds.height - innerTopRightPadding)
         //SWIFT 2.0 Syntax : Option Settypes
-        layer.autoresizingMask = [.LayerWidthSizable, .LayerHeightSizable]
+        layer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
         
-        self.dataLayer.anchorPoint = CGPointZero
+        self.dataLayer.anchorPoint = CGPoint.zero
         self.dataLayer.bounds = CGRect(x: 0, y: 0, width: layer.bounds.width, height: layer.bounds.height )
         //if parent layer has implicit and children don't have it, ghosting occurs!
         //fix: disable animation makes ghosting disappear !!!!
@@ -98,11 +122,11 @@ class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
 
         let masking = CALayer()
 //        masking.anchorPoint = CGPoin
-        masking.backgroundColor = NSColor.blackColor().CGColor
+        masking.backgroundColor = NSColor.black.cgColor
         self.dataLayer.mask = masking
         
         self.layer.insertSublayer(self.dataLayer, below: self.layer)
-        self.layer.insertSublayer(self.hashLayer, atIndex: 0)
+        self.layer.insertSublayer(self.hashLayer, at: 0)
 
         
 
@@ -123,7 +147,7 @@ class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
         self.maxDataRange = maxDataRange
     }
     
-    func drawLayer(layer: CALayer, inContext ctx: CGContext) {
+    func draw(_ layer: CALayer, in ctx: CGContext) {
         guard layer === self.layer || layer === self.hashLayer else {
             return
         }
@@ -136,7 +160,7 @@ class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
         
     }
     
-    func layoutSublayersOfLayer(layer: CALayer) {
+    func layoutSublayers(of layer: CALayer) {
         //=== identical to : refers to the same memory
         //== equal in value
         guard layer === self.dataLayer && self.dataLayer.sublayers?.count > 0 else {
@@ -162,7 +186,7 @@ class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
         layer.transform = CATransform3DRotate(translation, CGFloat(M_PI), 0, 1, 0)
     }
     
-    func actionForLayer(layer: CALayer, forKey event: String) -> CAAction? {
+    func action(for layer: CALayer, forKey event: String) -> CAAction? {
         //disable implicit animation of any kind
         return NSNull()
     }
@@ -171,19 +195,19 @@ class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
 
     func rescaleSublayers() {
         //set layer's contentScale for crisp display
-        guard let sublayers = self.dataLayer.sublayers where self.dataLayer.sublayers?.count > 0 else {
+        guard let sublayers = self.dataLayer.sublayers, self.dataLayer.sublayers?.count > 0 else {
             return
         }
         for sublayer in sublayers {
-            sublayer.contentsScale = NSApplication.sharedApplication().windows[0].backingScaleFactor
+            sublayer.contentsScale = NSApplication.shared().windows[0].backingScaleFactor
         }
-        self.layer.contentsScale = NSApplication.sharedApplication().windows[0].backingScaleFactor
-        self.hashLayer.contentsScale = NSApplication.sharedApplication().windows[0].backingScaleFactor
+        self.layer.contentsScale = NSApplication.shared().windows[0].backingScaleFactor
+        self.hashLayer.contentsScale = NSApplication.shared().windows[0].backingScaleFactor
     }
     
     //MARK: Utilities
     func manageDataSublayers() {
-        guard let sublayers = self.dataLayer.sublayers where self.dataLayer.sublayers?.count > 0 else {
+        guard let sublayers = self.dataLayer.sublayers, self.dataLayer.sublayers?.count > 0 else {
             return
         }
         
@@ -195,7 +219,7 @@ class SRPlotAxe: NSObject, NSWindowDelegate, CALayerDelegate {
         
     }
     
-    private func align(coordinate: CGFloat) -> CGFloat {
+    fileprivate func align(_ coordinate: CGFloat) -> CGFloat {
         return round(coordinate * layer.contentsScale) / layer.contentsScale
     }
     

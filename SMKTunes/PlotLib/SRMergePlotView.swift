@@ -17,28 +17,28 @@ class SRMergePlotView: SRPlotView {
         }
         set {
             self.axeLayer?.maxDataRange = newValue
-            let textSize = "\(self.maxDataRange)".sizeWithAttributes([NSFontAttributeName: NSFont.boldSystemFontOfSize(20)])
+            let textSize = "\(self.maxDataRange)".size(withAttributes: [NSFontAttributeName: NSFont.boldSystemFont(ofSize: 20)])
             self.axeLayer?.padding.x = newValue < 10 ? textSize.width * 3: textSize.width
             self.axeLayer?.layer.setNeedsDisplay()
 
         }
     }
     
-    var axeOrigin = CGPointZero
+    var axeOrigin = CGPoint.zero
     
     //MARK: Initialization
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.axeLayer!.layer.removeFromSuperlayer()
 //
-        self.axeLayer = SRPlotAxe(frame: self.frame, axeOrigin: CGPointZero, xPointsToShow: totalSecondsToDisplay, yPointsToShow: totalChannelsToDisplay, numberOfSubticks: 1)
+        self.axeLayer = SRPlotAxe(frame: self.frame, axeOrigin: CGPoint.zero, xPointsToShow: totalSecondsToDisplay, yPointsToShow: totalChannelsToDisplay, numberOfSubticks: 1)
         self.layer!.addSublayer(self.axeLayer!.layer)
         self.axeLayer?.yPointsToShow = 2
         self.axeLayer?.graph.anchorPoint = CGPoint(x: 0, y: 0.5)
         self.axeLayer?.hashSystem.anchorPoint = CGPoint(x: 0, y: 0.5)
-        self.axeLayer?.hashSystem.color = NSColor.darkGrayColor()
-        self.titleField?.textColor = NSColor.darkGrayColor()
-        self.axeLayer?.signalType = .Merge
+        self.axeLayer?.hashSystem.color = NSColor.darkGray
+        self.titleField?.textColor = NSColor.darkGray
+        self.axeLayer?.signalType = .merge
         
     }
     

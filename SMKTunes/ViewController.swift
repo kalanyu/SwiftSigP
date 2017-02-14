@@ -18,6 +18,7 @@ import CocoaAsyncSocket
             graphView1.maxDataRange = 15000
         }
     }
+	
     @IBOutlet weak var graphView2: SRPlotView! {
         didSet {
             graphView2.title = "Split"
@@ -40,7 +41,7 @@ import CocoaAsyncSocket
     }
     @IBOutlet weak var backgroundView: NSSpashBGView! {
         didSet {
-            backgroundView.splashFill(toColor: NSColor(red: 241/255.0, green: 206/255.0, blue: 51/255.0, alpha: 1), .Left)
+            backgroundView.splashFill(toColor: NSColor(red: 241/255.0, green: 206/255.0, blue: 51/255.0, alpha: 1), .left)
         }
     }
     @IBOutlet weak var volumeView: CountView! {
@@ -84,7 +85,7 @@ import CocoaAsyncSocket
     @IBOutlet weak var serverButton: NSButton!
     @IBOutlet weak var rectifyButton: NSButton! {
         didSet {
-            rectifyButton.enabled = false
+            rectifyButton.isEnabled = false
             rectifyButton.title = "Rectify"
         }
     }
@@ -92,26 +93,26 @@ import CocoaAsyncSocket
     
 
     
-    private var anotherDataTimer: NSTimer?
+    fileprivate var anotherDataTimer: Timer?
     var count = 0
     
-    private var dataReader : NIDAQreader?
-    private let loadingView = NSSpashBGView(frame: CGRectZero)
-    private var loadingLabel = NSTextLabel(frame: CGRectZero)
-    private var loadingText = "Status : Waiting for connection" {
+    fileprivate var dataReader : NIDAQreader?
+    fileprivate let loadingView = NSSpashBGView(frame: CGRect.zero)
+    fileprivate var loadingLabel = NSTextLabel(frame: CGRect.zero)
+    fileprivate var loadingText = "Status : Waiting for connection" {
         didSet {
             loadingLabel.stringValue = self.loadingText
             loadingLabel.sizeToFit()
         }
     }
-    private let progressIndicator = NSProgressIndicator(frame: CGRectZero)
-    private var fakeLoadTimer: NSTimer?
-    private var listenSocket : GCDAsyncSocket?
-    private var socketQueue : dispatch_queue_t?
-    private var connectedSockets : Array<GCDAsyncSocket>?
-    private var writeOK = false
-    private var numberOfChannels = 2;
-    private var samplingRate = 1000;
+    fileprivate let progressIndicator = NSProgressIndicator(frame: CGRect.zero)
+    fileprivate var fakeLoadTimer: Timer?
+    fileprivate var listenSocket : GCDAsyncSocket?
+    fileprivate var socketQueue : DispatchQueue?
+    fileprivate var connectedSockets : Array<GCDAsyncSocket>?
+    fileprivate var writeOK = false
+    fileprivate var numberOfChannels = 2;
+    fileprivate var samplingRate = 1000;
 
     
     
@@ -139,8 +140,8 @@ import CocoaAsyncSocket
 //        self.view.addSubview(loadingView)
 
         
-//        anotherDataTimer = NSTimer(timeInterval:1/60, target: self, selector: "addData2", userInfo: nil, repeats: true)
-//        NSRunLoop.currentRunLoop().addTimer(anotherDataTimer!, forMode: NSRunLoopCommonModes)
+        anotherDataTimer = Timer(timeInterval:1/60, target: self, selector: #selector(ViewController.addData2), userInfo: nil, repeats: true)
+        RunLoop.current.add(anotherDataTimer!, forMode: RunLoopMode.commonModes)
 //
 //        iController.delegate = self
 //        currentTrackLabel.stringValue = "Track: ".stringByAppendingString(iController.currentTrackName())
@@ -177,17 +178,17 @@ import CocoaAsyncSocket
 
     
     func addData2() {
-        
-        let cgCount = sin(Double(count += 1) * 1/60) * 15000
+        count += 1
+        let cgCount = sin(Double(count) * 1/60)
         //            let cgCount = 0.0
-        graphView1.addData([cgCount+1000, cgCount+2000, cgCount+3000, cgCount+400, cgCount+500 , cgCount+600])
-        graphView2.addData([cgCount+1000, cgCount+2000, cgCount+3000, cgCount+400, cgCount+500 , cgCount+600])
-        graphView3.addData([cgCount+1000, cgCount+2000, cgCount+3000, cgCount+400, cgCount+500 , cgCount+600])
+        graphView1.addData([cgCount, cgCount+1, cgCount+2, cgCount+3, cgCount+4 , cgCount+5])
+        graphView2.addData([cgCount, cgCount+1, cgCount+2, cgCount+3, cgCount+4 , cgCount+5])
+        graphView3.addData([cgCount, cgCount+1, cgCount+2, cgCount+3, cgCount+4 , cgCount+5])
 
     }
     
     
-    @IBAction func Rectify(sender: NSButton) {
+    @IBAction func Rectify(_ sender: NSButton) {
         guard let reader = dataReader else { return }
         
         if (!reader.rectify) {
@@ -199,15 +200,15 @@ import CocoaAsyncSocket
         reader.rectify = !reader.rectify;
     }
     
-    func roundProgressClicked(sender: NSView) {
+    func roundProgressClicked(_ sender: NSView) {
         if (sender === baseAlignButton) {
-            dataReader?.activateZscoreWithBufferSize(Int32(samplingRate) * 2);
+            dataReader?.activateZscore(withBufferSize: Int32(samplingRate) * 2);
         } else if(sender === normalizeButton) {
 //            serverButton.enabled = !serverButton.enabled
-            dataReader?.activateNormalizationWithBufferSize(Int32(samplingRate) * 5);
+            dataReader?.activateNormalization(withBufferSize: Int32(samplingRate) * 5);
 
         } else if(sender === filterButton) {
-            dataReader?.activateKoikefilterWithSamplingRate(Int32(samplingRate));
+            dataReader?.activateKoikefilter(withSamplingRate: Int32(samplingRate));
         } else if(sender === lowpassButton) {
             //just copy past from matlab
 //            var b = [0.00002914, 0.00008743, 0.00008743, 0.00002914];
@@ -217,12 +218,12 @@ import CocoaAsyncSocket
             var b = [0.0000000000003029, 0.0000000000015145, 0.0000000000030289, 0.0000000000030289, 0.0000000000015145, 0.0000000000003029]
             var a = [1.0000000000000000, -4.9796671949900722, 9.9188753381375463, -9.8786215487796287, 4.9192858681237484, -0.9798724624819012]
             
-            dataReader?.activateLowpassFilterWithCoefficients(&b, andDenominator: &a, withOrder: Int32(a.count - 1))
+            dataReader?.activateLowpassFilter(withCoefficients: &b, andDenominator: &a, withOrder: Int32(a.count - 1))
         }
     }
     
     
-    @IBAction func ReadFromDAQ(sender: NSButton) {
+    @IBAction func ReadFromDAQ(_ sender: NSButton) {
         if (sender.state == NSOnState) {
             sender.title = "Stop"
             //slider from 1 to 6 channels
@@ -233,33 +234,33 @@ import CocoaAsyncSocket
             
             var b = [0.9918, -3.9673, 5.9509, -3.9673, 0.9918]
             var a = [1.0000, -3.9836, 5.9509, -3.9510, 0.9837]
-            dataReader?.activateHighpassFilterWithCoefficients(&b, andDenominator: &a, withOrder: Int32(a.count - 1))
+            dataReader?.activateHighpassFilter(withCoefficients: &b, andDenominator: &a, withOrder: Int32(a.count - 1))
 
             //        NSLog(@"%d channel %d sample rate",[channelSlider intValue], [dataRateSlider intValue]);
 
             //TODO: add delegate to announce error
             //specify sampling rate as an argument
-            let operationQueue = NSOperationQueue()
-            operationQueue.addOperationWithBlock({
+            let operationQueue = OperationQueue()
+            operationQueue.addOperation({
                 self.dataReader?.startCollection()
             })
             
-            rectifyButton.enabled = true
+            rectifyButton.isEnabled = true
         }
         else {
             self.dataReader?.stop()
 //            serverButton.enabled = false
-            rectifyButton.enabled = false
+            rectifyButton.isEnabled = false
             sender.title = "Read"
         }
     }
 
-    func incomingStream(data: NSMutableArray!) {
-        let channel1 = (data.objectAtIndex(0).lastObject as! NSDictionary)["y"]!.doubleValue
-        let channel2 = (data.objectAtIndex(1).lastObject as! NSDictionary)["y"]!.doubleValue
-        let rawChannel1 = (data.objectAtIndex(0).lastObject as! NSDictionary)["rawy"]!.doubleValue
-        let rawChannel2 = (data.objectAtIndex(1).lastObject as! NSDictionary)["rawy"]!.doubleValue
-        let timestamp = (data.objectAtIndex(0).lastObject as! NSDictionary)["timestamp"]!
+    func incomingStream(_ data: NSMutableArray!) {
+        let channel1 = (((data.object(at: 0) as AnyObject).lastObject as! NSDictionary)["y"]! as AnyObject).doubleValue!
+        let channel2 = (((data.object(at: 1) as AnyObject).lastObject as! NSDictionary)["y"]! as AnyObject).doubleValue!
+        let rawChannel1 = (((data.object(at: 0) as AnyObject).lastObject as! NSDictionary)["rawy"]! as AnyObject).doubleValue!
+        let rawChannel2 = (((data.object(at: 1) as AnyObject).lastObject as! NSDictionary)["rawy"]! as AnyObject).doubleValue!
+        let timestamp = ((data.object(at: 0) as AnyObject).lastObject as! NSDictionary)["timestamp"]!
         
         graphView1.addData([channel1, channel2])
         graphView2.addData([channel1, channel2])
@@ -269,8 +270,8 @@ import CocoaAsyncSocket
         if listenSocket != nil {
             if writeOK {
                 for socket in connectedSockets! {
-                    let status = "\(channel1),\(channel2),\(rawChannel1),\(rawChannel2),\(timestamp)\n\r".dataUsingEncoding(NSUTF8StringEncoding)
-                    socket.writeData(status!, withTimeout: -1, tag: 1)
+                    let status = "\(channel1),\(channel2),\(rawChannel1),\(rawChannel2),\(timestamp)\n\r".data(using: String.Encoding.utf8)
+                    socket.write(status!, withTimeout: -1, tag: 1)
                     
     //                print(String(data: status!, encoding: NSUTF8StringEncoding))
                 }
@@ -280,19 +281,19 @@ import CocoaAsyncSocket
 
     }
     
-    func DAQerrorAppeared(string: String!) {
+    func daQerrorAppeared(_ string: String!) {
         print(string)
     }
 
-    @IBAction func ActivateServer(sender: AnyObject) {
+    @IBAction func ActivateServer(_ sender: AnyObject) {
         let button = sender as! NSButton
         
         if (button.state == NSOnState) {
             let port = 6353
             
             var address = "STARTUP ERROR"
-            var interfaces : UnsafeMutablePointer<ifaddrs> = nil
-            var temp_addr : UnsafeMutablePointer<ifaddrs> = nil
+            var interfaces : UnsafeMutablePointer<ifaddrs>? = nil
+            var temp_addr : UnsafeMutablePointer<ifaddrs>? = nil
             var success : Int32 = 0
             // retrieve the current interfaces - returns 0 on success
 
@@ -302,34 +303,35 @@ import CocoaAsyncSocket
                 temp_addr = interfaces;
                 while(temp_addr != nil)
                 {
-                    if(Int32(temp_addr.memory.ifa_addr.memory.sa_family) == AF_INET)
+                    if(Int32((temp_addr?.pointee.ifa_addr.pointee.sa_family)!) == AF_INET)
                     {
                         // Check if interface is en0 which is the wifi connection on the iPhone
     //                    print(String.fromCString(temp_addr.memory.ifa_name))
-                        if String.fromCString(temp_addr.memory.ifa_name) == "en0" || String.fromCString(temp_addr.memory.ifa_name) == "en1"
+                        if String(cString: (temp_addr?.pointee.ifa_name)!) == "en0" || String(cString: (temp_addr?.pointee.ifa_name)!) == "en1"
                         {
-    //                        There exists functions called withUnsafePointer() and withUnsafeMutablePointer() (and variants of these) that give you a pointer to a value that's valid for a nested scope. That's the supported way of working with pointers, but holding onto the pointer after the scope is over is a violation of the language semantics.
-                            let addr4 = withUnsafePointer(&temp_addr.memory.ifa_addr.memory) { UnsafePointer<sockaddr_in>($0).memory }
+    //                        There exists functions called withUnsafePointer() and withUnsafeMutablePointer() (and variants of these) that give you a pointer to a value that's valid for a nested scope. That's the supported way of working with pointers, but holding onto the pointer after the scope is over is a vwiolation of the language semantics.
+                            let addr4 = withUnsafePointer(to: &temp_addr!.pointee.ifa_addr.pointee) { UnsafeRawPointer($0).load(as: sockaddr_in.self) }
                             // Get String from C String
-                            address = String(CString: inet_ntoa(addr4.sin_addr), encoding: NSUTF8StringEncoding)!
+                            address = String(cString: inet_ntoa(addr4.sin_addr), encoding: String.Encoding.utf8)!
+													
                         } else if address != "STARTUP ERROR" {
                             address = "ONLINE : \(address) : \(port)"
                             break
                         }
                     }
                     
-                    temp_addr = temp_addr.memory.ifa_next
+                    temp_addr = temp_addr?.pointee.ifa_next
                 }
             }
         
             interfaces = nil
-            socketQueue = dispatch_queue_create("socketQueue", nil)
+            socketQueue = DispatchQueue(label: "socketQueue", attributes: [])
             listenSocket = GCDAsyncSocket(delegate: self, delegateQueue: socketQueue)
             //setup an array to store all accepted client connections
             connectedSockets = Array<GCDAsyncSocket>()
             
             do {
-              try listenSocket?.acceptOnInterface("localhost", port: 6353)
+              try listenSocket?.accept(onInterface: "localhost", port: 6353)
             }
             catch let error as NSError {
               print("error starting server : \(port) because \(error)");
@@ -351,7 +353,7 @@ import CocoaAsyncSocket
     }
     //MARK: CocoaAsyncSocketDelegates
 
-    func socket(sock: GCDAsyncSocket!, didAcceptNewSocket newSocket: GCDAsyncSocket!) {
+    func socket(_ sock: GCDAsyncSocket!, didAcceptNewSocket newSocket: GCDAsyncSocket!) {
         objc_sync_enter(connectedSockets)
         defer { objc_sync_exit(connectedSockets) }
         
@@ -359,11 +361,11 @@ import CocoaAsyncSocket
         let host = newSocket.connectedHost
         let socketPort = newSocket.connectedPort
         
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             autoreleasepool {
                 for socket in self.connectedSockets! {
-                    let writeOutData = "Initiate:\(self.numberOfChannels):\(self.samplingRate):\(self.dataReader!.fileName):\(self.dataReader!.fileName_raw)\n\r".dataUsingEncoding(NSUTF8StringEncoding)
-                    socket.writeData(writeOutData!, withTimeout: -1, tag: 1)
+                    let writeOutData = "Initiate:\(self.numberOfChannels):\(self.samplingRate):\(self.dataReader!.fileName):\(self.dataReader!.fileName_raw)\n\r".data(using: String.Encoding.utf8)
+                    socket.write(writeOutData!, withTimeout: -1, tag: 1)
 //                    print(String(data: writeOutData!, encoding: NSUTF8StringEncoding))
                 }
                 print("Accepted client : \(host) \(socketPort)")
@@ -371,29 +373,29 @@ import CocoaAsyncSocket
         })
     }
     
-    func socket(sock: GCDAsyncSocket!, didWriteDataWithTag tag: Int) {
-        sock.readDataToData(GCDAsyncSocket.CRLFData(), withTimeout: -1, tag: tag)
+    func socket(_ sock: GCDAsyncSocket!, didWriteDataWithTag tag: Int) {
+        sock.readData(to: GCDAsyncSocket.crlfData(), withTimeout: -1, tag: tag)
     }
     
-    func socket(sock: GCDAsyncSocket!, didReadData data: NSData!, withTag tag: Int) {
+    func socket(_ sock: GCDAsyncSocket!, didRead data: Data!, withTag tag: Int) {
 
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             autoreleasepool {
-                let response = String(data: data, encoding: NSUTF8StringEncoding)
+                let response = String(data: data, encoding: String.Encoding.utf8)
 //                print(response)
-                if response!.containsString("Ack") {
+                if response!.contains("Ack") {
                     self.writeOK = true
                 }
             }
         })
     }
     
-    func socketDidDisconnect(sock: GCDAsyncSocket!, withError err: NSError!) {
+    func socketDidDisconnect(_ sock: GCDAsyncSocket!, withError err: NSError!) {
         objc_sync_enter(connectedSockets)
         defer { objc_sync_exit(connectedSockets) }
         
-        if let index = connectedSockets?.indexOf(sock) {
-            connectedSockets?.removeAtIndex(index)
+        if let index = connectedSockets?.index(of: sock) {
+            connectedSockets?.remove(at: index)
         }
     }
     
@@ -402,7 +404,7 @@ import CocoaAsyncSocket
         self.dataReader?.stop()
     }
     
-    private func terminateServer() {
+    fileprivate func terminateServer() {
         guard let sockets = connectedSockets else { return }
         // Stop accepting connections
     
@@ -410,7 +412,7 @@ import CocoaAsyncSocket
         defer { objc_sync_exit(connectedSockets) }
         
         for socket in sockets {
-            socket.writeData("Shutting down server".dataUsingEncoding(NSUTF8StringEncoding)!, withTimeout: -1, tag: 1)
+            socket.write("Shutting down server".data(using: String.Encoding.utf8)!, withTimeout: -1, tag: 1)
             socket.disconnectAfterReadingAndWriting()
         }
         
