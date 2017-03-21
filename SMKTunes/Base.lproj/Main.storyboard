@@ -676,16 +676,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="1280" height="768"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="rgv-9L-pkK" customClass="NSSpashBGView" customModule="SwiftSigP" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="rgv-9L-pkK" customClass="SRSplashBGView" customModule="SwiftR">
                                 <rect key="frame" x="0.0" y="0.0" width="1280" height="768"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ti3-Uq-eWG" customClass="SRPlotView" customModule="SwiftSigP" customModuleProvider="target">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ti3-Uq-eWG" customClass="SRPlotView" customModule="SwiftR">
                                         <rect key="frame" x="20" y="393" width="608" height="355"/>
                                     </customView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="1Tt-9Z-en7" customClass="SRMergePlotView" customModule="SwiftSigP" customModuleProvider="target">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="1Tt-9Z-en7" customClass="SRMergePlotView" customModule="SwiftR">
                                         <rect key="frame" x="20" y="20" width="608" height="365"/>
                                     </customView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="3zg-Kq-dXx" customClass="SRMergePlotView" customModule="SwiftSigP" customModuleProvider="target">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="3zg-Kq-dXx" customClass="SRMergePlotView" customModule="SwiftR">
                                         <rect key="frame" x="662" y="20" width="608" height="365"/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cUN-u5-Cj3" customClass="RoundProgressView" customModule="SwiftSigP" customModuleProvider="target">
@@ -796,9 +796,9 @@
                         <outlet property="backgroundView" destination="rgv-9L-pkK" id="TIG-gL-MfT"/>
                         <outlet property="baseAlignButton" destination="cUN-u5-Cj3" id="zlL-d7-4iL"/>
                         <outlet property="filterButton" destination="Q4l-lF-Ij4" id="1lW-Fo-lNt"/>
-                        <outlet property="graphView1" destination="1Tt-9Z-en7" id="98D-fk-lcI"/>
-                        <outlet property="graphView2" destination="Ti3-Uq-eWG" id="l8v-Xc-U2v"/>
-                        <outlet property="graphView3" destination="3zg-Kq-dXx" id="x75-7r-99W"/>
+                        <outlet property="graphView1" destination="1Tt-9Z-en7" id="ZCt-j9-i9O"/>
+                        <outlet property="graphView2" destination="Ti3-Uq-eWG" id="KjL-vj-cjM"/>
+                        <outlet property="graphView3" destination="3zg-Kq-dXx" id="UYN-c5-N2R"/>
                         <outlet property="lowpassButton" destination="Ta4-ev-FP5" id="4zT-Qh-HdX"/>
                         <outlet property="normalizeButton" destination="hgq-74-9cK" id="vJK-aB-Jdn"/>
                         <outlet property="rectifyButton" destination="rxE-SV-wR6" id="N74-hc-SVQ"/>

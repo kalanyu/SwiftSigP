@@ -8,6 +8,7 @@
 
 import Cocoa
 import Foundation
+import SwiftR
 
 protocol RoundProgressProtocol {
     func roundProgressClicked(_ sender: NSView)
@@ -18,7 +19,7 @@ protocol RoundProgressProtocol {
     fileprivate let outerRing = CAShapeLayer()
     fileprivate var state = NSOffState
     fileprivate let lineWidth : CGFloat = 10
-    fileprivate let titleLabel = NSTextLabel()
+    fileprivate let titleLabel = SRLabel()
     
     var showMarker = false
     

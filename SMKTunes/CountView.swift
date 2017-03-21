@@ -7,46 +7,12 @@
 //
 
 import Cocoa
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l <= r
-  default:
-    return !(rhs < lhs)
-  }
-}
-
+import SwiftR
 
 @IBDesignable class CountView: NSView {
     
-    fileprivate var titleField : NSTextLabel?
-    fileprivate var countField : NSTextLabel?
+    private var titleField : SRLabel?
+    private var countField : SRLabel?
 
     var title : String = "" {
         didSet {
@@ -54,12 +20,12 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         }
     }
     
-    var directionValue : Int? {
+    var directionValue : Int {
         get {
-            return NumberFormatter().number(from: self.countText)?.intValue
+			return NumberFormatter().number(from: self.countText)!.intValue
         }
         set {
-            if let countNumber = NumberFormatter().string(from: NSNumber(value: newValue! as Int)) {
+			if let countNumber = NumberFormatter().string(from: NSNumber(value: newValue)) {
                 if newValue > 0 {
                     self.countText = "+\(countNumber)"
                 } else if newValue <= 0 {
@@ -81,8 +47,8 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        titleField = NSTextLabel(frame: CGRect.zero)
-        countField = NSTextLabel(frame: CGRect.zero)
+        titleField = SRLabel(frame: CGRect.zero)
+        countField = SRLabel(frame: CGRect.zero)
         
         titleField?.textColor = NSColor(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1)
         countField?.textColor = NSColor(red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1)
@@ -90,8 +56,8 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         self.addSubview(titleField!)
         self.addSubview(countField!)
         
-        self.titleField?.font = NSFont.boldSystemFont(ofSize: 20)
-        self.countField?.font = NSFont.systemFont(ofSize: 100)
+		self.titleField?.font = NSFont.boldSystemFont(ofSize: 20)
+		self.countField?.font = NSFont.systemFont(ofSize: 100)
         self.countField?.translatesAutoresizingMaskIntoConstraints = false
         var countFieldConstraint = NSLayoutConstraint(item: self.countField!, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0)
         self.addConstraint(countFieldConstraint)
@@ -121,10 +87,10 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
     override func layout() {
         super.layout()
-        countField?.font = NSFont.boldSystemFont(ofSize: resizeFontWithString(countField!.stringValue))
+		countField?.font = NSFont.boldSystemFont(ofSize: resizeFontWithString(title: countField!.stringValue))
     }
     
-    fileprivate func resizeFontWithString(_ title: String) -> CGFloat {
+    private func resizeFontWithString(title: String) -> CGFloat {
 //        defer {
 //            Swift.print(textSize, self.bounds, displaySize)
 //        }
@@ -136,13 +102,13 @@ fileprivate func <= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
         
         while displaySize < largestSize {
             let nsTitle = NSString(string: title)
-            let attributes = [NSFontAttributeName: NSFont.boldSystemFont(ofSize: displaySize)]
-            textSize = nsTitle.size(withAttributes: attributes)
+			let attributes = [NSFontAttributeName: NSFont.boldSystemFont(ofSize: displaySize)]
+			textSize = nsTitle.size(withAttributes: attributes)
             if textSize.width < self.bounds.width * 0.8 {
 //                Swift.print(displaySize, "increasing")
                 displaySize += 1
             } else {
-//                Swift.print(displaySize)
+                Swift.print(displaySize)
                 return displaySize
             }
         }

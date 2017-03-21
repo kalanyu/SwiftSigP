@@ -15,27 +15,14 @@
 		602F13CE1BD7CCCD009A6F07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602F13CD1BD7CCCD009A6F07 /* ViewController.swift */; };
 		602F13D01BD7CCCD009A6F07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 602F13CF1BD7CCCD009A6F07 /* Assets.xcassets */; };
 		602F13D31BD7CCCD009A6F07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 602F13D11BD7CCCD009A6F07 /* Main.storyboard */; };
+		6093453B1E6E4ED200DD2D0A /* SwiftR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 609345301E6E4CAE00DD2D0A /* SwiftR.framework */; };
+		6093453D1E6E4F9600DD2D0A /* CountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6093453C1E6E4F9600DD2D0A /* CountView.swift */; };
 		60A425221BE5B9120071077A /* RoundProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60A425211BE5B9120071077A /* RoundProgressView.swift */; };
-		60B5571A1BD8D5B4001EA27F /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B5570F1BD8D5B4001EA27F /* AxesDrawer.swift */; };
-		60B5571B1BD8D5B4001EA27F /* CALayer+Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557101BD8D5B4001EA27F /* CALayer+Center.swift */; };
-		60B5571C1BD8D5B4001EA27F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557111BD8D5B4001EA27F /* Constants.swift */; };
-		60B5571D1BD8D5B4001EA27F /* NSBezierPath+CGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557121BD8D5B4001EA27F /* NSBezierPath+CGPath.swift */; };
-		60B5571E1BD8D5B4001EA27F /* NSColor+Prism.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557131BD8D5B4001EA27F /* NSColor+Prism.swift */; };
-		60B5571F1BD8D5B4001EA27F /* NSView+Center.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557141BD8D5B4001EA27F /* NSView+Center.swift */; };
-		60B557201BD8D5B4001EA27F /* PrismColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557151BD8D5B4001EA27F /* PrismColor.swift */; };
-		60B557211BD8D5B4001EA27F /* SRMergePlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557161BD8D5B4001EA27F /* SRMergePlotView.swift */; };
-		60B557221BD8D5B4001EA27F /* SRPlotAxe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557171BD8D5B4001EA27F /* SRPlotAxe.swift */; };
-		60B557231BD8D5B4001EA27F /* SRPlotSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557181BD8D5B4001EA27F /* SRPlotSegment.swift */; };
-		60B557241BD8D5B4001EA27F /* SRPlotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B557191BD8D5B4001EA27F /* SRPlotView.swift */; };
 		60E8AD511C5EEF3B00EB2810 /* FirFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E8AD491C5EEF3B00EB2810 /* FirFilter.cpp */; };
 		60E8AD531C5EEF3B00EB2810 /* KoikeFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 60E8AD4D1C5EEF3B00EB2810 /* KoikeFilter.cpp */; };
 		60E8AD541C5EEF3B00EB2810 /* NIDAQreader.m in Sources */ = {isa = PBXBuildFile; fileRef = 60E8AD501C5EEF3B00EB2810 /* NIDAQreader.m */; };
 		60E8AD571C5EF3B200EB2810 /* IKoikeFilter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 60E8AD561C5EF3B200EB2810 /* IKoikeFilter.mm */; };
 		60E8AD5B1C5F121500EB2810 /* nidaqmxbaselv.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60E8AD591C5F121500EB2810 /* nidaqmxbaselv.framework */; };
-		60FE590C1BE1D8640037E9F0 /* CALayer+FadableBG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FE590A1BE1D8640037E9F0 /* CALayer+FadableBG.swift */; };
-		60FE590D1BE1D8640037E9F0 /* NSSpashBGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FE590B1BE1D8640037E9F0 /* NSSpashBGView.swift */; };
-		60FE590F1BE1D86E0037E9F0 /* CountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FE590E1BE1D86E0037E9F0 /* CountView.swift */; };
-		60FE59111BE1D9AB0037E9F0 /* HashDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FE59101BE1D9AB0037E9F0 /* HashDrawer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +46,48 @@
 			proxyType = 2;
 			remoteGlobalIDString = 7D8B70C41BCFA15700D8E273;
 			remoteInfo = "tvOS CocoaAsyncSocket";
+		};
+		6093452F1E6E4CAE00DD2D0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 609345261E6E4CAE00DD2D0A /* SwiftR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 606FEF1E1E53EDB1000BEB7C;
+			remoteInfo = SwiftR_macOS;
+		};
+		609345311E6E4CAE00DD2D0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 609345261E6E4CAE00DD2D0A /* SwiftR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 606FEF271E53EDB1000BEB7C;
+			remoteInfo = SwiftR_macOSTests;
+		};
+		609345331E6E4CAE00DD2D0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 609345261E6E4CAE00DD2D0A /* SwiftR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 606FEF3D1E53EDFB000BEB7C;
+			remoteInfo = SwiftR_iOS;
+		};
+		609345351E6E4CAE00DD2D0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 609345261E6E4CAE00DD2D0A /* SwiftR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 606FEF451E53EDFB000BEB7C;
+			remoteInfo = SwiftR_iOSTests;
+		};
+		609345371E6E4CAE00DD2D0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 609345261E6E4CAE00DD2D0A /* SwiftR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 60E7A4591E5D5D2000FA15B4;
+			remoteInfo = SwiftR_iOSUITests;
+		};
+		609345391E6E4CAE00DD2D0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 609345261E6E4CAE00DD2D0A /* SwiftR.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 60E7A4651E5D5D3700FA15B4;
+			remoteInfo = SwiftR_macOSUITests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -88,18 +117,9 @@
 		602F13D21BD7CCCD009A6F07 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		602F13D41BD7CCCD009A6F07 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6067E9F51BD91E7F00C76E68 /* SMKTunes-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SMKTunes-Bridging-Header.h"; sourceTree = "<group>"; };
+		609345261E6E4CAE00DD2D0A /* SwiftR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftR.xcodeproj; path = ../../../SwiftProjects/SwiftR/SwiftR.xcodeproj; sourceTree = "<group>"; };
+		6093453C1E6E4F9600DD2D0A /* CountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountView.swift; sourceTree = "<group>"; };
 		60A425211BE5B9120071077A /* RoundProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundProgressView.swift; sourceTree = "<group>"; };
-		60B5570F1BD8D5B4001EA27F /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
-		60B557101BD8D5B4001EA27F /* CALayer+Center.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Center.swift"; sourceTree = "<group>"; };
-		60B557111BD8D5B4001EA27F /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		60B557121BD8D5B4001EA27F /* NSBezierPath+CGPath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSBezierPath+CGPath.swift"; sourceTree = "<group>"; };
-		60B557131BD8D5B4001EA27F /* NSColor+Prism.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSColor+Prism.swift"; sourceTree = "<group>"; };
-		60B557141BD8D5B4001EA27F /* NSView+Center.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+Center.swift"; sourceTree = "<group>"; };
-		60B557151BD8D5B4001EA27F /* PrismColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrismColor.swift; sourceTree = "<group>"; };
-		60B557161BD8D5B4001EA27F /* SRMergePlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRMergePlotView.swift; sourceTree = "<group>"; };
-		60B557171BD8D5B4001EA27F /* SRPlotAxe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRPlotAxe.swift; sourceTree = "<group>"; };
-		60B557181BD8D5B4001EA27F /* SRPlotSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRPlotSegment.swift; sourceTree = "<group>"; };
-		60B557191BD8D5B4001EA27F /* SRPlotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SRPlotView.swift; sourceTree = "<group>"; };
 		60E8AD471C5EEF3B00EB2810 /* Filter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Filter.hpp; sourceTree = "<group>"; };
 		60E8AD481C5EEF3B00EB2810 /* FirFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FirFilter.hpp; sourceTree = "<group>"; };
 		60E8AD491C5EEF3B00EB2810 /* FirFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FirFilter.cpp; sourceTree = "<group>"; };
@@ -112,10 +132,6 @@
 		60E8AD561C5EF3B200EB2810 /* IKoikeFilter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IKoikeFilter.mm; sourceTree = "<group>"; };
 		60E8AD581C5F121500EB2810 /* nidaqmxbase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nidaqmxbase.framework; sourceTree = "<group>"; };
 		60E8AD591C5F121500EB2810 /* nidaqmxbaselv.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nidaqmxbaselv.framework; sourceTree = "<group>"; };
-		60FE590A1BE1D8640037E9F0 /* CALayer+FadableBG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+FadableBG.swift"; sourceTree = "<group>"; };
-		60FE590B1BE1D8640037E9F0 /* NSSpashBGView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSSpashBGView.swift; sourceTree = "<group>"; };
-		60FE590E1BE1D86E0037E9F0 /* CountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountView.swift; sourceTree = "<group>"; };
-		60FE59101BE1D9AB0037E9F0 /* HashDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashDrawer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6093453B1E6E4ED200DD2D0A /* SwiftR.framework in Frameworks */,
 				6009FF0D1CDC34E4007B2566 /* CocoaAsyncSocket.framework in Frameworks */,
 				0BEA07071C6AFC6B00B97C6D /* nidaqmxbase.framework in Frameworks */,
 				60E8AD5B1C5F121500EB2810 /* nidaqmxbaselv.framework in Frameworks */,
@@ -145,6 +162,7 @@
 		602F13BF1BD7CCCC009A6F07 = {
 			isa = PBXGroup;
 			children = (
+				609345261E6E4CAE00DD2D0A /* SwiftR.xcodeproj */,
 				6009FF011CDC34C8007B2566 /* CocoaAsyncSocket.xcodeproj */,
 				60E8AD581C5F121500EB2810 /* nidaqmxbase.framework */,
 				60E8AD591C5F121500EB2810 /* nidaqmxbaselv.framework */,
@@ -172,6 +190,7 @@
 				602F13CF1BD7CCCD009A6F07 /* Assets.xcassets */,
 				602F13D11BD7CCCD009A6F07 /* Main.storyboard */,
 				602F13D41BD7CCCD009A6F07 /* Info.plist */,
+				6093453C1E6E4F9600DD2D0A /* CountView.swift */,
 				60A425211BE5B9120071077A /* RoundProgressView.swift */,
 			);
 			name = SwiftSigP;
@@ -181,31 +200,21 @@
 		602F13E81BD7CD03009A6F07 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				60B5570E1BD8D5B4001EA27F /* PlotLib */,
 			);
 			name = "Support Files";
 			sourceTree = "<group>";
 		};
-		60B5570E1BD8D5B4001EA27F /* PlotLib */ = {
+		609345271E6E4CAE00DD2D0A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				60FE59101BE1D9AB0037E9F0 /* HashDrawer.swift */,
-				60FE590E1BE1D86E0037E9F0 /* CountView.swift */,
-				60FE590A1BE1D8640037E9F0 /* CALayer+FadableBG.swift */,
-				60FE590B1BE1D8640037E9F0 /* NSSpashBGView.swift */,
-				60B5570F1BD8D5B4001EA27F /* AxesDrawer.swift */,
-				60B557101BD8D5B4001EA27F /* CALayer+Center.swift */,
-				60B557111BD8D5B4001EA27F /* Constants.swift */,
-				60B557121BD8D5B4001EA27F /* NSBezierPath+CGPath.swift */,
-				60B557131BD8D5B4001EA27F /* NSColor+Prism.swift */,
-				60B557141BD8D5B4001EA27F /* NSView+Center.swift */,
-				60B557151BD8D5B4001EA27F /* PrismColor.swift */,
-				60B557161BD8D5B4001EA27F /* SRMergePlotView.swift */,
-				60B557171BD8D5B4001EA27F /* SRPlotAxe.swift */,
-				60B557181BD8D5B4001EA27F /* SRPlotSegment.swift */,
-				60B557191BD8D5B4001EA27F /* SRPlotView.swift */,
+				609345301E6E4CAE00DD2D0A /* SwiftR.framework */,
+				609345321E6E4CAE00DD2D0A /* SwiftR_macOSTests.xctest */,
+				609345341E6E4CAE00DD2D0A /* SwiftR.framework */,
+				609345361E6E4CAE00DD2D0A /* SwiftR_iOSTests.xctest */,
+				609345381E6E4CAE00DD2D0A /* SwiftR_iOSUITests.xctest */,
+				6093453A1E6E4CAE00DD2D0A /* SwiftR_macOSUITests.xctest */,
 			);
-			path = PlotLib;
+			name = Products;
 			sourceTree = "<group>";
 		};
 		60E8AD461C5EEEFA00EB2810 /* NIDAQ library */ = {
@@ -262,7 +271,9 @@
 				TargetAttributes = {
 					602F13C71BD7CCCD009A6F07 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = H9BFKH7H5D;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -281,6 +292,10 @@
 				{
 					ProductGroup = 6009FF021CDC34C8007B2566 /* Products */;
 					ProjectRef = 6009FF011CDC34C8007B2566 /* CocoaAsyncSocket.xcodeproj */;
+				},
+				{
+					ProductGroup = 609345271E6E4CAE00DD2D0A /* Products */;
+					ProjectRef = 609345261E6E4CAE00DD2D0A /* SwiftR.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -312,6 +327,48 @@
 			remoteRef = 6009FF0B1CDC34C8007B2566 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		609345301E6E4CAE00DD2D0A /* SwiftR.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftR.framework;
+			remoteRef = 6093452F1E6E4CAE00DD2D0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		609345321E6E4CAE00DD2D0A /* SwiftR_macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftR_macOSTests.xctest;
+			remoteRef = 609345311E6E4CAE00DD2D0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		609345341E6E4CAE00DD2D0A /* SwiftR.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftR.framework;
+			remoteRef = 609345331E6E4CAE00DD2D0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		609345361E6E4CAE00DD2D0A /* SwiftR_iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftR_iOSTests.xctest;
+			remoteRef = 609345351E6E4CAE00DD2D0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		609345381E6E4CAE00DD2D0A /* SwiftR_iOSUITests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftR_iOSUITests.xctest;
+			remoteRef = 609345371E6E4CAE00DD2D0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6093453A1E6E4CAE00DD2D0A /* SwiftR_macOSUITests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftR_macOSUITests.xctest;
+			remoteRef = 609345391E6E4CAE00DD2D0A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -331,29 +388,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60B5571C1BD8D5B4001EA27F /* Constants.swift in Sources */,
-				60FE590D1BE1D8640037E9F0 /* NSSpashBGView.swift in Sources */,
-				60B557231BD8D5B4001EA27F /* SRPlotSegment.swift in Sources */,
-				60B5571B1BD8D5B4001EA27F /* CALayer+Center.swift in Sources */,
 				60E8AD511C5EEF3B00EB2810 /* FirFilter.cpp in Sources */,
-				60B557201BD8D5B4001EA27F /* PrismColor.swift in Sources */,
 				602F13CE1BD7CCCD009A6F07 /* ViewController.swift in Sources */,
-				60B5571D1BD8D5B4001EA27F /* NSBezierPath+CGPath.swift in Sources */,
 				60E8AD571C5EF3B200EB2810 /* IKoikeFilter.mm in Sources */,
 				602137281CC89A0900435991 /* IIRFilter.mm in Sources */,
-				60FE590F1BE1D86E0037E9F0 /* CountView.swift in Sources */,
 				602F13CC1BD7CCCD009A6F07 /* AppDelegate.swift in Sources */,
-				60FE590C1BE1D8640037E9F0 /* CALayer+FadableBG.swift in Sources */,
-				60B5571A1BD8D5B4001EA27F /* AxesDrawer.swift in Sources */,
 				602137201CC881D900435991 /* IirFilter.cpp in Sources */,
-				60B557211BD8D5B4001EA27F /* SRMergePlotView.swift in Sources */,
-				60B5571F1BD8D5B4001EA27F /* NSView+Center.swift in Sources */,
-				60FE59111BE1D9AB0037E9F0 /* HashDrawer.swift in Sources */,
-				60B5571E1BD8D5B4001EA27F /* NSColor+Prism.swift in Sources */,
 				60E8AD541C5EEF3B00EB2810 /* NIDAQreader.m in Sources */,
-				60B557241BD8D5B4001EA27F /* SRPlotView.swift in Sources */,
-				60B557221BD8D5B4001EA27F /* SRPlotAxe.swift in Sources */,
 				60A425221BE5B9120071077A /* RoundProgressView.swift in Sources */,
+				6093453D1E6E4F9600DD2D0A /* CountView.swift in Sources */,
 				60E8AD531C5EEF3B00EB2810 /* KoikeFilter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,14 +502,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = H9BFKH7H5D;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = SMKTunes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = Swift.KoikeLab.SwiftSigP;
 				PRODUCT_NAME = SwiftSigP;
 				SWIFT_OBJC_BRIDGING_HEADER = "SMKTunes/SMKTunes-Bridging-Header.h";
@@ -480,14 +525,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = H9BFKH7H5D;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = SMKTunes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = Swift.KoikeLab.SwiftSigP;
 				PRODUCT_NAME = SwiftSigP;
 				SWIFT_OBJC_BRIDGING_HEADER = "SMKTunes/SMKTunes-Bridging-Header.h";

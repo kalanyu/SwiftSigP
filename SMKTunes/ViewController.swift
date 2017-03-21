@@ -8,6 +8,8 @@
 
 import Cocoa
 import CocoaAsyncSocket
+import SwiftR
+
 
 @IBDesignable class ViewController: NSViewController, RoundProgressProtocol, NIDAQreaderProtocol, GCDAsyncSocketDelegate {
 
@@ -39,7 +41,7 @@ import CocoaAsyncSocket
             graphView3.maxDataRange = 15000
         }
     }
-    @IBOutlet weak var backgroundView: NSSpashBGView! {
+    @IBOutlet weak var backgroundView: SRSplashBGView! {
         didSet {
             backgroundView.splashFill(toColor: NSColor(red: 241/255.0, green: 206/255.0, blue: 51/255.0, alpha: 1), .left)
         }
@@ -96,10 +98,10 @@ import CocoaAsyncSocket
     fileprivate var anotherDataTimer: Timer?
     var count = 0
     
-    fileprivate var dataReader : NIDAQreader?
-    fileprivate let loadingView = NSSpashBGView(frame: CGRect.zero)
-    fileprivate var loadingLabel = NSTextLabel(frame: CGRect.zero)
-    fileprivate var loadingText = "Status : Waiting for connection" {
+    var dataReader : NIDAQreader?
+    let loadingView = SRSplashBGView(frame: CGRect.zero)
+    var loadingLabel = NSTextLabel(frame: CGRect.zero)
+    var loadingText = "Status : Waiting for connection" {
         didSet {
             loadingLabel.stringValue = self.loadingText
             loadingLabel.sizeToFit()
@@ -119,41 +121,11 @@ import CocoaAsyncSocket
     override func viewDidLoad() {
         super.viewDidLoad()
         //prepare loading screen
-//        loadingView.frame = self.view.frame
-//        progressIndicator.frame = CGRect(center: CGPoint(x: 50, y: 50), size: CGSize(width: 100, height: 100))
-//        progressIndicator.style = .SpinningStyle
-//        loadingLabel.frame = CGRect(origin: CGPoint(x: progressIndicator.frame.origin.x + progressIndicator.frame.width, y: 0), size: CGSize(width: 100, height: 100))
-//        loadingLabel.stringValue = loadingText
-//        loadingLabel.font = NSFont.boldSystemFontOfSize(15)
-//        loadingLabel.sizeToFit()
-//        loadingLabel.frame.origin.y = progressIndicator.frame.origin.y + (progressIndicator.frame.width/2) - (loadingLabel.frame.height/2)
-//        loadingLabel.lineBreakMode = .ByTruncatingTail
-//        
-//        
-//        loadingView.addSubview(loadingLabel)
-//        loadingView.addSubview(progressIndicator)
-//        progressIndicator.startAnimation(nil)
-//        loadingView.wantsLayer = true
-//        loadingView.layer?.backgroundColor = NSColor.whiteColor().CGColor
-//        
-//        loadingView.autoresizingMask = [.ViewHeightSizable, .ViewWidthSizable]
-//        self.view.addSubview(loadingView)
 
         
-        anotherDataTimer = Timer(timeInterval:1/60, target: self, selector: #selector(ViewController.addData2), userInfo: nil, repeats: true)
-        RunLoop.current.add(anotherDataTimer!, forMode: RunLoopMode.commonModes)
-//
-//        iController.delegate = self
-//        currentTrackLabel.stringValue = "Track: ".stringByAppendingString(iController.currentTrackName())
-//        volumeView.countText = String(format: "%2d", iController.currentVolume())
-//        artworkView.image = iController.currentTrackAlbumArt()
-//        currentStatusLabel.stringValue = "Status: ".stringByAppendingString(iController.currentStatus())
-//        artistField.stringValue = "Artist: \(iController.currentArtist())"
-//        commandField.stringValue = "Waiting"
-//        // Do any additional setup after loading the view.
-//        
-//        motionSensor.delegate = self
-//        motionSensor.scanForRemoteSensor()
+//        anotherDataTimer = Timer(timeInterval:1/60, target: self, selector: #selector(ViewController.addData2), userInfo: nil, repeats: true)
+//        RunLoop.current.add(anotherDataTimer!, forMode: RunLoopMode.commonModes)
+
         graphView1.maxDataRange = 1
         graphView1.totalChannelsToDisplay = 2
         
@@ -161,33 +133,29 @@ import CocoaAsyncSocket
         
         graphView3.maxDataRange = 1
         graphView3.totalChannelsToDisplay = 2
-        
-//        motionClassifier.delegate = self
-//        fakeLoadTimer = NSTimer(timeInterval: 3, target: self, selector: "systemStartup", userInfo: nil, repeats: false)
-//        NSRunLoop.currentRunLoop().addTimer(fakeLoadTimer!, forMode: NSRunLoopCommonModes)
-
+		
     }
     
-    override func viewWillDisappear() {
-        
-    }
-    
-    func systemStartup() {
-        loadingView.fade(toAlpha: 0)
-    }
+//    override func viewWillDisappear() {
+//        
+//    }
+	
+//    func systemStartup() {
+//        loadingView.fade(toAlpha: 0)
+//    }
 
     
-    func addData2() {
-        count += 1
-        let cgCount = sin(Double(count) * 1/60)
-        //            let cgCount = 0.0
-        graphView1.addData([cgCount, cgCount+1, cgCount+2, cgCount+3, cgCount+4 , cgCount+5])
-        graphView2.addData([cgCount, cgCount+1, cgCount+2, cgCount+3, cgCount+4 , cgCount+5])
-        graphView3.addData([cgCount, cgCount+1, cgCount+2, cgCount+3, cgCount+4 , cgCount+5])
-
-    }
-    
-    
+//    func addData2() {
+//        count += 1
+//        let cgCount = sin(Double(count) * 1/60)
+//        //            let cgCount = 0.0
+//        graphView1.addData([cgCount, cgCount+1, cgCount+2, cgCount+3, cgCount+4 , cgCount+5])
+//        graphView2.addData([cgCount, cgCount+1, cgCount+2, cgCount+3, cgCount+4 , cgCount+5])
+//        graphView3.addData([cgCount, cgCount+1, cgCount+2, cgCount+3, cgCount+4 , cgCount+5])
+//
+//    }
+//    
+	
     @IBAction func Rectify(_ sender: NSButton) {
         guard let reader = dataReader else { return }
         
