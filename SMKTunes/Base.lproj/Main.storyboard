@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -658,6 +660,9 @@
                         <rect key="contentRect" x="196" y="240" width="1200" height="600"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
                         <value key="minSize" type="size" width="1200" height="600"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="Na5-YR-X2s"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -675,16 +680,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="1280" height="768"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="rgv-9L-pkK" customClass="NSSpashBGView" customModule="SwiftSigP" customModuleProvider="target">
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="rgv-9L-pkK" customClass="SRSplashBGView" customModule="SwiftR">
                                 <rect key="frame" x="0.0" y="0.0" width="1280" height="768"/>
                                 <subviews>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ti3-Uq-eWG" customClass="SRPlotView" customModule="SwiftSigP" customModuleProvider="target">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ti3-Uq-eWG" customClass="SRPlotView" customModule="SwiftR">
                                         <rect key="frame" x="20" y="393" width="608" height="355"/>
                                     </customView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="1Tt-9Z-en7" customClass="SRMergePlotView" customModule="SwiftSigP" customModuleProvider="target">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="1Tt-9Z-en7" customClass="SRMergePlotView" customModule="SwiftR">
                                         <rect key="frame" x="20" y="20" width="608" height="365"/>
                                     </customView>
-                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="3zg-Kq-dXx" customClass="SRMergePlotView" customModule="SwiftSigP" customModuleProvider="target">
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="3zg-Kq-dXx" customClass="SRMergePlotView" customModule="SwiftR">
                                         <rect key="frame" x="662" y="20" width="608" height="365"/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cUN-u5-Cj3" customClass="RoundProgressView" customModule="SwiftSigP" customModuleProvider="target">
@@ -716,7 +721,7 @@
                                             <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="ActivateServer:" target="XfG-lQ-9wD" id="i3E-nR-gzJ"/>
+                                            <action selector="ActivateServerWithSender:" target="XfG-lQ-9wD" id="4GP-bR-mcU"/>
                                         </connections>
                                     </button>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="hgq-74-9cK" customClass="RoundProgressView" customModule="SwiftSigP" customModuleProvider="target">
@@ -729,7 +734,7 @@
                                             <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="ReadFromDAQ:" target="XfG-lQ-9wD" id="tch-xA-bby"/>
+                                            <action selector="ReadFromDAQWithSender:" target="XfG-lQ-9wD" id="7SK-a3-x3T"/>
                                         </connections>
                                     </button>
                                     <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A1q-xc-6sG">
