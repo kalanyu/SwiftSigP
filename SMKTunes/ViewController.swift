@@ -9,7 +9,6 @@
 import Cocoa
 import CocoaAsyncSocket
 import SwiftR
-import CocoaMQTT
 import Foundation
 
 @IBDesignable class ViewController: NSViewController, RoundProgressProtocol, GCDAsyncSocketDelegate {
@@ -43,7 +42,7 @@ import Foundation
     }
     @IBOutlet weak var backgroundView: SRSplashBGView! {
         didSet {
-            backgroundView.splashFill(toColor: NSColor(red: 241/255.0, green: 206/255.0, blue: 51/255.0, alpha: 1), .left)
+            backgroundView.splashFill(toColor: NSColor(red: 1/255.0, green: 71/255.0, blue: 64/255.0, alpha: 1), .left)
         }
     }
     @IBOutlet weak var volumeView: CountView! {
@@ -378,7 +377,7 @@ import Foundation
         defer { objc_sync_exit(connectedSockets!) }
 
         for socket in sockets {
-            socket.write("Eject\r\n".data(using: String.Encoding.utf8)!, withTimeout: 100, tag: 1)
+            socket.write("Eject\r\n".data(using: String.Encoding.utf8), withTimeout: 100, tag: 1)
             socket.disconnectAfterReadingAndWriting()
         }
         listenSocket?.disconnectAfterReadingAndWriting()

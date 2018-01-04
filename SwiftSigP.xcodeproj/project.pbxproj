@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B8DA3331FE9DEE200842BDC /* CocoaMQTT.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8DA3261FE9DEBF00842BDC /* CocoaMQTT.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		0B8DA3431FE9DF2D00842BDC /* SwiftyTimer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0B8DA33E1FE9DF1600842BDC /* SwiftyTimer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0BE457391FE8E20E007DE06A /* SwiftR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B1886471FE8E12E00E8696D /* SwiftR.framework */; };
 		0BE4573D1FE8E213007DE06A /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B18863A1FE8E12300E8696D /* CocoaAsyncSocket.framework */; };
 		602137201CC881D900435991 /* IirFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6021371E1CC881D900435991 /* IirFilter.cpp */; };
@@ -73,90 +71,6 @@
 			remoteGlobalIDString = 606FEF451E53EDFB000BEB7C;
 			remoteInfo = SwiftR_iOSTests;
 		};
-		0B18864E1FE8E12E00E8696D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B18863D1FE8E12E00E8696D /* SwiftR.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 60E7A4591E5D5D2000FA15B4;
-			remoteInfo = SwiftR_iOSUITests;
-		};
-		0B1886501FE8E12E00E8696D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B18863D1FE8E12E00E8696D /* SwiftR.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 60E7A4651E5D5D3700FA15B4;
-			remoteInfo = SwiftR_macOSUITests;
-		};
-		0B8DA3211FE9DEBF00842BDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B8DA3131FE9DEBF00842BDC /* CocoaMQTT.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0409970F1C1B0B96006B5A6D;
-			remoteInfo = "CocoaMQTT iOS";
-		};
-		0B8DA3231FE9DEBF00842BDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B8DA3131FE9DEBF00842BDC /* CocoaMQTT.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 040997191C1B0B96006B5A6D;
-			remoteInfo = "CocoaMQTT iOSTests";
-		};
-		0B8DA3251FE9DEBF00842BDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B8DA3131FE9DEBF00842BDC /* CocoaMQTT.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 040997301C1B0E06006B5A6D;
-			remoteInfo = "CocoaMQTT OSX";
-		};
-		0B8DA3271FE9DEBF00842BDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B8DA3131FE9DEBF00842BDC /* CocoaMQTT.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 040997391C1B0E06006B5A6D;
-			remoteInfo = "CocoaMQTT OSXTests";
-		};
-		0B8DA3291FE9DEBF00842BDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B8DA3131FE9DEBF00842BDC /* CocoaMQTT.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 040997591C1B0F7E006B5A6D;
-			remoteInfo = "CocoaMQTT tvOS";
-		};
-		0B8DA32B1FE9DEBF00842BDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B8DA3131FE9DEBF00842BDC /* CocoaMQTT.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 040997621C1B0F7E006B5A6D;
-			remoteInfo = "CocoaMQTT tvOSTests";
-		};
-		0B8DA33B1FE9DF1600842BDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B8DA3341FE9DF1600842BDC /* SwiftyTimer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 3E721ABB1BF7255D008AF027;
-			remoteInfo = SwiftyTimer;
-		};
-		0B8DA33D1FE9DF1600842BDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B8DA3341FE9DF1600842BDC /* SwiftyTimer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6E7E408A1C84B1A20030CEBB;
-			remoteInfo = "SwiftyTimer OS X";
-		};
-		0B8DA33F1FE9DF1600842BDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B8DA3341FE9DF1600842BDC /* SwiftyTimer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6E7E409A1C84B3790030CEBB;
-			remoteInfo = "SwiftyTimer tvOS";
-		};
-		0B8DA3411FE9DF1600842BDC /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0B8DA3341FE9DF1600842BDC /* SwiftyTimer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6E7E40A81C84B4240030CEBB;
-			remoteInfo = "SwiftyTimer watchOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -166,8 +80,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0B8DA3431FE9DF2D00842BDC /* SwiftyTimer.framework in Embed Frameworks */,
-				0B8DA3331FE9DEE200842BDC /* CocoaMQTT.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -177,8 +89,6 @@
 /* Begin PBXFileReference section */
 		0B1886311FE8E12300E8696D /* CocoaAsyncSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaAsyncSocket.xcodeproj; path = ../CocoaAsyncSocket/CocoaAsyncSocket.xcodeproj; sourceTree = "<group>"; };
 		0B18863D1FE8E12E00E8696D /* SwiftR.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftR.xcodeproj; path = ../SwiftR/SwiftR.xcodeproj; sourceTree = "<group>"; };
-		0B8DA3131FE9DEBF00842BDC /* CocoaMQTT.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CocoaMQTT.xcodeproj; path = "../../../Downloads/CocoaMQTT-master/CocoaMQTT.xcodeproj"; sourceTree = "<group>"; };
-		0B8DA3341FE9DF1600842BDC /* SwiftyTimer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftyTimer.xcodeproj; path = "../../../Downloads/SwiftyTimer-master/SwiftyTimer.xcodeproj"; sourceTree = "<group>"; };
 		6021371E1CC881D900435991 /* IirFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IirFilter.cpp; sourceTree = "<group>"; };
 		6021371F1CC881D900435991 /* IirFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IirFilter.hpp; sourceTree = "<group>"; };
 		602137261CC89A0900435991 /* IIRFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIRFilter.h; sourceTree = "<group>"; };
@@ -233,32 +143,6 @@
 				0B1886491FE8E12E00E8696D /* SwiftR_macOSTests.xctest */,
 				0B18864B1FE8E12E00E8696D /* SwiftR.framework */,
 				0B18864D1FE8E12E00E8696D /* SwiftR_iOSTests.xctest */,
-				0B18864F1FE8E12E00E8696D /* SwiftR_iOSUITests.xctest */,
-				0B1886511FE8E12E00E8696D /* SwiftR_macOSUITests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		0B8DA3141FE9DEBF00842BDC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0B8DA3221FE9DEBF00842BDC /* CocoaMQTT.framework */,
-				0B8DA3241FE9DEBF00842BDC /* CocoaMQTT iOSTests.xctest */,
-				0B8DA3261FE9DEBF00842BDC /* CocoaMQTT.framework */,
-				0B8DA3281FE9DEBF00842BDC /* CocoaMQTT OSXTests.xctest */,
-				0B8DA32A1FE9DEBF00842BDC /* CocoaMQTT.framework */,
-				0B8DA32C1FE9DEBF00842BDC /* CocoaMQTT tvOSTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		0B8DA3351FE9DF1600842BDC /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0B8DA33C1FE9DF1600842BDC /* SwiftyTimer.framework */,
-				0B8DA33E1FE9DF1600842BDC /* SwiftyTimer.framework */,
-				0B8DA3401FE9DF1600842BDC /* SwiftyTimer.framework */,
-				0B8DA3421FE9DF1600842BDC /* SwiftyTimer.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,8 +157,6 @@
 		602F13BF1BD7CCCC009A6F07 = {
 			isa = PBXGroup;
 			children = (
-				0B8DA3341FE9DF1600842BDC /* SwiftyTimer.xcodeproj */,
-				0B8DA3131FE9DEBF00842BDC /* CocoaMQTT.xcodeproj */,
 				0B18863D1FE8E12E00E8696D /* SwiftR.xcodeproj */,
 				0B1886311FE8E12300E8696D /* CocoaAsyncSocket.xcodeproj */,
 				602F13CA1BD7CCCD009A6F07 /* SwiftSigP */,
@@ -389,16 +271,8 @@
 					ProjectRef = 0B1886311FE8E12300E8696D /* CocoaAsyncSocket.xcodeproj */;
 				},
 				{
-					ProductGroup = 0B8DA3141FE9DEBF00842BDC /* Products */;
-					ProjectRef = 0B8DA3131FE9DEBF00842BDC /* CocoaMQTT.xcodeproj */;
-				},
-				{
 					ProductGroup = 0B18863E1FE8E12E00E8696D /* Products */;
 					ProjectRef = 0B18863D1FE8E12E00E8696D /* SwiftR.xcodeproj */;
-				},
-				{
-					ProductGroup = 0B8DA3351FE9DF1600842BDC /* Products */;
-					ProjectRef = 0B8DA3341FE9DF1600842BDC /* SwiftyTimer.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -456,90 +330,6 @@
 			fileType = wrapper.cfbundle;
 			path = SwiftR_iOSTests.xctest;
 			remoteRef = 0B18864C1FE8E12E00E8696D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B18864F1FE8E12E00E8696D /* SwiftR_iOSUITests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SwiftR_iOSUITests.xctest;
-			remoteRef = 0B18864E1FE8E12E00E8696D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B1886511FE8E12E00E8696D /* SwiftR_macOSUITests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SwiftR_macOSUITests.xctest;
-			remoteRef = 0B1886501FE8E12E00E8696D /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B8DA3221FE9DEBF00842BDC /* CocoaMQTT.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CocoaMQTT.framework;
-			remoteRef = 0B8DA3211FE9DEBF00842BDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B8DA3241FE9DEBF00842BDC /* CocoaMQTT iOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "CocoaMQTT iOSTests.xctest";
-			remoteRef = 0B8DA3231FE9DEBF00842BDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B8DA3261FE9DEBF00842BDC /* CocoaMQTT.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CocoaMQTT.framework;
-			remoteRef = 0B8DA3251FE9DEBF00842BDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B8DA3281FE9DEBF00842BDC /* CocoaMQTT OSXTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "CocoaMQTT OSXTests.xctest";
-			remoteRef = 0B8DA3271FE9DEBF00842BDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B8DA32A1FE9DEBF00842BDC /* CocoaMQTT.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CocoaMQTT.framework;
-			remoteRef = 0B8DA3291FE9DEBF00842BDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B8DA32C1FE9DEBF00842BDC /* CocoaMQTT tvOSTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "CocoaMQTT tvOSTests.xctest";
-			remoteRef = 0B8DA32B1FE9DEBF00842BDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B8DA33C1FE9DF1600842BDC /* SwiftyTimer.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyTimer.framework;
-			remoteRef = 0B8DA33B1FE9DF1600842BDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B8DA33E1FE9DF1600842BDC /* SwiftyTimer.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyTimer.framework;
-			remoteRef = 0B8DA33D1FE9DF1600842BDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B8DA3401FE9DF1600842BDC /* SwiftyTimer.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyTimer.framework;
-			remoteRef = 0B8DA33F1FE9DF1600842BDC /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0B8DA3421FE9DF1600842BDC /* SwiftyTimer.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftyTimer.framework;
-			remoteRef = 0B8DA3411FE9DF1600842BDC /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
