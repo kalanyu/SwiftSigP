@@ -677,23 +677,23 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="SwiftSigP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1280" height="768"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1440" height="768"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="rgv-9L-pkK" customClass="SRSplashBGView" customModule="SwiftR">
-                                <rect key="frame" x="0.0" y="0.0" width="1280" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1440" height="768"/>
                                 <subviews>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="Ti3-Uq-eWG" customClass="SRPlotView" customModule="SwiftR">
-                                        <rect key="frame" x="20" y="393" width="608" height="355"/>
+                                        <rect key="frame" x="366" y="393" width="528" height="355"/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="1Tt-9Z-en7" customClass="SRMergePlotView" customModule="SwiftR">
-                                        <rect key="frame" x="20" y="20" width="608" height="365"/>
+                                        <rect key="frame" x="366" y="20" width="528" height="365"/>
                                     </customView>
                                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="3zg-Kq-dXx" customClass="SRMergePlotView" customModule="SwiftR">
-                                        <rect key="frame" x="662" y="20" width="608" height="365"/>
+                                        <rect key="frame" x="903" y="20" width="527" height="365"/>
                                     </customView>
-                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rxE-SV-wR6">
-                                        <rect key="frame" x="1198" y="493" width="72" height="24"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rxE-SV-wR6">
+                                        <rect key="frame" x="1358" y="493" width="72" height="24"/>
                                         <buttonCell key="cell" type="bevel" title="Rectify" bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="jtR-Lf-utZ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
@@ -702,8 +702,8 @@
                                             <action selector="Rectify:" target="XfG-lQ-9wD" id="157-XI-rYA"/>
                                         </connections>
                                     </button>
-                                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-fq-rPw">
-                                        <rect key="frame" x="1203" y="438" width="67" height="32"/>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gW3-fq-rPw">
+                                        <rect key="frame" x="1363" y="438" width="67" height="32"/>
                                         <buttonCell key="cell" type="bevel" title="Server" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="tYV-hs-bMJ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
@@ -712,8 +712,8 @@
                                             <action selector="ActivateServerWithSender:" target="XfG-lQ-9wD" id="4GP-bR-mcU"/>
                                         </connections>
                                     </button>
-                                    <button horizontalHuggingPriority="249" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g76-GB-S9W">
-                                        <rect key="frame" x="1215" y="468" width="55" height="24"/>
+                                    <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g76-GB-S9W">
+                                        <rect key="frame" x="1375" y="468" width="55" height="24"/>
                                         <buttonCell key="cell" type="bevel" title="Read" bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="uVR-CH-tfr">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
@@ -722,8 +722,8 @@
                                             <action selector="ReadFromDAQWithSender:" target="XfG-lQ-9wD" id="7SK-a3-x3T"/>
                                         </connections>
                                     </button>
-                                    <button horizontalHuggingPriority="249" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A1q-xc-6sG">
-                                        <rect key="frame" x="1179" y="412" width="91" height="24"/>
+                                    <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A1q-xc-6sG">
+                                        <rect key="frame" x="1339" y="412" width="91" height="24"/>
                                         <buttonCell key="cell" type="bevel" title="OFFLINE" bezelStyle="regularSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="Jd8-h3-t9s">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" size="20" name=".HelveticaNeueDeskInterface-Bold"/>
@@ -732,32 +732,44 @@
                                             <action selector="ReadFromDAQ:" target="XfG-lQ-9wD" id="KRj-01-hTe"/>
                                         </connections>
                                     </button>
-                                    <mapView fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cs3-0y-OQD">
-                                        <rect key="frame" x="728" y="468" width="320" height="240"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <mapView mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cs3-0y-OQD">
+                                        <rect key="frame" x="944" y="458" width="332" height="290"/>
                                     </mapView>
+                                    <customView translatesAutoresizingMaskIntoConstraints="NO" id="IjK-qg-byN" customClass="SRPlotView" customModule="SwiftR">
+                                        <rect key="frame" x="20" y="20" width="338" height="728"/>
+                                    </customView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="rxE-SV-wR6" firstAttribute="top" secondItem="g76-GB-S9W" secondAttribute="top" id="3ME-38-lcd"/>
-                                    <constraint firstItem="gW3-fq-rPw" firstAttribute="top" secondItem="g76-GB-S9W" secondAttribute="top" id="45D-a6-yyf"/>
                                     <constraint firstItem="Ti3-Uq-eWG" firstAttribute="top" secondItem="rgv-9L-pkK" secondAttribute="top" constant="20" id="4KV-IA-ZlS"/>
-                                    <constraint firstItem="3zg-Kq-dXx" firstAttribute="top" secondItem="A1q-xc-6sG" secondAttribute="bottom" constant="19" id="4LF-IJ-DR4"/>
-                                    <constraint firstItem="1Tt-9Z-en7" firstAttribute="width" secondItem="Ti3-Uq-eWG" secondAttribute="width" id="5ND-t7-2nm"/>
-                                    <constraint firstItem="g76-GB-S9W" firstAttribute="centerX" secondItem="3zg-Kq-dXx" secondAttribute="centerX" id="8O8-I7-g4n"/>
-                                    <constraint firstItem="A1q-xc-6sG" firstAttribute="centerX" secondItem="3zg-Kq-dXx" secondAttribute="centerX" id="Bdg-Qc-qoV"/>
-                                    <constraint firstItem="rxE-SV-wR6" firstAttribute="leading" secondItem="Ti3-Uq-eWG" secondAttribute="trailing" constant="152" id="CRD-hB-caJ"/>
-                                    <constraint firstItem="Ti3-Uq-eWG" firstAttribute="leading" secondItem="rgv-9L-pkK" secondAttribute="leading" constant="20" id="Cuc-3s-skF"/>
+                                    <constraint firstAttribute="trailing" secondItem="cs3-0y-OQD" secondAttribute="trailing" constant="164" id="4Ky-5Z-Mmg"/>
+                                    <constraint firstAttribute="trailing" secondItem="A1q-xc-6sG" secondAttribute="trailing" constant="10" id="DnR-AC-ICu"/>
+                                    <constraint firstItem="Ti3-Uq-eWG" firstAttribute="leading" secondItem="IjK-qg-byN" secondAttribute="trailing" constant="8" id="Egs-m7-mHP"/>
+                                    <constraint firstItem="cs3-0y-OQD" firstAttribute="leading" secondItem="Ti3-Uq-eWG" secondAttribute="trailing" constant="50" id="EhP-I8-Wq6"/>
+                                    <constraint firstAttribute="bottom" secondItem="IjK-qg-byN" secondAttribute="bottom" constant="20" id="FeO-M3-XeU"/>
+                                    <constraint firstItem="IjK-qg-byN" firstAttribute="leading" secondItem="rgv-9L-pkK" secondAttribute="leading" constant="20" id="I2U-JB-RdM"/>
                                     <constraint firstItem="1Tt-9Z-en7" firstAttribute="height" secondItem="Ti3-Uq-eWG" secondAttribute="height" constant="10" id="JT7-lV-Xph"/>
+                                    <constraint firstItem="3zg-Kq-dXx" firstAttribute="top" secondItem="A1q-xc-6sG" secondAttribute="bottom" constant="27" id="PHS-sQ-9B7"/>
                                     <constraint firstItem="1Tt-9Z-en7" firstAttribute="top" secondItem="Ti3-Uq-eWG" secondAttribute="bottom" constant="8" id="Pt9-q4-e9R"/>
-                                    <constraint firstItem="A1q-xc-6sG" firstAttribute="top" secondItem="g76-GB-S9W" secondAttribute="bottom" constant="58" id="QWv-6I-zOt"/>
+                                    <constraint firstItem="g76-GB-S9W" firstAttribute="top" secondItem="rxE-SV-wR6" secondAttribute="bottom" constant="1" id="VaE-Nc-iMc"/>
                                     <constraint firstItem="3zg-Kq-dXx" firstAttribute="height" secondItem="1Tt-9Z-en7" secondAttribute="height" id="WgM-OA-2NJ"/>
+                                    <constraint firstItem="cs3-0y-OQD" firstAttribute="top" secondItem="rgv-9L-pkK" secondAttribute="top" constant="20" id="XyM-v3-eib"/>
+                                    <constraint firstItem="A1q-xc-6sG" firstAttribute="top" secondItem="gW3-fq-rPw" secondAttribute="bottom" constant="2" id="c7L-Gf-Lv1"/>
+                                    <constraint firstItem="3zg-Kq-dXx" firstAttribute="top" secondItem="cs3-0y-OQD" secondAttribute="bottom" constant="73" id="cb4-B8-jfy"/>
+                                    <constraint firstItem="A1q-xc-6sG" firstAttribute="leading" relation="lessThanOrEqual" secondItem="cs3-0y-OQD" secondAttribute="trailing" constant="104" id="cpf-P9-rCa"/>
+                                    <constraint firstItem="Ti3-Uq-eWG" firstAttribute="leading" secondItem="rgv-9L-pkK" secondAttribute="leading" constant="366" id="d94-Ir-gE3"/>
+                                    <constraint firstAttribute="trailing" secondItem="gW3-fq-rPw" secondAttribute="trailing" constant="10" id="e10-P8-gSB"/>
+                                    <constraint firstItem="cs3-0y-OQD" firstAttribute="height" secondItem="Ti3-Uq-eWG" secondAttribute="height" constant="-65" id="eHw-nA-xla"/>
                                     <constraint firstAttribute="bottom" secondItem="3zg-Kq-dXx" secondAttribute="bottom" constant="20" id="euo-dQ-83t"/>
-                                    <constraint firstItem="3zg-Kq-dXx" firstAttribute="width" secondItem="1Tt-9Z-en7" secondAttribute="width" id="fyF-jg-B9W"/>
-                                    <constraint firstAttribute="trailing" secondItem="gW3-fq-rPw" secondAttribute="trailing" constant="135" id="h21-xN-j7r"/>
+                                    <constraint firstItem="3zg-Kq-dXx" firstAttribute="width" secondItem="1Tt-9Z-en7" secondAttribute="width" constant="-1" id="fyF-jg-B9W"/>
                                     <constraint firstAttribute="trailing" secondItem="3zg-Kq-dXx" secondAttribute="trailing" constant="10" id="hE2-tU-0Lo"/>
-                                    <constraint firstItem="3zg-Kq-dXx" firstAttribute="leading" secondItem="1Tt-9Z-en7" secondAttribute="trailing" constant="34" id="m74-CQ-1PU"/>
-                                    <constraint firstItem="1Tt-9Z-en7" firstAttribute="leading" secondItem="rgv-9L-pkK" secondAttribute="leading" constant="20" id="mUx-UF-eoH"/>
+                                    <constraint firstAttribute="trailing" secondItem="rxE-SV-wR6" secondAttribute="trailing" constant="10" id="icr-gE-bp8"/>
+                                    <constraint firstItem="1Tt-9Z-en7" firstAttribute="trailing" secondItem="Ti3-Uq-eWG" secondAttribute="trailing" id="nAD-rT-erM"/>
+                                    <constraint firstItem="IjK-qg-byN" firstAttribute="top" secondItem="rgv-9L-pkK" secondAttribute="top" constant="20" id="nqH-bv-aoi"/>
+                                    <constraint firstItem="3zg-Kq-dXx" firstAttribute="leading" secondItem="1Tt-9Z-en7" secondAttribute="trailing" constant="9" id="o3m-Ef-FBa"/>
+                                    <constraint firstAttribute="trailing" secondItem="g76-GB-S9W" secondAttribute="trailing" constant="10" id="rUa-bU-djn"/>
                                     <constraint firstItem="3zg-Kq-dXx" firstAttribute="top" secondItem="Ti3-Uq-eWG" secondAttribute="bottom" constant="8" id="sol-u0-eLp"/>
+                                    <constraint firstItem="gW3-fq-rPw" firstAttribute="top" secondItem="g76-GB-S9W" secondAttribute="bottom" constant="-2" id="xdp-h5-TlW"/>
+                                    <constraint firstItem="1Tt-9Z-en7" firstAttribute="leading" secondItem="Ti3-Uq-eWG" secondAttribute="leading" id="yYQ-jW-3bY"/>
                                 </constraints>
                             </customView>
                         </subviews>
@@ -771,9 +783,11 @@
                     <connections>
                         <outlet property="addressLabel" destination="A1q-xc-6sG" id="Sbq-lY-5FB"/>
                         <outlet property="backgroundView" destination="rgv-9L-pkK" id="TIG-gL-MfT"/>
+                        <outlet property="computedGraphView" destination="IjK-qg-byN" id="avY-G4-7JX"/>
                         <outlet property="graphView1" destination="1Tt-9Z-en7" id="98D-fk-lcI"/>
                         <outlet property="graphView2" destination="Ti3-Uq-eWG" id="l8v-Xc-U2v"/>
                         <outlet property="graphView3" destination="3zg-Kq-dXx" id="x75-7r-99W"/>
+                        <outlet property="mapView" destination="cs3-0y-OQD" id="nL8-L0-cA9"/>
                         <outlet property="rectifyButton" destination="rxE-SV-wR6" id="N74-hc-SVQ"/>
                         <outlet property="serverButton" destination="gW3-fq-rPw" id="JUQ-vJ-g8Q"/>
                     </connections>

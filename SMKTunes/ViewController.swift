@@ -10,11 +10,23 @@ import Cocoa
 import CocoaAsyncSocket
 import SwiftR
 import Foundation
+import MapKit
 
 @IBDesignable class ViewController: NSViewController, RoundProgressProtocol, GCDAsyncSocketDelegate {
 
     
-//, NIDAQreaderProtocol, GCDAsyncSocketDelegate
+    @IBOutlet weak var computedGraphView: SRPlotView! {
+        didSet {
+            computedGraphView.title = "Computed"
+            computedGraphView.totalSecondsToDisplay = 10
+            computedGraphView.totalChannelsToDisplay = 3
+            computedGraphView.yTicks[0] = "x"
+            computedGraphView.yTicks[1] = "y"
+            computedGraphView.yTicks[2] = "z"
+            computedGraphView.axeLayer?.maxDataRange = 25
+        }
+    }
+    //, NIDAQreaderProtocol, GCDAsyncSocketDelegate
     @IBOutlet weak var graphView1: SRMergePlotView! {
         didSet {
             graphView1.title = "Gravity"
@@ -40,46 +52,12 @@ import Foundation
             graphView3.maxDataRange = 2
         }
     }
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
     @IBOutlet weak var backgroundView: SRSplashBGView! {
         didSet {
             backgroundView.splashFill(toColor: NSColor(red: 1/255.0, green: 71/255.0, blue: 64/255.0, alpha: 1), .left)
-        }
-    }
-    @IBOutlet weak var volumeView: CountView! {
-        didSet {
-            volumeView.title = "Volume"
-            volumeView.countText = "100"
-        }
-    }
-    @IBOutlet weak var baseAlignButton: RoundProgressView! {
-        didSet {
-            baseAlignButton.roundDelegate = self
-            baseAlignButton.title = "Align"
-            baseAlignButton.loadSeconds = 2.0
-        }
-    }
-    
-    @IBOutlet weak var filterButton: RoundProgressView! {
-        didSet {
-            filterButton.roundDelegate = self
-            filterButton.title = "Filter"
-            filterButton.loadSeconds = 1.0
-        }
-    }
-    @IBOutlet weak var normalizeButton: RoundProgressView! {
-        didSet {
-            normalizeButton.roundDelegate = self
-            normalizeButton.showMarker = true
-            normalizeButton.title = "Norm"
-            normalizeButton.loadSeconds = 5.0
-        }
-    }
-    
-    @IBOutlet weak var lowpassButton: RoundProgressView! {
-        didSet {
-            lowpassButton.roundDelegate = self
-            lowpassButton.title = "Lowpass"
-            lowpassButton.loadSeconds = 0.5
         }
     }
 
@@ -97,7 +75,6 @@ import Foundation
     private var anotherDataTimer: Timer?
     var count = 0
     
-//    private var dataReader : NIDAQreader?
     private let loadingView = SRSplashBGView(frame: CGRect.zero)
     private var loadingLabel = NSTextLabel(frame: CGRect.zero)
     private var loadingText = "Status : Waiting for connection" {
@@ -140,8 +117,11 @@ import Foundation
 
         loadingView.autoresizingMask = [.height, .width]
         self.view.addSubview(loadingView)
-//
-//        
+        //drivemode offices
+//        35.7014553,139.7086263,18.13z
+        let location = CLLocation(latitude: 35.7014553, longitude: 139.7086263)
+        let coordinate = MKCoordinateRegionMakeWithDistance(location.coordinate, 1000, 1000)
+        mapView.setRegion(coordinate, animated: true)
 //        anotherDataTimer = Timer(timeInterval:1/20, target: self, selector: "addData2", userInfo: nil, repeats: true)
 //        RunLoop.current.add(anotherDataTimer!, forMode: RunLoopMode.commonModes)
 ////
